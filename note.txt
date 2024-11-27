@@ -1,0 +1,5 @@
+1. bivagio_barshik_porikolpona -
+    ->deadline dropdown toirikorte hobe -dropdown-e date er shathe schedule input dewar system thekbe. multiple input dewa jabe.
+    ->budget dropdown toirikorte hobe - dropdown-e bivinno lokkho-matra set kore multiple input dewa jabe.
+
+
