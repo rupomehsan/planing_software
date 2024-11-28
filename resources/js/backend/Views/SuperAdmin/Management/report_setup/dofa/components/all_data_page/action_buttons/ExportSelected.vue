@@ -8,7 +8,7 @@
 <script>
 import { mapState } from 'pinia';
 import { store } from '../../../setup/store';
-import export_selected_csv from "../../../helpers/export_selected_csv"
+import export_selected_csv from "../../../helpersold/export_selected_csv"
 export default {
     computed: {
         ...mapState(store,[

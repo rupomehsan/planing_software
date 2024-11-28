@@ -3,29 +3,31 @@
         <nav>
             <div class="side_nave">
                 <div class="side_nave_topbar">
-                    <div class="profile_heading">
-                        <div class="profile_image_container">
-                            <img src="https://media.istockphoto.com/id/1327592506/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=BpR0FVaEa5F24GIw7K8nMWiiGmbb8qmhfkpXcp1dhQg="
-                                alt="">
-                        </div>
-                        <div class="profile_name_container">
-                            <div class="name">
-                                Tasnimul Hasan
-                            </div>
-                            <div class="setting_icon">
-                                <a href=""><i class="fa-solid fa-angle-down"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    <h4>Super Admin</h4>
                     <div class="sidebar_toggle">
                         <a href=""><i class="fa-solid fa-indent"></i></a>
                     </div>
                 </div>
 
                 <ul class="side_nave_lists">
+                    <li>
+                        <div class="profile_heading">
+                            <div class="profile_image_container">
+                                <img src="https://media.istockphoto.com/id/1327592506/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=BpR0FVaEa5F24GIw7K8nMWiiGmbb8qmhfkpXcp1dhQg="
+                                    alt="">
+                            </div>
+                            <div class="profile_name_container">
+                                <div class="name">
+                                    Tasnimul Hasan
+                                </div>
 
-                    <dropdown-nav :label="`Dashboard`" :name="`Alldofa`" :icon="`fa fa-list`"></dropdown-nav>
-                    <dropdown-nav :label="`রিপোর্ট ব্যবস্থাপনা`" :icon="`fa fa-list`" :menus="[
+                            </div>
+                        </div>
+                    </li>
+
+                    <dropdown-nav :label="`ড্যাশবোর্ড`" :name="`SuperAdminDashboard`"
+                        :icon="`fa fa-list`"></dropdown-nav>
+                    <dropdown-nav :label="`পরিকল্পনা ব্যবস্থাপনা`" :icon="`fa fa-list`" :menus="[
                         { name: `Alldofa`, label: `দফা` },
                         { name: `Allorjitobbo_target`, label: `অরজিতব্য টার্গেট` },
                         { name: `Allorjitobbo_target`, label: `কেটেগরি` },
@@ -80,7 +82,8 @@
                     ]">
                     </dropdown-nav>
 
-                    <dropdown-nav :label="`আর্কাইভ (পর্যালোচনা)`" :name="`Alluser`" :icon="`fa fa-list`"> </dropdown-nav>
+                    <dropdown-nav :label="`আর্কাইভ (পর্যালোচনা)`" :name="`Alluser`" :icon="`fa fa-list`">
+                    </dropdown-nav>
                     <dropdown-nav :label="`বার্ষিক বাজেট`" :name="`Alluser`" :icon="`fa fa-list`"> </dropdown-nav>
                     <dropdown-nav :label="`ব্যবহারবিধি`" :name="`Alluser`" :icon="`fa fa-list`"> </dropdown-nav>
                     <dropdown-nav :label="`বিবিধ`" :name="`Alluser`" :icon="`fa fa-list`"> </dropdown-nav>
@@ -128,12 +131,13 @@ export default {
 };
 </script>
 
-<style></style>
-<!-- <side-bar-drop-down-menus :icon="`fa fa-plus`" :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
-    :menu_title="`title Management`" :menus="[
-                {
-                    route_name: `AllUser`,
-                    title: `title`,
-                    icon: `zmdi zmdi-dot-circle-alt`,
-                },
-            ]" /> -->
+<style scoped>
+.profile_heading {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: 15px 0px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+}
+</style>

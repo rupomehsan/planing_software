@@ -1,5 +1,5 @@
 import { mapState, mapWritableState } from "pinia";
-import { anyObject } from "../../../../../../../common_types/object";
+import { anyObject } from "../../../../../../../../common_types/object";
 import { store } from "..";
 import fetchDataAndUpdateCache from "../../helpers/http";
 
@@ -92,9 +92,9 @@ let execute = async () => {
     state.cached.set(response.totalStorage);
 
     state.all.set(response.data);
-    state.all_data_count.set(response.data.total);
-    state.active_data_count.set(response.data.active_data_count);
-    state.inactive_data_count.set(response.data.inactive_data_count);
+    state.all_data_count.set(response.data?.total);
+    state.active_data_count.set(response.data?.active_data_count);
+    state.inactive_data_count.set(response.data?.inactive_data_count);
 
     state.is_loading.set(false);
     state.loading_text.set('');

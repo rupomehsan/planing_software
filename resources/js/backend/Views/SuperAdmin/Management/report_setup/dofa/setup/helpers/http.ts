@@ -21,6 +21,9 @@ function storeLatestEndpoints(endpointInfo: EndpointInfo) {
 
 async function fetch_and_save_to_cache(url, cache, startTime) {
     try {
+
+
+
         const response = await axios.get(url);
         await cache.put(url, new Response(JSON.stringify(response.data)));
 
@@ -34,7 +37,7 @@ async function fetch_and_save_to_cache(url, cache, startTime) {
 
         return response;
     } catch (error) {
-        console.error(error.response.data);
+        console.error(error);
 
         let endTime = performance.now();
         let duration = endTime - startTime;
@@ -58,6 +61,8 @@ function bytesToKB(bytes) {
 }
 
 async function fetchDataAndUpdateCache(url, fetch_only_latest) {
+
+
     let responseData: anyObject = {
         data: {},
         status: 200,
@@ -67,6 +72,7 @@ async function fetchDataAndUpdateCache(url, fetch_only_latest) {
     let usage: number = 0;
 
     try {
+
         const startTime = performance.now();
         const cacheName = new URL(url).pathname;
         const cache = await caches.open(cacheName);
@@ -79,13 +85,23 @@ async function fetchDataAndUpdateCache(url, fetch_only_latest) {
             }
         }
 
+
+
         const cacheData = await cache.match(url);
+
+
+
+
         if (cacheData && fetch_only_latest === false) {
             responseData.data = await cacheData.json();
             fetch_and_save_to_cache(url, cache, startTime);
         } else {
             responseData = await fetch_and_save_to_cache(url, cache, startTime);
+
         }
+
+
+
 
         endTime = performance.now();
         duration = endTime - startTime;
@@ -101,7 +117,7 @@ async function fetchDataAndUpdateCache(url, fetch_only_latest) {
         console.error('error #%s', error);
         return {
             duration,
-            data: responseData.data.data,
+            data: responseData?.data?.data,
             totalStorage: 0,
         };
     }

@@ -1,10 +1,8 @@
 <template>
     <li class="side_nave_list_item" name="user">
-        <div class="list_container nav_option">
+        <div class="list_container nav_option ">
             <div class="list_identity_icon">
-
                 <i :class="icon"></i>
-
             </div>
             <div class="list_name" v-if="name">
                 <router-link :to="{ name: name }">

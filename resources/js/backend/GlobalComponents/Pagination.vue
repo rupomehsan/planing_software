@@ -1,5 +1,6 @@
 <template>
-    <nav aria-label="" class="d-flex gap-2 align-items-center" style="gap: 10px;">
+
+    <nav aria-label="" class="d-flex gap-2 align-items-center border-top px-3" style="gap: 10px;">
         <ul class="pagination my-2" style="font-size: 11px;">
             <template v-for="(link, index) in data.links" :key="index">
                 <li class="page-item" :class="{ active: link.active }">
@@ -26,7 +27,7 @@
         <div class="d-flex" style="gap: 5px">
             <span></span>
             <span> Limit </span>
-            <select @change="set_per_page_limit" class="bg-transparent rounded-1">
+            <select @change="set_per_page_limit" v-model="page_limit" class="bg-transparent rounded-1">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
@@ -46,6 +47,10 @@ export default {
         get_data: Function,
         set_paginate: Function,
     },
+    data: () => ({
+        page_limit: 10
+    }),
+
     methods: {
         set_page_data: function (link) {
             try {
@@ -54,6 +59,7 @@ export default {
                 link.url ? this.set_page(parseInt(page)) : '';
                 this.get_data();
             } catch (error) {
+                console.log(" error", error);
 
             }
         },

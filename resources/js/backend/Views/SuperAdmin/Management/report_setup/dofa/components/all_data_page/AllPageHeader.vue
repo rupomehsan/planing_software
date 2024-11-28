@@ -1,6 +1,6 @@
 <template lang="">
     <h5 class="text-capitalize mb-0"> {{ setup.all_page_title }} </h5>
-    <div style="flex: 1;">
+    <div>
         <search/>
     </div>
     <div>
@@ -25,6 +25,3 @@ export default {
     }
 }
 </script>
-<style lang="">
-
-</style>

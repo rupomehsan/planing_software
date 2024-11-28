@@ -121,7 +121,7 @@ label {
 .pace {
     position: relative;
 
-    &::after {
+    /* &::after {
         content: '';
         position: fixed;
         background: #0000006b;
@@ -129,7 +129,7 @@ label {
         width: 100vw;
         z-index: 9999;
         backdrop-filter: blur(2px);
-    }
+    } */
 
     .pace-progress,
     .pace-activity{

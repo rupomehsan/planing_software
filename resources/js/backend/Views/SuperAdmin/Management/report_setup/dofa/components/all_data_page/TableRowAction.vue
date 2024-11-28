@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-import active_row from '../../helpers/table_active_row';
+import active_row from '../../helpersold/table_active_row';
 import Details from './action_buttons/Details.vue';
 import Edit from './action_buttons/Edit.vue';
 import Deactive from './action_buttons/Deactive.vue';

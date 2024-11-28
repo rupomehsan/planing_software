@@ -30,7 +30,7 @@ export const initialState = {
     orderByAsc: true,
 
 
-    status: 1, // active | inactive
+    status: 'active', // active | inactive
 
     /*_______________*/
 

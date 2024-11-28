@@ -349,12 +349,11 @@ a{
 }
 
 .profile_image_container {
-    width: 24px;
-    height: 24px;
-    margin-right: 6px;
+    width: 60px;
+    height: 60px;
     border-radius: 5px;
     overflow: hidden;
-
+    margin-bottom: 5px;
 }
 
 .profile_image_container img {
@@ -522,8 +521,11 @@ a{
         padding: 5px 10px;
         text-transform: uppercase;
         border-left: inset;
-        background: var(--color2);
+
         margin: 5px 0px;
+    }
+    .nav-active{
+        background: var(--color2);
     }
 }
 .main_content{

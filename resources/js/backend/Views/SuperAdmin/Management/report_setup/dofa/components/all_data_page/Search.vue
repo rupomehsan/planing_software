@@ -1,12 +1,12 @@
 <template lang="">
     <input
         @keyup="(e) => set_search_key(e)"
-        class="form-control w-100 ml-4 all_page_search"/>
+        class="form-control  ml-4 all_page_search py-1"/>
 </template>
 <script>
 import { mapActions, mapWritableState } from 'pinia';
 import { store } from '../../setup/store';
-import debounce from '../../helpers/debounce';
+import debounce from '../../helpersold/debounce';
 import get_all from '../../setup/store/async_actions/all'
 export default {
     methods: {
@@ -28,6 +28,9 @@ export default {
     }
 }
 </script>
-<style lang="">
-
+<style scoped>
+.all_page_search {
+    width: 300px;
+    height: 35px;
+}
 </style>

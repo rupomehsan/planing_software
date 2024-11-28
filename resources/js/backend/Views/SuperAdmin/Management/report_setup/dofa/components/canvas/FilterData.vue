@@ -7,6 +7,7 @@
                     <span class="fa fa-close"></span>
                 </button>
             </div>
+            <hr class="m-0 p-0">
             <div class="data_content">
                 <div class="filter_item">
                     <label for="start_date">Start Date</label>

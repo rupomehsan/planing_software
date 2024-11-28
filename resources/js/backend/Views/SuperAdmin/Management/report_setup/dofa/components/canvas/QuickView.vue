@@ -57,5 +57,8 @@ export default {
     }
 };
 </script>
-<style lang="">
+<style>
+.off_canvas.active{
+    box-shadow:  0px 0px 0px 100000px rgba(0, 0, 0, 0.5);
+}
 </style>
