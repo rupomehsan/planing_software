@@ -1,7 +1,8 @@
 <template>
     <div>
-        Dashboard
-        <a href=""></a>
+        <div class="text-center">
+            Dashboard
+        </div>
     </div>
 </template>
 

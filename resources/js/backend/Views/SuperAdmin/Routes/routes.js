@@ -12,7 +12,7 @@ import Dashboard from "../Management/Dashboard/Dashboard.vue";
 import UserRoutes from '../Management/user_management/setup/routes.js';
 
 // //report_setup
-import dofa from '../Management/report_setup/dofa/setup/routes';
+import dofa from '../Management/report_setup/dofa/setup/routes.js';
 import orjitobbo_target from '../Management/report_setup/orjitobbo_target/setup/routes';
 // import porikolponar_dhoron from '../Management/report_setup/porikolponar_dhoron/setup/routes';
 // import time_frame_type from '../Management/report_setup/time_frame_type/setup/routes';

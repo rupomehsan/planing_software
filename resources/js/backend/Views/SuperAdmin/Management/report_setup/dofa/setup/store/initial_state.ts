@@ -22,6 +22,7 @@ export const initialState = {
     all_data_count: 0, // total data in database
     active_data_count: 0,
     inactive_data_count: 0,
+    trased_data_count: 0,
     page: 1,
     paginate: 13,
     search_key: ``,
@@ -51,4 +52,6 @@ export const initialState = {
     /*_______________*/
     cached: 0,
     only_latest_data: false,
+
+    import_csv_modal_show: false,
 };

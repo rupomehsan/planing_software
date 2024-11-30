@@ -6,7 +6,7 @@
         <import />
         <active />
         <inactive />
-        <trash />
+        <!-- <trash /> -->
         <bulk-actions />
     </div>
 </template>

@@ -20,6 +20,11 @@ export default {
             'set_page',
         ]),
         change_status: function (status = 'active') {
+            if (status == 'trased') {
+                this.is_trashed_data = true;
+            } else {
+                this.is_trashed_data = false
+            }
             this.set_only_latest_data(true);
             this.set_status(status);
             this.set_page(1);
@@ -31,9 +36,7 @@ export default {
     },
     computed: {
         ...mapState(store, [
-            'active_data_count',
-            'inactive_data_count',
-            'status',
+            'trased_data_count',
         ]),
     }
 }

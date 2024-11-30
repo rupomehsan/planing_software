@@ -1,6 +1,6 @@
 import CsvBuilder from "./filify";
 import setup from "../setup";
-import {store} from "../store";
+import {store} from "../setup/store";
 import { mapActions, mapState, mapWritableState } from "pinia";
 
 

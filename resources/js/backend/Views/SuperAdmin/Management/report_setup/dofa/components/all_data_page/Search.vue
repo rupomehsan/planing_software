@@ -6,7 +6,7 @@
 <script>
 import { mapActions, mapWritableState } from 'pinia';
 import { store } from '../../setup/store';
-import debounce from '../../helpersold/debounce';
+import debounce from '../../helpers/debounce';
 import get_all from '../../setup/store/async_actions/all'
 export default {
     methods: {

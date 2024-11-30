@@ -9,6 +9,9 @@ import update from "./async_actions/update";
 import deactive from "./async_actions/deactive";
 import restore from "./async_actions/restore";
 import destroy from "./async_actions/destroy";
+import update_status from "./async_actions/update_status";
+
+
 
 /** actions */
 import set_filter_criteria from "./actions/set_filter_criteria";
@@ -19,6 +22,7 @@ import set_paginate from "./actions/set_paginate";
 import set_show_details_canvas from "./actions/set_show_details_canvas";
 import set_show_filter_canvas from "./actions/set_show_filter_canvas";
 import set_status from "./actions/set_status";
+import set_import_csv_modal from "./actions/set_import_csv_modal";
 import setup from "..";
 
 export const store = defineStore(setup.store_prefix, {
@@ -29,6 +33,7 @@ export const store = defineStore(setup.store_prefix, {
         get_all: all,
         create: create,
         update: update,
+        update_status: update_status,
         details: details,
         deactive: deactive,
         restore: restore,
@@ -43,5 +48,6 @@ export const store = defineStore(setup.store_prefix, {
         set_filter_criteria,
         set_status,
         set_only_latest_data,
+        set_import_csv_modal,
     },
 });

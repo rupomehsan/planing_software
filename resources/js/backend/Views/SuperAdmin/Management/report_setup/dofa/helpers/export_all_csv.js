@@ -17,7 +17,7 @@ async function export_all_csv() {
         const excludedColumns = ['deleted_at', 'created_at', 'updated_at'];
         let export_csv;
         let allValues = []; // Array to accumulate data from all pages
-
+        console.log(excludedColumns);
         // Loop through all pages to gather data
         for (let page = 1; page <= last_page; page++) {
             url.searchParams.set('page', page); // Set the current page number
@@ -29,6 +29,8 @@ async function export_all_csv() {
                 // Only extract columns from the first page
                 last_page = response.data.data.last_page; // Total number of pages from the API response
                 const columns = extractColumns(response.data.data.data[0], excludedColumns);
+                console.log("sss", columns);
+
                 export_csv = new CsvBuilder(`${store_prefix}_list.csv`).setColumns(columns);
             }
 

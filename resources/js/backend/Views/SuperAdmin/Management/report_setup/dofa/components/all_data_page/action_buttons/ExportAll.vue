@@ -7,7 +7,7 @@
     </a>
 </template>
 <script>
-import export_all_csv from "../../../helpersold/export_all_csv"
+import export_all_csv from "../../../helpers/export_all_csv"
 export default {
     methods: {
         export_all_csv,

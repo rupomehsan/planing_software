@@ -1,16 +1,17 @@
-<template lang="">
-    <a v-if="item.status== 1" href="/deactive" @click.prevent="deactive_data" class="border-warning">
-        <i class="fa fa-ban text-warning"></i>
-        Deactive
+<template>
+    <a v-if="item.status == 'active'" href="" @click.prevent="updateStatus(item)" class="border-warning">
+        <i class="fa fa-eye-slash text-warning"></i>
+        Inactive
     </a>
-    <a v-if="item.status== 0" href="/active" @click.prevent="restore_data" class="border-warning">
-        <i class="fa fa-refresh text-warning"></i>
-        Restore
+    <a v-if="item.status == 'inactive'" href="" @click.prevent="updateStatus(item)" class="border-warning">
+        <i class="fa fa-eye text-warning"></i>
+        Active
     </a>
 </template>
 <script>
 import { mapActions } from 'pinia';
 import { store } from '../../../setup/store';
+
 
 export default {
     props: {
@@ -25,33 +26,24 @@ export default {
             `get_all`,
             `set_only_latest_data`,
             `set_item`,
+            `update_status`,
         ]),
-        deactive_data: async function(){
-            let con = await window.s_confirm('deactive');
-            if(con){
-                this.set_item(this.item);
-                this.set_only_latest_data(true);
+        updateStatus: async function (item) {
+            console.log(item);
 
-                let res = await this.deactive();
-                await this.get_all();
-                if(res.data.status == "success"){
-                    window.s_alert('Deactivated');
+            let action = item.status == 'active' ? 'deactive' : 'active';
+            let con = await window.s_confirm('Are you sure want to ' + action + ' ?');
+            if (con) {
+                this.set_item(item);
+                this.set_only_latest_data(true);
+                let response = await this.update_status();
+                if (response.data.status === "success") {
+                    await this.get_all();
+                    window.s_alert(response.data?.message);
+                    this.set_only_latest_data(true);
+                } else {
+                    window.s_warning(response.data?.message);
                 }
-
-                this.set_only_latest_data(false);
-            }
-        },
-        restore_data: async function(){
-            let con = await window.s_confirm('Restore');
-            if(con){
-                this.set_item(this.item);
-                this.set_only_latest_data(true);
-
-                await this.restore();
-                await this.get_all();
-                window.s_alert('Restored');
-
-                this.set_only_latest_data(false);
             }
         },
     }

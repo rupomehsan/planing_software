@@ -31,8 +31,8 @@
                 </div>
                 <div class="layout_content_right">
                     <div class="topbar">
-                        <div class="topbar_left">
-                            <a href=""><i class="fa-solid fa-chart-column"></i></a>
+                        <div class="topbar_left ">
+                            <!-- <a href=""><i class="fa-solid fa-chart-column"></i></a> -->
                             <h3 class="text-center">Planing Software</h3>
                         </div>
                         <div class="topbar_right">

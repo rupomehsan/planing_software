@@ -31,6 +31,7 @@
         <export-all-loader />
         <quick-view />
         <filter-data />
+        <import-modal></import-modal>
     </div>
 </template>
 
@@ -51,6 +52,7 @@ import AllPageHeader from './components/all_data_page/AllPageHeader.vue';
 import AllPageFooterActions from './components/all_data_page/AllPageFooterActions.vue';
 import ExportAllLoader from './components/all_data_page/ExportAllLoader.vue';
 import QuickView from './components/canvas/QuickView.vue';
+import ImportModal from './components/canvas/ImportModal.vue';
 import QuickViewColumn from './components/all_data_page/QuickViewColumn.vue';
 import FilterData from './components/canvas/FilterData.vue';
 import DropDownEl from './components/dropdown/DropDownEl.vue';
@@ -92,6 +94,7 @@ export default {
         QuickViewColumn,
         FilterData,
         DropDownEl,
+        ImportModal,
     },
 }
 </script>

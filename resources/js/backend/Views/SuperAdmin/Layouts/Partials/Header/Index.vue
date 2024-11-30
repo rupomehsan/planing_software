@@ -1,6 +1,6 @@
 <template>
     <!--Start topbar header-->
-    <header class="topbar-nav">
+
         <nav class="navbar navbar-expand fixed-top">
             <div class="toggle-menu">
                 <i @click.prevent="toggle_menu" class="zmdi zmdi-menu"></i>
@@ -151,7 +151,7 @@
                 </li>
             </ul>
         </nav>
-    </header>
+
     <!--End topbar header-->
 </template>
 
@@ -165,33 +165,14 @@ export default {
     }),
 
     methods: {
-        toggle_menu: function () {
-            document.getElementById("wrapper").classList.toggle("toggled");
-        },
-        logout: async function () {
-            let con = await window.s_confirm("Are you sure want to logout?");
-            if (con) {
-                localStorage.removeItem("admin_token");
-                window.location.href = "/";
-            }
-        },
+       
     },
 
     mounted() {
-        const navItems = document.querySelectorAll(".nav-item");
 
-        navItems.forEach((element) => {
-            element.addEventListener("click", () => {
-                navItems.forEach((item) => {
-                    if (element !== item) {
-                        if (item.childNodes[1]?.classList?.contains("show")) {
-                            item.childNodes[1]?.classList?.remove("show");
-                        }
-                    }
-                });
-                element.childNodes[1].classList.toggle("show");
-            });
-        });
+
+
+
     },
     computed: {
         ...mapState(auth_store, {

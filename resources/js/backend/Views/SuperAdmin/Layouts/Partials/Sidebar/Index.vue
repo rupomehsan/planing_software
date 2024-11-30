@@ -5,7 +5,7 @@
                 <div class="side_nave_topbar">
                     <h4>Super Admin</h4>
                     <div class="sidebar_toggle">
-                        <a href=""><i class="fa-solid fa-indent"></i></a>
+                        <a href="javascript:void(0)"><i class="fa-solid fa-indent"></i></a>
                     </div>
                 </div>
 

@@ -8,7 +8,7 @@
 
 </template>
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapWritableState } from 'pinia';
 import { store } from '../../../setup/store';
 
 export default {
@@ -24,36 +24,28 @@ export default {
             `get_all`,
             `set_only_latest_data`,
             `set_item`,
+            `set_page`,
+            `set_status`,
         ]),
-        deactive_data: async function () {
-            let con = await window.s_confirm('deactive');
-            if (con) {
-                this.set_item(this.item);
-                this.set_only_latest_data(true);
-
-                let res = await this.deactive();
-                await this.get_all();
-                if (res.data.status == "success") {
-                    window.s_alert('Deactivated');
-                }
-
-                this.set_only_latest_data(false);
+        change_status: function (status = 'active') {
+            if (status == 'trased') {
+                this.is_trashed_data = true;
+            } else {
+                this.is_trashed_data = false
             }
+            this.set_only_latest_data(true);
+            this.set_status(status);
+            this.set_page(1);
+            this.get_all();
+            this.set_only_latest_data(true);
         },
-        restore_data: async function () {
-            let con = await window.s_confirm('Restore');
-            if (con) {
-                this.set_item(this.item);
-                this.set_only_latest_data(true);
 
-                await this.restore();
-                await this.get_all();
-                window.s_alert('Restored');
-
-                this.set_only_latest_data(false);
-            }
-        },
-    }
+    },
+    computed: {
+        ...mapWritableState(store, [
+            'active_data_count',
+        ]),
+    },
 }
 </script>
 <style lang="">

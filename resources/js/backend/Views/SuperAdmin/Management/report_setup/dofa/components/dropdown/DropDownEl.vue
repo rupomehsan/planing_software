@@ -50,7 +50,7 @@
 <script>
 import { mapActions, mapState, mapWritableState } from 'pinia';
 import { store } from '../../setup/store';
-import debounce from '../../helpersold/debounce';
+import debounce from '../../helpers/debounce';
 
 export default {
     props: {
