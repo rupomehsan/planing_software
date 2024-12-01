@@ -10,7 +10,7 @@ import deactive from "./async_actions/deactive";
 import restore from "./async_actions/restore";
 import destroy from "./async_actions/destroy";
 import update_status from "./async_actions/update_status";
-
+import bulk_action from "./async_actions/bulk_action";
 
 
 /** actions */
@@ -23,6 +23,7 @@ import set_show_details_canvas from "./actions/set_show_details_canvas";
 import set_show_filter_canvas from "./actions/set_show_filter_canvas";
 import set_status from "./actions/set_status";
 import set_import_csv_modal from "./actions/set_import_csv_modal";
+import clear_selected from "./actions/clear_selected";
 import setup from "..";
 
 export const store = defineStore(setup.store_prefix, {
@@ -38,7 +39,7 @@ export const store = defineStore(setup.store_prefix, {
         deactive: deactive,
         restore: restore,
         destroy: destroy,
-
+        bulk_action: bulk_action,
         /* actions */
         set_page,
         set_paginate,
@@ -49,5 +50,6 @@ export const store = defineStore(setup.store_prefix, {
         set_status,
         set_only_latest_data,
         set_import_csv_modal,
+        clear_selected
     },
 });

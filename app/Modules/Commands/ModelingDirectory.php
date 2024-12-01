@@ -87,6 +87,7 @@ class ModelingDirectory extends Command
             'StoreData.php',
             'GetSingleData.php',
             'UpdateData.php',
+            'UpdateStatus.php',
             'DestroyData.php',
             'RestoreData.php',
             'SoftDelete.php',
@@ -165,6 +166,9 @@ class ModelingDirectory extends Command
             }
             if ($file == 'UpdateData.php') {
                 File::put($actionsDirectory . '/' . $file, UpdateData($module_name));
+            }
+            if ($file == 'UpdateStatus.php') {
+                File::put($actionsDirectory . '/' . $file, UpdateStatus($module_name));
             }
             if ($file == 'DestroyData.php') {
                 File::put($actionsDirectory . '/' . $file, DestroyData($module_name));

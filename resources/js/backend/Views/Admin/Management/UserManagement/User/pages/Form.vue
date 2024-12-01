@@ -104,7 +104,7 @@ export default {
                 let response = await this.create($event);
                 // await this.get_all();
                 if ([200, 201].includes(response.status)) {
-                    window.s_alert("data created");
+                    window.s_alert(response.data?.message);
                     this.$router.push({ name: `All${this . setup . route_prefix}` });
                 }
             }

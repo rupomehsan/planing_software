@@ -3,7 +3,7 @@
         <nav>
             <div class="side_nave">
                 <div class="side_nave_topbar">
-                    <h4>Super Admin</h4>
+                    <h5>Super Admin</h5>
                     <div class="sidebar_toggle">
                         <a href="javascript:void(0)"><i class="fa-solid fa-indent"></i></a>
                     </div>
@@ -30,7 +30,7 @@
                     <dropdown-nav :label="`পরিকল্পনা ব্যবস্থাপনা`" :icon="`fa fa-list`" :menus="[
                         { name: `Alldofa`, label: `দফা` },
                         { name: `Allorjitobbo_target`, label: `অরজিতব্য টার্গেট` },
-                        { name: `Allorjitobbo_target`, label: `কেটেগরি` },
+                        { name: `Allcategories`, label: `কেটেগরি` },
                         { name: `Allorjitobbo_target`, label: `সংখ্যাতাত্ত্বিক তথ্য` },
                         { name: `Allorjitobbo_target`, label: `পরিকল্পনার ধরন ` },
                         { name: `Allorjitobbo_target`, label: `সময়সীমার ধরন` },

@@ -1,21 +1,19 @@
-<template lang="">
+<template>
 
-             <!-- <div class="" v-if="this.selected?.length"> -->
-        <div class="">
-            <select
-                @change="bulkActions">
-                <option disabled selected>Select action</option>
-                <option value="inactive">Inactive</option>
-                <option value="active">Action</option>
-                <!-- <option value="soft_delete">Soft Delete</option> -->
-                <!-- <option value="restore">Restore</option> -->
-                <option value="destroy">Destroy</option>
-            </select>
-        </div>
+    <div class="" v-if="this.selected?.length">
+        <select @change="bulkActions">
+            <option disabled selected>Select action</option>
+            <option value="inactive">Inactive</option>
+            <option value="active">Action</option>
+            <!-- <option value="soft_delete">Soft Delete</option> -->
+            <!-- <option value="restore">Restore</option> -->
+            <option value="destroy">Destroy</option>
+        </select>
+    </div>
 
 </template>
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapWritableState } from 'pinia';
 import { store } from '../../../setup/store';
 
 export default {
@@ -31,38 +29,37 @@ export default {
             `get_all`,
             `set_only_latest_data`,
             `set_item`,
+            `clear_selected`,
+            `bulk_action`,
         ]),
-        deactive_data: async function () {
-            let con = await window.s_confirm('deactive');
+        bulkActions: async function () {
+            let action = event.target.value;
+            let con = await window.s_confirm('Are you sure want to ' + action + ' items ?');
             if (con) {
-                this.set_item(this.item);
-                this.set_only_latest_data(true);
 
-                let res = await this.deactive();
-                await this.get_all();
-                if (res.data.status == "success") {
-                    window.s_alert('Deactivated');
+                let selected_data = this.selected;
+                selected_data = selected_data.map((item => item.id))
+                this.set_only_latest_data(true);
+                let response = await this.bulk_action(action, selected_data);
+                if (response.data.status === "success") {
+                    await this.get_all();
+                    document.querySelector('.select_all_checkbox').checked = false;
+                    this.clear_selected();
+                    this.set_only_latest_data(false);
+                    window.s_alert('You have ' + action + ' items ?');
+                } else {
+                    window.s_warning(response.data?.message);
                 }
 
-                this.set_only_latest_data(false);
             }
-        },
-        restore_data: async function () {
-            let con = await window.s_confirm('Restore');
-            if (con) {
-                this.set_item(this.item);
-                this.set_only_latest_data(true);
 
-                await this.restore();
-                await this.get_all();
-                window.s_alert('Restored');
-
-                this.set_only_latest_data(false);
-            }
         },
+    },
+    computed: {
+        ...mapWritableState(store, [
+            'selected',
+        ]),
     }
 }
 </script>
-<style lang="">
-
-</style>
+<style></style>

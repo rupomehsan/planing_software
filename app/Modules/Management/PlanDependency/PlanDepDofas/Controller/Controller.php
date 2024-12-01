@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Management\PlanDependency\PlanDepDofas\Controller;
+
 use App\Modules\Management\PlanDependency\PlanDepDofas\Actions\GetAllData;
 use App\Modules\Management\PlanDependency\PlanDepDofas\Actions\DestroyData;
 use App\Modules\Management\PlanDependency\PlanDepDofas\Actions\GetSingleData;
@@ -19,7 +20,8 @@ use App\Http\Controllers\Controller as ControllersController;
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
         return $data;
@@ -42,6 +44,7 @@ class Controller extends ControllersController
         $data = UpdateData::execute($request, $slug);
         return $data;
     }
+
     public function updateStatus()
     {
         $data = UpdateStatus::execute();
@@ -73,5 +76,4 @@ class Controller extends ControllersController
         $data = BulkActions::execute($request);
         return $data;
     }
-
 }

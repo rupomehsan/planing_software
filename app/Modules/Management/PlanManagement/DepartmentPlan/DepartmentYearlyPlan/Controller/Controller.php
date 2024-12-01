@@ -6,6 +6,7 @@ use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Ac
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Actions\GetSingleData;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Actions\StoreData;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Actions\UpdateData;
+use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Actions\UpdateStatus;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Actions\SoftDelete;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Actions\RestoreData;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Actions\ImportData;
@@ -36,9 +37,14 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update(DataStoreValidation $request, $slug)
+   public function update(DataStoreValidation $request, $slug)
     {
         $data = UpdateData::execute($request, $slug);
+        return $data;
+    }
+public function updateStatus()
+    {
+        $data = UpdateStatus::execute();
         return $data;
     }
 

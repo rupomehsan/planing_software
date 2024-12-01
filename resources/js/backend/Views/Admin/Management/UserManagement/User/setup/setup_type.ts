@@ -1,10 +1,11 @@
     export default interface RouteConfig {
     permission: string[];
 
-    prefix: string;
+     prefix: string;
     module_name: string;
     route_prefix: string;
     store_prefix: string;
+    route_path : string;
     route_path: string;
 
     api_host: string;

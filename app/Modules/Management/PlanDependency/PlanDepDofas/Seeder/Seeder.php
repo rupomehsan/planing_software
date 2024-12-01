@@ -25,7 +25,7 @@ class Seeder extends SeederClass
             "islamic somajbinirman",
         ];
 
-        for ($i = 0; $i < 4; $i++) {
+        // for ($i = 0; $i < 4; $i++) {
             foreach ($data as $key => $item) {
                 self::$model::create([
                     'title' => $item,
@@ -33,6 +33,6 @@ class Seeder extends SeederClass
                     'serial_no' => $key + 1,
                 ]);
             }
-        }
+        // }
     }
 }

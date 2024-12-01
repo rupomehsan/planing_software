@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Modules\Management\PlanDependency\PlanDepPlanType\Controller;
+
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\GetAllData;
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\DestroyData;
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\GetSingleData;
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\StoreData;
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\UpdateData;
+use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\UpdateStatus;
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\SoftDelete;
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\RestoreData;
 use App\Modules\Management\PlanDependency\PlanDepPlanType\Actions\ImportData;
@@ -18,7 +20,8 @@ use App\Http\Controllers\Controller as ControllersController;
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
         return $data;
@@ -39,6 +42,11 @@ class Controller extends ControllersController
     public function update(DataStoreValidation $request, $slug)
     {
         $data = UpdateData::execute($request, $slug);
+        return $data;
+    }
+    public function updateStatus()
+    {
+        $data = UpdateStatus::execute();
         return $data;
     }
 
@@ -67,5 +75,4 @@ class Controller extends ControllersController
         $data = BulkActions::execute($request);
         return $data;
     }
-
 }

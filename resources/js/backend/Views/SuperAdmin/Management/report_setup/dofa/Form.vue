@@ -3,30 +3,23 @@
         <form @submit.prevent="submitHandler" class="p-2">
             <div class="card w-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="text-capitalize">{{ param_id ? 'Update' : 'Create' }} new {{ setup.prefix }}</h5>
+                    <h5 class="text-capitalize">{{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }}  </h5>
                     <div>
                         <router-link v-if="item.slug" class="btn btn-outline-info mr-2 btn-sm"
                             :to="{ name: `Details${setup.route_prefix}`, params: {id: item.slug} }">
-                            Details {{ setup.prefix }}
+                             {{ setup.details_page_title }}
                         </router-link>
-                        <router-link class="btn btn-outline-warning btn-sm" :to="{ name: `All${setup.route_prefix}` }">
-                            All {{ setup.prefix }}
+                        <router-link class="btn btn-outline-warning btn-sm mx-2" :to="{ name: `All${setup.route_prefix}` }">
+                             {{ setup.all_page_title }}
                         </router-link>
                     </div>
                 </div>
                 <div class="card-body card_body_fixed_height">
-                    <div class="row">
+                    <div class="row d-grid">
                         <template v-for="(form_field, index) in form_fields" v-bind:key="index">
-                            <div :class="form_field.row_col_class ? form_field.row_col_class :`col-md-12 mb-2`" >
-                                <div class="form-group">
-                                    <label :for="form_field.name">{{ form_field.label }}</label>
-                                    <input  :type="form_field.type" class="form-control my-2"
-                                            :name="form_field.name" :id="form_field.name"
-                                            :placeholder="`Enter ` + form_field.label"
-                                            :value="param_id ? user[form_field.name] : ''"
-                                            >
-                                </div>
-                            </div>
+                            <common-input :label="form_field.label" :type="form_field.type" :name="form_field.name"
+                                :multiple="form_field.multiple" :value="form_field.value"
+                                :data_list="form_field.data_list" :is_visible="form_field.is_visible" :row_col_class="form_field.row_col_class" />
                         </template>
                     </div>
                 </div>

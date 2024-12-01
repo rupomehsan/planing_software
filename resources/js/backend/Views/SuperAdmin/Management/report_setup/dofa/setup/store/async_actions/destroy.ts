@@ -10,7 +10,7 @@ async function execute(){
 
     try {
         // let response = await axios.post(url, {slug: state.item().slug});
-        let response = await axios.delete(url, state.item().slug);
+        let response = await axios.post(url, state.item().slug);
         return response;
     } catch (error) {
         return error.response;

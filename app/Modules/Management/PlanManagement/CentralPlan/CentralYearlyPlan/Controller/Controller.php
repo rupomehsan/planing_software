@@ -6,6 +6,7 @@ use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\GetSingleData;
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\StoreData;
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\UpdateData;
+use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\UpdateStatus;
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\SoftDelete;
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\RestoreData;
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\ImportData;
@@ -36,9 +37,14 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update(DataStoreValidation $request, $slug)
+   public function update(DataStoreValidation $request, $slug)
     {
         $data = UpdateData::execute($request, $slug);
+        return $data;
+    }
+public function updateStatus()
+    {
+        $data = UpdateStatus::execute();
         return $data;
     }
 

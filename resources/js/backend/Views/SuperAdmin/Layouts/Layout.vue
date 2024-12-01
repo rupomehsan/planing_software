@@ -33,7 +33,7 @@
                     <div class="topbar">
                         <div class="topbar_left ">
                             <!-- <a href=""><i class="fa-solid fa-chart-column"></i></a> -->
-                            <h3 class="text-center">Planing Software</h3>
+                            <h5 class="text-center">Planing Software</h5>
                         </div>
                         <div class="topbar_right">
                             <div class="topbar_right_search">

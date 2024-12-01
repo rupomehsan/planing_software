@@ -1,25 +1,40 @@
-//app layout
+/*
+|--------------------------------------------------------------------------
+| App  Layout
+|--------------------------------------------------------------------------
+*/
 import Layout from "../Layouts/Layout.vue";
-//Dashboard
 import Dashboard from "../Management/Dashboard/Dashboard.vue";
-
-//SettingsRoutes
+/*
+|--------------------------------------------------------------------------
+| Settings Routes
+|--------------------------------------------------------------------------
+*/
 // import SettingsRoutes from "../Management/Settings/setup/routes.js";
-
-
-//routes
-
+/*
+|--------------------------------------------------------------------------
+| User Management Routes
+|--------------------------------------------------------------------------
+*/
 import UserRoutes from '../Management/user_management/setup/routes.js';
-
-// //report_setup
-import dofa from '../Management/report_setup/dofa/setup/routes.js';
-import orjitobbo_target from '../Management/report_setup/orjitobbo_target/setup/routes';
-// import porikolponar_dhoron from '../Management/report_setup/porikolponar_dhoron/setup/routes';
-// import time_frame_type from '../Management/report_setup/time_frame_type/setup/routes';
-// import time_duration from '../Management/report_setup/time_duration/setup/routes';
-// import month_management from '../Management/report_setup/month_management/setup/routes';
-
-// //kendro
+/*
+|--------------------------------------------------------------------------
+| Plan Dependency Routes
+|--------------------------------------------------------------------------
+*/
+import dofa_routes from '../Management/plan_dep/dofa/setup/routes.js';
+import orjitobbo_target_routes from '../Management/plan_dep/orjitobbo_target/setup/routes';
+import category_routes from '../Management/plan_dep/category/setup/routes';
+import mash_bebosthapona_routes from '../Management/plan_dep/mash_bebosthapona/setup/routes';
+import porikolponar_dhoron_routes from '../Management/plan_dep/porikolponar_dhoron/setup/routes';
+import somoykal_routes from '../Management/plan_dep/somoykal/setup/routes';
+import somoysimar_dhoron_routes from '../Management/plan_dep/somoysimar_dhoron/setup/routes';
+import sonkha_tattik_tottho_routes from '../Management/plan_dep/sonkha_tattik_tottho/setup/routes';
+/*
+|--------------------------------------------------------------------------
+| Central(kendro) Plan Management Routes
+|--------------------------------------------------------------------------
+*/
 // import barsik_porikolpona from '../Management/kendro/barshik_porikolpona/setup/routes';
 // import barshik_karjokori_porikolpona from '../Management/kendro/barshik_karjokori_porikolpona/setup/routes';
 
@@ -61,20 +76,32 @@ const routes = {
             component: Dashboard,
             name: 'SuperAdminDashboard',
         },
-        //management routes
-
+        /*
+        |--------------------------------------------------------------------------
+        | Plan Dependency Routes
+        |--------------------------------------------------------------------------
+        */
         UserRoutes,
-        orjitobbo_target,
-        dofa,
+        dofa_routes,
+        orjitobbo_target_routes,
+        sonkha_tattik_tottho_routes,
+        category_routes,
+        mash_bebosthapona_routes,
+        porikolponar_dhoron_routes,
+        somoykal_routes,
+        somoysimar_dhoron_routes,
+        /*
+        |--------------------------------------------------------------------------
+        | Settings Routes
+        |--------------------------------------------------------------------------
+        */
         //settings
         // SettingsRoutes,
-        //report_setup
-        // porikolponar_dhoron,
-        // time_frame_type,
-        // time_duration,
-        // month_management,
-
-        // //kendro
+        /*
+        |--------------------------------------------------------------------------
+        | Central(kendro) Plan Management Routes
+        |--------------------------------------------------------------------------
+        */
         // barsik_porikolpona,
         // barshik_karjokori_porikolpona,
 

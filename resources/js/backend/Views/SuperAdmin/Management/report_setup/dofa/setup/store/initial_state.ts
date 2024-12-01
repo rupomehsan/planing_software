@@ -9,7 +9,6 @@ export const initialState = {
     all: {} as anyObject,
     item: {} as anyObject,
     url: '',
-
     /*_______________*/
     /* data filters */
 

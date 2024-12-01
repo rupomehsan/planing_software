@@ -5,6 +5,7 @@ use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\GetAl
 use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\DestroyData;
 use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\GetSingleData;
 use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\StoreData;
+use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\UpdateStatus;
 use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\UpdateData;
 use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\SoftDelete;
 use App\Modules\Management\UserManagement\UserDepartmentSubSection\Actions\RestoreData;
@@ -36,9 +37,14 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update(DataStoreValidation $request, $slug)
+   public function update(DataStoreValidation $request, $slug)
     {
         $data = UpdateData::execute($request, $slug);
+        return $data;
+    }
+public function updateStatus()
+    {
+        $data = UpdateStatus::execute();
         return $data;
     }
 

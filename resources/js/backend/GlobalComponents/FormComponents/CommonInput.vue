@@ -1,5 +1,5 @@
 <template>
-    <div :class="row_col_class">
+    <div :class="row_col_class ?? 'col-md-6'">
         <div class="form-group" v-if="is_visible">
             <label for="">
                 {{ label || name }}
@@ -30,10 +30,10 @@
             </div>
 
             <div v-if="type === 'textarea'" class="mt-1 mb-3">
-                <!-- <textarea class="form-control form-control-square" rows="10"  type="text" :name="name" :value="value"
-                @change="errorReset"></textarea> -->
-                <!-- <div :id="name"></div> -->
-                <text-editor :name="name" />
+                <textarea class="form-control form-control-square" rows="10" type="text" :name="name" :value="value"
+                    @change="errorReset"></textarea>
+                <div :id="name"></div>
+                <!-- <text-editor :name="name" /> -->
             </div>
 
             <div v-if="type === 'select'" class="mt-1 mb-3">

@@ -6,6 +6,7 @@ use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\Destroy
 use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\GetSingleData;
 use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\StoreData;
 use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\UpdateData;
+use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\UpdateStatus;
 use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\SoftDelete;
 use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\RestoreData;
 use App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Actions\ImportData;
@@ -36,9 +37,14 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update(DataStoreValidation $request, $slug)
+   public function update(DataStoreValidation $request, $slug)
     {
         $data = UpdateData::execute($request, $slug);
+        return $data;
+    }
+public function updateStatus()
+    {
+        $data = UpdateStatus::execute();
         return $data;
     }
 
