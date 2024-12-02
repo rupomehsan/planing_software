@@ -47,7 +47,7 @@
     padding: 10px;
     position: absolute;
     backdrop-filter: blur(8px);
-    background: rgba(54, 64, 74, 0.92);
+    background: rgb(206 206 206 / 92%);
     top: calc(100% + 5px);
     width: 100%;
     z-index: 9999;

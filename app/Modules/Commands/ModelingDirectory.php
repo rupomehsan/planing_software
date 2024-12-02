@@ -410,25 +410,25 @@ class ModelingDirectory extends Command
             //sidebar dynamic  making
             //sidebar dynamic  making
 
-            $filePath = base_path("resources/js/backend/Views/{$role}/Layouts/Partials/Sidebar/Index.vue");
-            $routeImport = "import SideBarDropDownMenus from './SideBarDropDownMenus.vue';\n";
-            $sidebarMenuContent = "<side-bar-single-menu :icon=\"`fa fa-plus`\" :menu_title=\"`{$ViewModuleName}`\"  :route_name=\"`All{$ViewModuleName}`\" />\n";
+            // $filePath = base_path("resources/js/backend/Views/{$role}/Layouts/Partials/Sidebar/Index.vue");
+            // $routeImport = "import SideBarDropDownMenus from './SideBarDropDownMenus.vue';\n";
+            // $sidebarMenuContent = "<side-bar-single-menu :icon=\"`fa fa-plus`\" :menu_title=\"`{$ViewModuleName}`\"  :route_name=\"`All{$ViewModuleName}`\" />\n";
 
 
-            $fileContent = file_get_contents($filePath);
+            // $fileContent = file_get_contents($filePath);
 
 
-            if (strpos($fileContent, $routeImport) === false) {
-                $routesCommentPosition = strpos($fileContent, "// routes");
-                $insertPosition = strpos($fileContent, "\n", $routesCommentPosition) + 1;
-                $fileContent = substr($fileContent, 0, $insertPosition) . $routeImport . substr($fileContent, $insertPosition);
-            }
+            // if (strpos($fileContent, $routeImport) === false) {
+            //     $routesCommentPosition = strpos($fileContent, "// routes");
+            //     $insertPosition = strpos($fileContent, "\n", $routesCommentPosition) + 1;
+            //     $fileContent = substr($fileContent, 0, $insertPosition) . $routeImport . substr($fileContent, $insertPosition);
+            // }
 
-            if (strpos($fileContent, $sidebarMenuContent) === false) {
-                $managementEndPosition = strpos($fileContent, "<!-- Management end -->");
-                $fileContent = substr($fileContent, 0, $managementEndPosition) . $sidebarMenuContent . substr($fileContent, $managementEndPosition);
-            }
-            file_put_contents($filePath, $fileContent);
+            // if (strpos($fileContent, $sidebarMenuContent) === false) {
+            //     $managementEndPosition = strpos($fileContent, "<!-- Management end -->");
+            //     $fileContent = substr($fileContent, 0, $managementEndPosition) . $sidebarMenuContent . substr($fileContent, $managementEndPosition);
+            // }
+            // file_put_contents($filePath, $fileContent);
         }
 
 

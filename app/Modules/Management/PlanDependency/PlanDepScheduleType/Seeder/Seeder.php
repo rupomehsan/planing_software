@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Management\PlanDependency\PlanDepScheduleType\Seeder;
 
 use Illuminate\Database\Seeder as SeederClass;
@@ -14,11 +15,19 @@ class Seeder extends SeederClass
 
     public function run(): void
     {
+
         $faker = Faker::create();
         self::$model::truncate();
 
-        for ($i = 1; $i <= 100; $i++) {
-            self::$model::create([                'title' => $faker->text(100),
+        $data = [
+            "sector vittik",
+            "prikolporna vittik",
+            "niyomito",
+        ];
+
+        foreach ($data as $key => $item) {
+            self::$model::create([
+                'title' => $item,
                 'description' => $faker->paragraph,
                 'serial_no' => $faker->randomNumber,
             ]);

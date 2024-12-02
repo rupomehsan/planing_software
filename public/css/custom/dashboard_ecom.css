@@ -20,7 +20,7 @@ label {
 }
 
 .card_body_fixed_height {
-    height: calc(100vh - 270px) !important;
+    /* height: calc(100vh - 270px) !important; */
     overflow-y: auto !important;
 }
 

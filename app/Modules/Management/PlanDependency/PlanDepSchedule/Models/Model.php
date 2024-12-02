@@ -5,11 +5,14 @@ namespace App\Modules\Management\PlanDependency\PlanDepSchedule\Models;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Model extends EloquentModel
 {
     use SoftDeletes;
     protected $table = "plan_dep_schedules";
     protected $guarded = [];
+
+    protected static $schedule_type_model = \App\Modules\Management\PlanDependency\PlanDepScheduleType\Models\Model::class;
 
     protected static function booted()
     {
@@ -32,12 +35,17 @@ class Model extends EloquentModel
         return $q->where('status', 'active');
     }
 
-     public function scopeInactive($q)
+    public function scopeInactive($q)
     {
         return $q->where('status', 'inactive');
     }
-     public function scopeTrased($q)
+    public function scopeTrased($q)
     {
         return $q->onlyTrashed();
+    }
+
+    public function schedule_type()
+    {
+        return $this->belongsTo(self::$schedule_type_model, 'plan_dep_schedule_type_id');
     }
 }

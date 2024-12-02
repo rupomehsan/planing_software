@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Management\PlanDependency\PlanDepSchedule\Seeder;
 
 use Illuminate\Database\Seeder as SeederClass;
@@ -18,7 +19,8 @@ class Seeder extends SeederClass
         self::$model::truncate();
 
         for ($i = 1; $i <= 100; $i++) {
-            self::$model::create([                'plan_dep_schedule_type_id' => $faker->randomNumber,
+            self::$model::create([
+                'plan_dep_schedule_type_id' => rand(1, 3),
                 'title' => $faker->text(100),
                 'description' => $faker->paragraph,
                 'serial_no' => $faker->randomNumber,

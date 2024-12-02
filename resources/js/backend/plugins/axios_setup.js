@@ -61,9 +61,11 @@ window.render_form_errors = function (object, selector = "name") {
             // console.log("resss",element);
             let el = document.querySelector(`input[${selector}="${key}`);
             let txarea = document.querySelector(`textarea[${selector}="${key}`);
+
             if (!el) {
                 el = document.getElementById(`${key}`);
             }
+
             if (txarea) {
                 el = document.querySelector(`textarea[${selector}="${key}`);
             }

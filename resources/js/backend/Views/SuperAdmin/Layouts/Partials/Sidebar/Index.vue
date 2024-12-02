@@ -1,4 +1,5 @@
 <template>
+
     <aside>
         <nav>
             <div class="side_nave">
@@ -29,17 +30,29 @@
                         :icon="`fa fa-list`"></dropdown-nav>
                     <dropdown-nav :label="`পরিকল্পনা ব্যবস্থাপনা`" :icon="`fa fa-list`" :menus="[
                         { name: `Alldofa`, label: `দফা` },
-                        { name: `Allorjitobbo_target`, label: `অরজিতব্য টার্গেট` },
+                        { name: `Allorjitobbo_target`, label: `অর্জিতব্য টার্গেট` },
                         { name: `Allcategories`, label: `কেটেগরি` },
-                        { name: `Allorjitobbo_target`, label: `সংখ্যাতাত্ত্বিক তথ্য` },
-                        { name: `Allorjitobbo_target`, label: `পরিকল্পনার ধরন ` },
-                        { name: `Allorjitobbo_target`, label: `সময়সীমার ধরন` },
-                        { name: `Allorjitobbo_target`, label: `সময়কাল` },
+                        { name: `Allsonkha_tattik_totthos`, label: `সংখ্যাতাত্ত্বিক তথ্য` },
+                        { name: `Allplan_types`, label: `পরিকল্পনার ধরন ` },
+                        { name: `Allschedule_types`, label: `সময়সীমার ধরন` },
+                        { name: `Allschedules`, label: `সময়কাল` },
                         { name: `Allorjitobbo_target`, label: `মাস ব্যবস্থাপনা` },
                     ]">
                     </dropdown-nav>
 
+                    <dropdown-nav :label="`কেন্দ্রিও পরিকল্পনা`" :icon="`fa fa-list`" :menus="[
+                        { name: `Allcentral_yearly_plans`, label: `বার্ষিক পরিকল্পনা` },
+                        { name: `Allcentral_yearly_exicutive_plans`, label: ` কার্যকরী পরিকল্পনা` },
+                        // { name: `Allorjitobbo_target`, label: `বিভাগীয় সেকশন` },
+                    ]">
+                    </dropdown-nav>
 
+                    <dropdown-nav :label="`বিভাগীয় পরিকল্পনা`" :icon="`fa fa-list`" :menus="[
+                        { name: `Alldepartment_yearly_plans`, label: `বার্ষিক পরিকল্পনা` },
+                        { name: `Alldepartment_yearly_exicutive_plans`, label: `বার্ষিক কার্যকরী পরিকল্পনা` },
+                        { name: `Allorjitobbo_target`, label: `কার্যকরী পরিকল্পনা` },
+                    ]">
+                    </dropdown-nav>
 
                     <dropdown-nav :label="`বিভাগ ব্যবস্থাপনা`" :icon="`fa fa-list`" :menus="[
                         { name: `Alldofa`, label: `দফা` },
@@ -51,19 +64,9 @@
                     ]">
                     </dropdown-nav>
 
-                    <dropdown-nav :label="`কেন্দ্রিও পরিকল্পনা`" :icon="`fa fa-list`" :menus="[
-                        { name: `Alldofa`, label: `বার্ষিক পরিকল্পনা` },
-                        { name: `Allorjitobbo_target`, label: `বিভাগীয় সেকশন` },
-                        { name: `Allorjitobbo_target`, label: `বার্ষিক কার্যকরী পরিকল্পনা` },
-                    ]">
-                    </dropdown-nav>
 
-                    <dropdown-nav :label="`বিভাগীয় পরিকল্পনা`" :icon="`fa fa-list`" :menus="[
-                        { name: `Alldofa`, label: `বার্ষিক পরিকল্পনা` },
-                        { name: `Allorjitobbo_target`, label: `বার্ষিক কার্যকরী পরিকল্পনা` },
-                        { name: `Allorjitobbo_target`, label: `কার্যকরী পরিকল্পনা` },
-                    ]">
-                    </dropdown-nav>
+
+
 
                     <dropdown-nav :label="` বিভাগীয় বাজেট`" :icon="`fa fa-list`" :menus="[
                         { name: `Alldofa`, label: `বাজেট আয়` },

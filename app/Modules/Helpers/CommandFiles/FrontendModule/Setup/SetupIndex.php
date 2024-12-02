@@ -51,6 +51,7 @@ if (!function_exists('SetupIndex')) {
             select_fields: [
                 "id",
                 {$selectFields},
+                "status",
                 "slug",
                 "created_at",
             ],

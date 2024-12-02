@@ -17,7 +17,7 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = [];
+            $with = ['schedule_type:id,title'];
             $condition = [];
 
             $data = self::$model::query();
@@ -25,17 +25,17 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-    $q->where('plan_dep_schedule_type_id', 'like', '%' . $searchKey . '%');    
+    $q->where('plan_dep_schedule_type_id', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('title', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('title', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('description', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('description', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('serial_no', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('serial_no', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('start_date', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('start_date', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('end_date', 'like', '%' . $searchKey . '%');              
+    $q->orWhere('end_date', 'like', '%' . $searchKey . '%');
 
                 });
             }
