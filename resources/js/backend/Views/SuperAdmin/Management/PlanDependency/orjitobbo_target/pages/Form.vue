@@ -22,7 +22,7 @@
                             <template v-if="form_field.type === 'select'">
                                 <div :class="form_field.row_col_class">
                                     <div class="form-group ">
-                                        <label for="">Select Category</label>
+                                        <label for="">{{ form_field.label }}</label>
                                         <div class="mt-1 mb-3">
                                             <drop-down-el :name="'plan_dep_dofa_id'"
                                                 :value="item && item.plan_dep_dofa_id ? [this.item.dofa] : []"

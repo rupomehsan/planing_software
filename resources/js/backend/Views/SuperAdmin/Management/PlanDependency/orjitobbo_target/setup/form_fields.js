@@ -1,7 +1,7 @@
 export default [
     {
         name: "plan_dep_dofa_id",
-        label: "Select  Dofa",
+        label: "দফা",
         type: "select",
         value: "",
         row_col_class: "col-md-6",
@@ -9,7 +9,7 @@ export default [
     },
     {
         name: "title",
-        label: "Title",
+        label: "শিরোনাম",
         type: "text",
         value: "",
         row_col_class: "col-md-6",
@@ -17,7 +17,7 @@ export default [
 
     {
         name: "description",
-        label: "Description",
+        label: "বর্ণনা",
         type: "textarea",
         value: "",
         row_col_class: "col-md-6",

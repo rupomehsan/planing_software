@@ -13,6 +13,7 @@ const setup: setup_type = {
     module_name: 'categories',
     route_prefix: `categories`,
     store_prefix: 'categories',
+    route_path: "categories",
 
     select_fields: ['id', 'title', 'description', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],

@@ -4,14 +4,13 @@
             <div class="card w-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <!-- <h5 class="text-capitalize">{{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
-                    <h5 class="text-capitalize">বিভাগিয় বার্ষিক পরিকল্পনা বাস্তবায়ন
-                    </h5>
+                    <h5 class="text-capitalize">বিভাগীয় বার্ষিক কার্যকরী পরিকল্পনা বাস্তবায়ন</h5>
                     <div>
                         <button type="button" class="btn btn-outline-warning btn-sm mx-2" @click="is_show_modal = true">
-                           Import From Excel
+                            Import From Excel
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-sm mx-2" @click="is_show_modal = true">
-                           Import  previous  incompleted
+                            Import previous incompleted
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-sm " @click="is_show_modal = true">
                             Add Iitem
@@ -71,7 +70,8 @@
                 <form @submit.prevent="submitHandler">
                     <div class="modal-content border-primary">
                         <div class="modal-header bg-primary">
-                            <h5 class="modal-title text-white"> বিভাগিয় বার্ষিক পরিকল্পনা বাস্তবায়ন তৈরি করুন </h5>
+                            <h5 class="modal-title text-white">বিভাগীয় বার্ষিক কার্যকরী পরিকল্পনা বাস্তবায়ন তৈরি করুন
+                            </h5>
                             <button @click="is_show_modal = false" type="button" class="btn btn-light"
                                 data-dismiss="modal"><i class="fa fa-times"></i>
                             </button>
@@ -149,16 +149,16 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title "> Ration(1-10) </label>
+                                        <label for="title "> Rating(1-10) </label>
                                         <input type="number" class="form-control" name="" id="">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <h4>bastobayon kari</h4>
+                                    <h4 class="mt-2">Bastobayon kari</h4>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group mt-2">
+                                    <div class="form-group ">
                                         <label for="title "> Department section </label>
                                         <select name="" class="form-select" id="">
                                             <option value="">Saptahik</option>
@@ -192,11 +192,11 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <h4>External helper</h4>
+                                    <h4 class="mt-2">External helper</h4>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group mt-2">
+                                    <div class="form-group ">
                                         <label for="title "> Others Departments</label>
                                         <select name="" class="form-select" id="">
                                             <option value="">Saptahik</option>

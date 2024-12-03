@@ -426,11 +426,11 @@ a{
                 margin-left: 10px;
 
                 span {
-                    display: block;
-                    width: 135px;
-                    white-space: nowrap;
+                    /* display: block; */
+                    /* width: 135px; */
+                    /* white-space: nowrap;
                     overflow: hidden;
-                    text-overflow: ellipsis;
+                    text-overflow: ellipsis; */
                     color: var(--color3)
                 }
 

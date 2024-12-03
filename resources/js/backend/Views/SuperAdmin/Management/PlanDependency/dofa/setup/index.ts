@@ -11,13 +11,13 @@ const setup: setup_type = {
     api_end_point: 'plan-dep-dofas',
 
     module_name: 'dofa',
-    route_prefix: `dofa`,
+    route_prefix: `Dofa`,
     store_prefix: 'dofa',
     route_path: "dofa",
 
     select_fields: ['id', 'title', 'description', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],
-    table_header_data: ['id', 'title', 'description', 'status'],
+    table_header_data: ['ক্রম', 'শিরোনাম', 'বর্ণনা', 'স্ট্যাটাস'],
     table_row_data: ['id', 'title', 'description', 'status'],
 
 

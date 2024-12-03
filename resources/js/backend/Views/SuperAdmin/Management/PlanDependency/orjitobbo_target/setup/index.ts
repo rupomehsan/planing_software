@@ -1,7 +1,7 @@
 import app_config from '../../../../../../Config/app_config';
 import setup_type from './setup_type';
 
-const prefix: string = 'অরজিতব্য টার্গেট';
+const prefix: string = 'অর্জিতব্য টার্গেট';
 const setup: setup_type = {
     prefix,
     permission: [`admin`, `super_admin`],
@@ -17,7 +17,7 @@ const setup: setup_type = {
 
     select_fields: ['id', 'title', 'plan_dep_dofa_id', 'description', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],
-    table_header_data: ['id', "dofa", 'title', 'description', 'status'],
+    table_header_data: ['ক্রম','দফা', 'শিরোনাম', 'বর্ণনা', 'স্ট্যাটাস'],
     table_row_data: ['id', 'dofa', 'title', 'description', 'status'],
 
     layout_title: prefix + ' Management',

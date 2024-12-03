@@ -21,7 +21,6 @@
                                 <div class="name">
                                     Tasnimul Hasan
                                 </div>
-
                             </div>
                         </div>
                     </li>
@@ -29,7 +28,7 @@
                     <dropdown-nav :label="`ড্যাশবোর্ড`" :name="`SuperAdminDashboard`"
                         :icon="`fa fa-list`"></dropdown-nav>
                     <dropdown-nav :label="`পরিকল্পনা ব্যবস্থাপনা`" :icon="`fa fa-list`" :menus="[
-                        { name: `Alldofa`, label: `দফা` },
+                        { name: `AllDofa`, label: `দফা` },
                         { name: `Allorjitobbo_target`, label: `অর্জিতব্য টার্গেট` },
                         { name: `Allcategories`, label: `কেটেগরি` },
                         { name: `Allsonkha_tattik_totthos`, label: `সংখ্যাতাত্ত্বিক তথ্য` },
@@ -55,12 +54,12 @@
                     </dropdown-nav>
 
                     <dropdown-nav :label="`বিভাগ ব্যবস্থাপনা`" :icon="`fa fa-list`" :menus="[
-                        { name: `Alldofa`, label: `দফা` },
-                        { name: `Allorjitobbo_target`, label: `বিভাগীয় সেকশন` },
-                        { name: `Allorjitobbo_target`, label: `বিভাগীয় সাবসেকশন` },
-                        { name: `Allorjitobbo_target`, label: `বিভাগ` },
-                        { name: `Allorjitobbo_target`, label: `বিভাগ রোল ` },
-                        { name: `Allorjitobbo_target`, label: `বিভাগ সদস্য` },
+
+                        { name: `AllDepartmentSection`, label: `বিভাগীয় সেকশন` },
+                        { name: `AllDepartmentSubSection`, label: `বিভাগীয় সাবসেকশন` },
+                        { name: `AllDepartmentDivision`, label: `বিভাগ` },
+                        { name: `AllDepartmentRole`, label: `বিভাগ রোল ` },
+                        { name: `AllDepartmentMember`, label: `বিভাগ সদস্য` },
                     ]">
                     </dropdown-nav>
 
@@ -69,28 +68,28 @@
 
 
                     <dropdown-nav :label="` বিভাগীয় বাজেট`" :icon="`fa fa-list`" :menus="[
-                        { name: `Alldofa`, label: `বাজেট আয়` },
-                        { name: `Allorjitobbo_target`, label: `বাজেট ব্যয়` },
+                        { name: `Allincome`, label: `বাজেট আয়` },
+                        { name: `Allexpense`, label: `বাজেট ব্যয়` },
                     ]">
                     </dropdown-nav>
 
                     <dropdown-nav :label="`রিপোর্ট`" :icon="`fa fa-list`" :menus="[
-                        { name: `Alldofa`, label: `পরিকল্পনা বাস্তবায়নের মাসিক রিপোর্ট` },
-                        { name: `Allorjitobbo_target`, label: `কার্যকরী পরিকল্পনা বাস্তবায়নের মাসিক রিপোর্ট` },
-                        { name: `Allorjitobbo_target`, label: `পরিকল্পনা বাস্তবায়নের ত্রৈমাসিক/ষাণ্মাসিক/বার্ষিক রিপোর্ট` },
-                        { name: `Allorjitobbo_target`, label: `পরিকল্পনা বাস্তবায়নের ত্রৈমাসিক/ষাণ্মাসিক/বার্ষিক রিপোর্ট` },
-                        { name: `Allorjitobbo_target`, label: `কেন্দ্রিও পরিকল্পনা বাস্তবায়নের রিপোর্ট` },
-                        { name: `Allorjitobbo_target`, label: `বিভাগের পরিকল্পনা বাস্তবায়নের রিপোর্ট` },
-                        { name: `Allorjitobbo_target`, label: `শাখা থেকে প্রাপ্ত/সংগৃহীত রিপোর্ট` },
+                        {  label: `পরিকল্পনা বাস্তবায়নের মাসিক রিপোর্ট` },
+                        {  label: `কার্যকরী পরিকল্পনা বাস্তবায়নের মাসিক রিপোর্ট` },
+                        {  label: `পরিকল্পনা বাস্তবায়নের ত্রৈমাসিক/ষাণ্মাসিক/বার্ষিক রিপোর্ট` },
+                        {  label: `পরিকল্পনা বাস্তবায়নের ত্রৈমাসিক/ষাণ্মাসিক/বার্ষিক রিপোর্ট` },
+                        {  label: `কেন্দ্রিও পরিকল্পনা বাস্তবায়নের রিপোর্ট` },
+                        {  label: `বিভাগের পরিকল্পনা বাস্তবায়নের রিপোর্ট` },
+                        {  label: `শাখা থেকে প্রাপ্ত/সংগৃহীত রিপোর্ট` },
                     ]">
                     </dropdown-nav>
 
-                    <dropdown-nav :label="`আর্কাইভ (পর্যালোচনা)`" :name="`Alluser`" :icon="`fa fa-list`">
+                    <dropdown-nav :label="`আর্কাইভ (পর্যালোচনা)`"  :icon="`fa fa-list`">
                     </dropdown-nav>
-                    <dropdown-nav :label="`বার্ষিক বাজেট`" :name="`Alluser`" :icon="`fa fa-list`"> </dropdown-nav>
-                    <dropdown-nav :label="`ব্যবহারবিধি`" :name="`Alluser`" :icon="`fa fa-list`"> </dropdown-nav>
-                    <dropdown-nav :label="`বিবিধ`" :name="`Alluser`" :icon="`fa fa-list`"> </dropdown-nav>
-                    <dropdown-nav :label="`ব্যবহারকারী`" :name="`Alluser`" :icon="`fa fa-list`"></dropdown-nav>
+                    <dropdown-nav :label="`বার্ষিক বাজেট`"  :icon="`fa fa-list`"> </dropdown-nav>
+                    <dropdown-nav :label="`ব্যবহারবিধি`"  :icon="`fa fa-list`"> </dropdown-nav>
+                    <dropdown-nav :label="`বিবিধ`"  :icon="`fa fa-list`"> </dropdown-nav>
+                    <dropdown-nav :label="`ব্যবহারকারী`"  :icon="`fa fa-list`"></dropdown-nav>
 
                 </ul>
 
