@@ -32,10 +32,10 @@
                         { name: `Allorjitobbo_target`, label: `অর্জিতব্য টার্গেট` },
                         { name: `Allcategories`, label: `কেটেগরি` },
                         { name: `Allsonkha_tattik_totthos`, label: `সংখ্যাতাত্ত্বিক তথ্য` },
-                        { name: `Allplan_types`, label: `পরিকল্পনার ধরন ` },
+                        { name: `AllPlanTypes`, label: `পরিকল্পনার ধরন ` },
                         { name: `Allschedule_types`, label: `সময়সীমার ধরন` },
                         { name: `Allschedules`, label: `সময়কাল` },
-                        { name: `Allorjitobbo_target`, label: `মাস ব্যবস্থাপনা` },
+                        { name: `AllMonthManagement`, label: `মাস ব্যবস্থাপনা` },
                     ]">
                     </dropdown-nav>
 

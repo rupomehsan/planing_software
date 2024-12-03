@@ -10,14 +10,14 @@ const setup: setup_type = {
     api_version: app_config.api_version,
     api_end_point: 'plan-dep-dofas',
 
-    module_name: 'dofa',
-    route_prefix: `dofa`,
-    store_prefix: 'dofa',
-    route_path: "dofa",
+    module_name: 'month_management',
+    route_prefix: `MonthManagement`,
+    store_prefix: 'month_management',
+    route_path: "month-management",
 
     select_fields: ['id', 'title', 'description', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],
-    table_header_data: ['id', 'title', 'description', 'status'],
+    table_header_data: ['ক্রম', 'শিরোনাম', 'বর্ণনা', 'স্ট্যাটাস'],
     table_row_data: ['id', 'title', 'description', 'status'],
 
 

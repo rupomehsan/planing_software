@@ -1,7 +1,7 @@
 import app_config from '../../../../../../Config/app_config';
 import setup_type from './setup_type';
 
-const prefix: string = 'দফা';
+const prefix: string = 'পরিকল্পনার ধরন';
 const setup: setup_type = {
     prefix,
     permission: [`admin`, `super_admin`],
@@ -10,14 +10,14 @@ const setup: setup_type = {
     api_version: app_config.api_version,
     api_end_point: 'plan-dep-dofas',
 
-    module_name: 'dofa',
-    route_prefix: `dofa`,
-    store_prefix: 'dofa',
-    route_path: "dofa",
+    module_name: 'plan_types',
+    route_prefix: `PlanTypes`,
+    store_prefix: 'plan_types',
+    route_path: "plan-types",
 
     select_fields: ['id', 'title', 'description', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],
-    table_header_data: ['id', 'title', 'description', 'status'],
+    table_header_data: ['ক্রম', 'শিরোনাম', 'বর্ণনা', 'স্ট্যাটাস'],
     table_row_data: ['id', 'title', 'description', 'status'],
 
 

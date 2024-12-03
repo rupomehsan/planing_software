@@ -2,7 +2,7 @@
 
     <template v-for="(row_item, index) in setup.table_row_data" :key="index">
         <tr >
-            <th>{{ row_item }}</th>
+            <th>{{ setup.table_header_data[index] }}</th>
             <th class="text-center">:</th>
             <th class="text-trim">
                 {{ trim_content(item[row_item]) }}

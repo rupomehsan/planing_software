@@ -17,7 +17,7 @@ const setup: setup_type = {
 
     select_fields: ['id', 'title', 'description', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],
-    table_header_data: ['id', 'title', 'description', 'status'],
+    table_header_data: ['ক্রম', 'শিরোনাম', 'বর্ণনা', 'স্ট্যাটাস'],
     table_row_data: ['id', 'title', 'description', 'status'],
 
 
