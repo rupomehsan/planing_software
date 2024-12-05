@@ -1,7 +1,7 @@
 export default [
     {
         name: "plan_dep_dofa_id",
-        label: "Select Dofa",
+        label: "দফা",
         type: "select",
         value: null,
         data_list: [],
