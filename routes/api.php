@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-require_once __DIR__ . '/../App/Modules/Routes/ApiRoutes.php';
-
+require_once __DIR__ . '/../app/Modules/Routes/ApiRoutes.php';
 
 
 

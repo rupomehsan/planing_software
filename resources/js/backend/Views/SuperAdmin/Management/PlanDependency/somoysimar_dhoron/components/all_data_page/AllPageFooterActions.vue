@@ -16,7 +16,7 @@ import ExportAll from "./action_buttons/ExportAll.vue"
 import ExportSelected from "./action_buttons/ExportSelected.vue"
 import Import from "./action_buttons/Import.vue"
 import Active from "./action_buttons/Active.vue"
-import Inactive from "./action_buttons/Inactive.vue"
+import Inactive from "./action_buttons/InActive.vue"
 import BulkActions from "./action_buttons/BulkActions.vue"
 import Trash from "./action_buttons/Trash.vue"
 

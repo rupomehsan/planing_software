@@ -75,7 +75,7 @@
                             name: `Edit${setup.route_prefix}`,
                             params: { id: item.slug}
                         }">
-                        Edit {{ setup.route_prefix }}
+                        {{ setup.edit_page_title }}
                     </router-link>
 
                     <a href="" v-if="item.prev_slug" @click.prevent="get_data(item.prev_slug)" class="btn btn-secondary btn-sm ml-2">

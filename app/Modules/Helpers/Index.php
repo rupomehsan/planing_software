@@ -8,7 +8,7 @@
 |
 */
 
-include_once(__DIR__ . '\CommandFiles\Index.php');
+include_once(__DIR__ . '/CommandFiles/Index.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +17,4 @@ include_once(__DIR__ . '\CommandFiles\Index.php');
 |
 */
 
-include_once(__DIR__ . '\HelperFiles\Index.php');
+include_once(__DIR__ . '/HelperFiles/Index.php');
