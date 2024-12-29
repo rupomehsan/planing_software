@@ -14,7 +14,7 @@
     {{-- <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> --}}
     <script src="{{ asset('js//sweet_alert.js')}}" defer></script>
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/backend/app.js'])
 </head>
 <body>
     <div>
