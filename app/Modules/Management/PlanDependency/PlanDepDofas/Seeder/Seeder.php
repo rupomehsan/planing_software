@@ -26,13 +26,13 @@ class Seeder extends SeederClass
         ];
 
         // for ($i = 0; $i < 4; $i++) {
-            foreach ($data as $key => $item) {
-                self::$model::create([
-                    'title' => $item,
-                    'description' => $faker->paragraph,
-                    'serial_no' => $key + 1,
-                ]);
-            }
+        foreach ($data as $key => $item) {
+            self::$model::create([
+                'title' => $item,
+                'description' => $faker->paragraph,
+                'serial_no' => $key + 1,
+            ]);
+        }
         // }
     }
 }

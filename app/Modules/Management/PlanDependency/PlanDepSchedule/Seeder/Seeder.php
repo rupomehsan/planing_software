@@ -12,18 +12,18 @@ class Seeder extends SeederClass
      php artisan db:seed --class="\App\Modules\Management\PlanDependency\PlanDepSchedule\Seeder\Seeder"
      */
     static $model = \App\Modules\Management\PlanDependency\PlanDepSchedule\Models\Model::class;
-
     public function run(): void
     {
         $faker = Faker::create();
         self::$model::truncate();
-
-        for ($i = 1; $i <= 100; $i++) {
+        $data = [
+            "robibar,mongol,brihospity(12pm-5pm)",
+            "robibar,mongol,brihospity(8pm-11pm),",
+        ];
+        foreach ($data as $key => $item) {
             self::$model::create([
                 'plan_dep_schedule_type_id' => rand(1, 3),
-                'title' => $faker->text(100),
-                'description' => $faker->paragraph,
-                'serial_no' => $faker->randomNumber,
+                'title' => $item,
                 'start_date' => $faker->dateTime,
                 'end_date' => $faker->dateTime,
             ]);

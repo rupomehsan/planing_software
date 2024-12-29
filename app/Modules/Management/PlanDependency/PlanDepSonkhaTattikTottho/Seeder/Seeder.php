@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Management\PlanDependency\PlanDepSonkhaTattikTottho\Seeder;
 
 use Illuminate\Database\Seeder as SeederClass;
@@ -16,11 +17,15 @@ class Seeder extends SeederClass
     {
         $faker = Faker::create();
         self::$model::truncate();
+        $data = [
+            "3",
+            "2",
+            "1",
+        ];
 
-        for ($i = 1; $i <= 100; $i++) {
-            self::$model::create([                'title' => $faker->text(100),
-                'description' => $faker->paragraph,
-                'serial_no' => $faker->randomNumber,
+        foreach ($data as $key => $item) {
+            self::$model::create([
+                'title' => $item,
             ]);
         }
     }
