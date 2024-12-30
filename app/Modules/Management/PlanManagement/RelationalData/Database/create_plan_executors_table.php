@@ -7,22 +7,21 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='/app/Modules/Management/PlanManagement/CentralPlan/CentralYearlyPlan/Database/create_central_yearly_plans_table.php'
+     php artisan migrate --path='/app/Modules/Management/PlanManagement/RelationalData/Database/create_plan_executors_table.php'
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('central_yearly_plans', function (Blueprint $table) {
+        Schema::create('plan_executors', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('plan_dep_dofas_id')->nullable();
-            $table->bigInteger('plan_dep_orjitobbo_target_id')->nullable();
+            $table->string('table_name')->nullable();
+            $table->bigInteger('table_id')->nullable();
             $table->bigInteger('serial_no')->nullable();
-            $table->string('title')->nullable();
+            $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('user_depertment_id')->nullable();
             $table->text('description')->nullable();
             $table->integer('previous_unfinished_parcent')->nullable();
             $table->integer('rating')->nullable();
-            $table->tinyInteger('is_published')->default(0);
-            $table->tinyInteger('is_approved')->default(0);
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

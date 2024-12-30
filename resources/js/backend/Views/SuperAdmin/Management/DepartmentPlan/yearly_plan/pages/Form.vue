@@ -312,21 +312,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.icon {
-    cursor: pointer;
-    position: relative;
-    width: 20px;
-    height: 10px;
-}
-
-.icon::after {
-    content: "\f085";
-    font-family: 'FontAwesome';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
-}
-</style>
+ 

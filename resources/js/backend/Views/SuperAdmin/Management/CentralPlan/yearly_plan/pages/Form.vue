@@ -44,36 +44,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="table_rows table_row_4">
-                                        <td class="text-wrap max-w-120">
-                                            <i class="fa fa-pencil"></i>
-                                            <i class="fa fa-trash mx-2"></i>
+                                    <tr 
+                                    v-for="(item,index) in form_data" :key="index"
+                                    class="table_rows table_row_4">
+                                        <td class="text-wrap max-w-120" >
+                                            <span @click="editItemHandler(index)">
+                                                <i class="fa fa-pencil cursor-pointer" ></i>
+                                            </span>
+                                            <span @click="deleteItemHandler(index)"> 
+                                                <i class="fa fa-trash mx-2 cursor-pointer"  ></i>
+                                            </span>
                                         </td>
-                                        <td class="text-wrap max-w-120">1</td>
-                                        <td class="text-wrap max-w-120">islamic somajbinirman</td>
-                                        <td class="text-wrap max-w-120">Target One</td>
-                                        <td class="text-wrap max-w-120">IT</td>
-                                        <td class="text-wrap max-w-120">50</td>
-                                        <td class="text-wrap max-w-120">40</td>
+                                        <td class="text-wrap max-w-120">{{ index+1 }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.plan_dep_dofa?.title }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.plan_dep_orjitobbo_target?.title }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.user_department?.title }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.previous_incomplete }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.rating }}</td>
 
                                     </tr>
-                                    <tr class="table_rows table_row_4">
-                                        <td class="text-wrap max-w-120">
-                                            <i class="fa fa-pencil"></i>
-                                            <i class="fa fa-trash mx-2"></i>
-                                        </td>
-                                        <td class="text-wrap max-w-120">1</td>
-                                        <td class="text-wrap max-w-120">islamic somajbinirman</td>
-                                        <td class="text-wrap max-w-120">Target One</td>
-                                        <td class="text-wrap max-w-120">IT,sahitto</td>
-                                        <td class="text-wrap max-w-120">50</td>
-                                        <td class="text-wrap max-w-120">40</td>
-
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                             <div  class="text-center">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-primary" @click="submitHandler">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -85,7 +79,7 @@
         <div class="modal fade " :class="`${is_show_modal ? 'show d-block' : 'd-none'}`" id="primarymodal"
             aria-modal="true">
             <div class="modal-dialog modal-lg ">
-                <form @submit.prevent="submitHandler">
+                <form @submit.prevent="SingleItemSubmitHandler">
                     <div class="modal-content border-primary">
                         <div class="modal-header bg-primary">
                             <h5 class="modal-title text-white"> {{ setup.prefix }} তৈরি করুন </h5>
@@ -98,43 +92,46 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Dofa</label>
-                                        <select name="" class="form-select" id="">
-                                            <option value="">One</option>
-                                            <option value="">two</option>
-                                            <option value="">three</option>
+                                        <select  @change="updateSelectText('plan_dep_dofa', $event)" class="form-select" id="" required>
+                                            <option value="">Select Dofa</option>
+                                            <option :value="item.id" v-for="item in dofas" :selected="item.id == form_item.plan_dep_dofa.id" :key="item">{{ item.title }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Orjitobbo Target</label>
-                                        <select name="" class="form-select" id="">
-                                            <option value="">One</option>
-                                            <option value="">two</option>
-                                            <option value="">three</option>
+                                        <select  @change="updateSelectText('plan_dep_orjitobbo_target', $event)" class="form-select" id="" required>
+                                           <option value="">Select Orjitobbo Target</option>
+                                            <option v-for="item in orgitobbo_target" :selected="item.id == form_item.plan_dep_orjitobbo_target.id" :value="item.id" :key="item">{{ item.title }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Executive Department</label>
-                                        <select name="" class="form-select" id="">
-                                            <option value="">One</option>
-                                            <option value="">two</option>
-                                            <option value="">three</option>
+                                        <select  @change="updateSelectText('user_department', $event)" class="form-select" id="" required>
+                                            <option value="">Select Executive Department</option>
+                                            <option v-for="item in user_departments" :selected="item.id == form_item.user_department.id" :value="item.id" :key="item">{{ item.title }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">Previous incomplete (%)</label>
-                                        <input type="text" class="form-control" placeholder="Previous incomplete">
+                                        <input v-model="form_item.previous_incomplete" type="text" required class="form-control" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">Rating (1-100) </label>
-                                        <input type="number" class="form-control" placeholder="Previous incomplete">
+                                        <input v-model="form_item.rating" type="number" class="form-control" required placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group mt-2">
+                                        <label for="title ">Description</label>
+                                        <textarea class="form-control" v-model="form_item.description" name="" id=""></textarea>
                                     </div>
                                 </div>
 
@@ -162,12 +159,26 @@ import DofaDropDownEl from '../../../PlanDependency/dofa/components/dropdown/Dro
 export default {
     components: { DofaDropDownEl },
     data: () => ({
+        setup,
         route_prefix: '',
         prefix: '',
         form_fields,
         param_id: null,
-        setup,
-        is_show_modal: false
+        is_show_modal: false,
+
+        dofas : [],
+        orgitobbo_target: [],
+        user_departments: [],
+        form_data: [],
+        form_item: {
+            plan_dep_dofa: { id: null, title: null },
+            plan_dep_orjitobbo_target: { id: null, title: null },
+            user_department: { id: null, title: null },
+            previous_incomplete: '',
+            rating: '',
+            description: ''
+        },
+        edit_item: null
     }),
     created: async function () {
         let id = this.param_id = this.$route.params.id;
@@ -177,6 +188,11 @@ export default {
         if (id) {
             this.set_fields(id);
         }
+
+        await this.get_all_dofas()
+        await this.get_all_orgitobbo_target()
+        await this.get_all_user_departments()
+
     },
     methods: {
         ...mapActions(user_store, {
@@ -203,21 +219,89 @@ export default {
             }
         },
 
-        submitHandler: async function ($event) {
-            if (this.param_id) {
-                let response = await this.update($event);
-                if ([200, 201].includes(response.status)) {
-                    window.s_alert("data updated");
-                    this.$router.push({ name: `Details${this.route_prefix}` });
-                }
+        
+
+        SingleItemSubmitHandler: async function ($event) {
+            if (this.edit_item !== null) {
+                
+                this.form_data[this.edit_item] = this.form_item
+                this.is_show_modal = false
+
             } else {
-                let response = await this.create($event);
-                if ([200, 201].includes(response.status)) {
-                    window.s_alert("data created");
-                    this.$router.push({ name: `All${this.route_prefix}` });
+
+
+                this.form_data.push(this.form_item)
+                this.form_item = {
+                    plan_dep_dofa: { id: null, title: null },
+                    plan_dep_orjitobbo_target: { id: null, title: null },
+                    user_department: { id: null, title: null },
+                    previous_incomplete: '',
+                    rating: '',
+                    description: ''
                 }
             }
+        
         },
+
+        submitHandler: async function ($event) {
+            $event.preventDefault();
+            if (this.form_data.length == 0) {
+                s_warning('No item found');
+                return false;
+            }
+            let contirmation = s_confirm('Are you sure want to submit?');
+            if (!contirmation) {
+                return false;
+            }
+            if (this.param_id) {
+                await this.update(this.form_data);
+            } else {
+                await this.create(this.form_data);
+            }
+        },
+
+         updateSelectText(field, event) {
+            const selectedIndex = event.target.selectedIndex;
+            const selectedText = event.target.options[selectedIndex].text;
+            const selectedValue = event.target.value;
+
+            // Ensure the field is an object and update id and title
+            this.form_item[field] = {
+                id: selectedValue,
+                title: selectedText
+            };
+        },
+
+        editItemHandler(index) {
+            this.is_show_modal = true;
+            this.edit_item = index
+            this.form_item = {}
+            this.form_item = this.form_data[index]
+        },
+
+        deleteItemHandler(index) {
+            this.form_data.splice(index, 1)
+        },
+
+        get_all_dofas: async function () {
+            let response = await axios.get('plan-dep-dofas?get_all=1');
+            if (response.data.status == "success") {
+                this.dofas = response.data.data
+            }
+        },
+
+        get_all_orgitobbo_target: async function () {
+            let response = await axios.get('plan-dep-orjitobbo-targets?get_all=1');
+            if (response.data.status == "success") {
+                this.orgitobbo_target = response.data.data
+            }
+        },
+        get_all_user_departments: async function () {
+            let response = await axios.get('user-departments?get_all=1');
+            if (response.data.status == "success") {
+                this.user_departments = response.data.data
+            }
+        }
     },
 
     computed: {
@@ -225,6 +309,7 @@ export default {
             item: "item",
         }),
     },
+    
 }
 </script>
 

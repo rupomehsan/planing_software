@@ -35,7 +35,7 @@
                         { name: `AllPlanTypes`, label: `পরিকল্পনার ধরন ` },
                         { name: `Allschedule_types`, label: `সময়সীমার ধরন` },
                         { name: `Allschedules`, label: `সময়কাল` },
-                        { name: `AllMonthManagement`, label: `মাস ব্যবস্থাপনা` },
+                        // { name: `AllMonthManagement`, label: `মাস ব্যবস্থাপনা` },
                     ]">
                     </dropdown-nav>
 
