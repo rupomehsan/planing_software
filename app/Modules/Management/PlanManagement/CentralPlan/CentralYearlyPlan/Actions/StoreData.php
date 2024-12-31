@@ -20,6 +20,7 @@ class StoreData
                     'description' => $value['description'] ?? null,
                     'previous_unfinished_parcent' => $value['previous_unfinished_parcent'] ?? null,
                     'rating' => $value['rating'] ?? null,
+                    'user_depertment_id' => $value['user_department']['id'] ?? null,
                 ];
 
                 $centralYearlyPlan = self::$model::create($data);
@@ -32,6 +33,8 @@ class StoreData
                     'description' => $centralYearlyPlan->description,
                     'rating' => $centralYearlyPlan->rating,
                 ];
+
+                // dd($plan_executors);
 
                 self::$PlanExecutorModel::create($plan_executors);
             }

@@ -5,6 +5,7 @@ namespace App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Mo
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Model extends EloquentModel
 {
     use SoftDeletes;
@@ -32,12 +33,27 @@ class Model extends EloquentModel
         return $q->where('status', 'active');
     }
 
-     public function scopeInactive($q)
+    public function scopeInactive($q)
     {
         return $q->where('status', 'inactive');
     }
-     public function scopeTrased($q)
+    public function scopeTrased($q)
     {
         return $q->onlyTrashed();
+    }
+
+    public function plan_dep_dofa()
+    {
+        return $this->belongsTo(\App\Modules\Management\PlanDependency\PlanDepDofas\Models\Model::class, 'plan_dep_dofas_id');
+    }
+
+    public function plan_dep_orjitobbo_target()
+    {
+        return $this->belongsTo(\App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Models\Model::class, 'plan_dep_orjitobbo_target_id');
+    }
+
+    public function user_department()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\UserDepartment\Models\Model::class, 'user_depertment_id');
     }
 }

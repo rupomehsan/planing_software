@@ -15,11 +15,10 @@ const setup: setup_type = {
     store_prefix: 'central_yearly_plans',
     route_path: 'central-yearly-plans',
 
-    select_fields: ['id', 'title', 'description', 'slug', 'created_at', 'status'],
+    select_fields: ['id', 'plan_dep_dofas_id','plan_dep_orjitobbo_target_id','user_depertment_id','title','previous_unfinished_parcent','rating', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],
-    table_header_data: ['id', 'title', 'description', 'status'],
-    table_row_data: ['id', 'title', 'description', 'status'],
-
+    table_header_data: ['id', 'plan dofa','orjitobbo target','user_department','title', 'status'],
+    table_row_data: ['id','plan_dep_dofa','plan_dep_orjitobbo_target','user_depertment_id', 'title', 'status'],
 
     layout_title: prefix + ' Management',
     page_title: `${prefix} Management`,

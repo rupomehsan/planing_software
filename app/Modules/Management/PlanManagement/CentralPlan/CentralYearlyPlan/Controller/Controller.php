@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Controller;
+
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\GetAllData;
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\DestroyData;
 use App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Actions\GetSingleData;
@@ -19,7 +20,8 @@ use App\Http\Controllers\Controller as ControllersController;
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
         return $data;
@@ -37,12 +39,12 @@ class Controller extends ControllersController
         return $data;
     }
 
-   public function update(DataStoreValidation $request, $slug)
+    public function update(DataStoreValidation $request, $slug)
     {
         $data = UpdateData::execute($request, $slug);
         return $data;
     }
-public function updateStatus()
+    public function updateStatus()
     {
         $data = UpdateStatus::execute();
         return $data;
@@ -73,5 +75,4 @@ public function updateStatus()
         $data = BulkActions::execute($request);
         return $data;
     }
-
 }

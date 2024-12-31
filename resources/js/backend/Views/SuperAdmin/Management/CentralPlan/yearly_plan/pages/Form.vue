@@ -59,7 +59,7 @@
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_dofa?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_orjitobbo_target?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.user_department?.title }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.previous_incomplete }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.previous_unfinished_parcent }}</td>
                                         <td class="text-wrap max-w-120">{{ item.rating }}</td>
 
                                     </tr>
@@ -119,7 +119,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">Previous incomplete (%)</label>
-                                        <input v-model="form_item.previous_incomplete" type="text" required class="form-control" placeholder="">
+                                        <input v-model="form_item.previous_unfinished_parcent" type="number" required class="form-control" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -174,7 +174,7 @@ export default {
             plan_dep_dofa: { id: null, title: null },
             plan_dep_orjitobbo_target: { id: null, title: null },
             user_department: { id: null, title: null },
-            previous_incomplete: '',
+            previous_unfinished_parcent: '',
             rating: '',
             description: ''
         },
@@ -235,7 +235,7 @@ export default {
                     plan_dep_dofa: { id: null, title: null },
                     plan_dep_orjitobbo_target: { id: null, title: null },
                     user_department: { id: null, title: null },
-                    previous_incomplete: '',
+                    previous_unfinished_parcent: '',
                     rating: '',
                     description: ''
                 }
@@ -249,10 +249,12 @@ export default {
                 s_warning('No item found');
                 return false;
             }
-            let contirmation = s_confirm('Are you sure want to submit?');
+            let contirmation = await s_confirm('Are you sure want to submit?');
+            
             if (!contirmation) {
                 return false;
             }
+            
             if (this.param_id) {
                 await this.update(this.form_data);
             } else {

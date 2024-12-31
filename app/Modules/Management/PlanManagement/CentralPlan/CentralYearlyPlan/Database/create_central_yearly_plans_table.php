@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('plan_dep_dofas_id')->nullable();
             $table->bigInteger('plan_dep_orjitobbo_target_id')->nullable();
+            $table->bigInteger('user_depertment_id')->nullable();
             $table->bigInteger('serial_no')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
