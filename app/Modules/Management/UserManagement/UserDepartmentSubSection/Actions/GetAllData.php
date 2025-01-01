@@ -22,6 +22,11 @@ class GetAllData
 
             $data = self::$model::query();
 
+
+            if (request()->has('user_department_section_id') && request()->input('user_department_section_id')) {
+                $condition['user_department_section_id'] = request()->input('user_department_section_id');
+            }
+
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {

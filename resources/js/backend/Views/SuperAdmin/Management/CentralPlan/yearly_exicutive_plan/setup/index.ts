@@ -1,7 +1,7 @@
 import app_config from '../../../../../../Config/app_config';
 import setup_type from './setup_type';
 
-const prefix: string = 'বার্ষিক পরিকল্পনা বাস্তবায়ন';
+const prefix: string = 'কেন্দ্রিও বার্ষিক পরিকল্পনা বাস্তবায়ন';
 const setup: setup_type = {
     prefix,
     permission: [`admin`, `super_admin`],

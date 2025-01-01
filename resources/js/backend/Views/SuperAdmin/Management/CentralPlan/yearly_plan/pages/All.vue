@@ -16,6 +16,7 @@
                                             <span class="icon"></span>
                                         </th>
                                         <th class="w-10">id</th>
+                                        <th>Title</th>
                                         <th class="">Dofa</th>
                                         <th class="">Orjitobbo Target</th>
                                         <th class=""> Executive Department</th>
@@ -38,6 +39,7 @@
                                             </span>
                                         </td>
                                         <td class="text-wrap max-w-120">{{ item.id }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_dofa?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_orjitobbo_target?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.user_department?.title }}</td>

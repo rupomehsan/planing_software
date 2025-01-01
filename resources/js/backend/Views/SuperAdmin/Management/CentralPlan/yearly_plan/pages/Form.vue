@@ -36,6 +36,7 @@
                                             <span class="icon"></span>
                                         </th>
                                         <th class="w-10">id</th>
+                                        <th>Title</th>
                                         <th class="">Dofa</th>
                                         <th class="">Orjitobbo Target</th>
                                         <th class=""> Executive Department</th>
@@ -56,6 +57,7 @@
                                             </span>
                                         </td>
                                         <td class="text-wrap max-w-120">{{ index+1 }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_dofa?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_orjitobbo_target?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.user_department?.title }}</td>
@@ -89,6 +91,12 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group mt-2">
+                                        <label for="title "> Title</label>
+                                        <input type="text" class="form-control" v-model="form_item.title">
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Dofa</label>
@@ -171,6 +179,7 @@ export default {
         user_departments: [],
         form_data: [],
         form_item: {
+            title: '',
             plan_dep_dofa: { id: null, title: null },
             plan_dep_orjitobbo_target: { id: null, title: null },
             user_department: { id: null, title: null },
@@ -232,6 +241,7 @@ export default {
 
                 this.form_data.push(this.form_item)
                 this.form_item = {
+                    title: '',
                     plan_dep_dofa: { id: null, title: null },
                     plan_dep_orjitobbo_target: { id: null, title: null },
                     user_department: { id: null, title: null },

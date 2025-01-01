@@ -15,6 +15,7 @@ class StoreData
             foreach ($requestData as $key => $value) {
 
                 $data = [
+                    'title' => $value['title'],
                     'plan_dep_dofas_id' => $value['plan_dep_dofa']['id'],
                     'plan_dep_orjitobbo_target_id' => $value['plan_dep_orjitobbo_target']['id'],
                     'description' => $value['description'] ?? null,
