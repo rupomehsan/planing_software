@@ -15,7 +15,7 @@ const setup: setup_type = {
     store_prefix: 'central_yearly_exicutive_plans',
     route_path: 'central-yearly-exicutive-plans',
 
-    select_fields: ['id', 'title', 'description', 'slug', 'created_at', 'status'],
+    select_fields: ['id', 'title', 'session','central_yearly_plan_id','user_department_id','plan_dep_dofa_id','rating', 'slug', 'created_at', 'status'],
     sort_by_cols: ['id', 'title', 'slug', 'created_at', 'status'],
     table_header_data: ['id', 'title', 'description', 'status'],
     table_row_data: ['id', 'title', 'description', 'status'],

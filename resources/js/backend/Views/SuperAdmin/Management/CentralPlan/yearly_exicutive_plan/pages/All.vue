@@ -8,12 +8,43 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive table_responsive card_body_fixed_height">
-                            <table class="table table-hover text-center table-bordered">
+                           <table class="table table-hover text-center table-bordered">
                                 <thead>
-                                    <table-head />
+                                    <tr>
+                                        <th class="w-10">
+                                            <span class="icon"></span>
+                                        </th>
+                                        <th class="w-10">id</th>
+                                        <th>Title</th>
+                                        <th class="">Central yearly Plan</th>
+                                        <th class="">Session</th>
+                                        <th class="">Dofa</th>
+                                        <th class="">Executive Department</th>
+                                        <th class="">Rating (1-100)</th>
+                                    </tr>
                                 </thead>
-                                <tbody v-if="all?.data?.length">
-                                    <table-body :data="all?.data" />
+                                <tbody>
+                                    <tr 
+                                    v-for="(item,index) in all?.data" :key="index"
+                                    class="table_rows table_row_4">
+                                        <td class="max-w-120 mx-2">
+                                            <span class="mx-2 cursor-pointer" @click="editItem(item.slug)">
+
+                                                <i class="fa fa-pencil" ></i>
+                                            </span>
+                                            <span class="cursor-pointer" @click="deleteItem(item)">
+
+                                                <i class="fa fa-trash mx-2" ></i>
+                                            </span>
+                                        </td>
+                                        <td class="text-wrap max-w-120">{{ item.id }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.title }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.central_yearly_plan?.title }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.session }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.dofa?.title }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.user_department?.title }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.rating }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

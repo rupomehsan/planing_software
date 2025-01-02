@@ -45,7 +45,6 @@
                                         <td class="text-wrap max-w-120">{{ item.user_department?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.previous_unfinished_parcent }}</td>
                                         <td class="text-wrap max-w-120">{{ item.rating }}</td>
-
                                     </tr>
                                 </tbody>
                             </table>

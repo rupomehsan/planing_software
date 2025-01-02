@@ -60,6 +60,9 @@
                                     </tr>
                                 </tbody>
                             </table>
+                             <div  class="text-center">
+                                <button type="button" class="btn btn-primary" @click="submitHandler">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </div>

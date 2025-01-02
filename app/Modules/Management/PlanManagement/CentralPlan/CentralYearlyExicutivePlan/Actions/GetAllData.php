@@ -17,7 +17,7 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = [];
+            $with = ['central_yearly_plan:id,title', 'user_department:id,title', 'dofa:id,title'];
             $condition = [];
 
             $data = self::$model::query();
