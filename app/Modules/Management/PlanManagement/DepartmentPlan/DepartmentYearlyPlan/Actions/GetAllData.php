@@ -4,6 +4,7 @@ namespace App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyP
 
 class GetAllData
 {
+    static $CentralYearlyPlanmodel = \App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Models\Model::class;
     static $model = \App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Models\Model::class;
 
     public static function execute()
@@ -17,8 +18,12 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = [];
+            $with = ['plan_dep_dofa', 'plan_dep_orjitobbo_target'];
             $condition = [];
+
+
+
+            $central_yearly_plan = self::$CentralYearlyPlanmodel::with($with)->where('user_depertment_id', auth()->user()->user_department_id)->get();
 
             $data = self::$model::query();
 
@@ -26,23 +31,14 @@ class GetAllData
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
                     $q->where('central_yearly_plan_id', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('plan_dep_dofas_id', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('plan_dep_orjitobbo_target_id', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('title', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('serial_no', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('description', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('previous_unfinished_parcent', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('rating', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('is_published', 'like', '%' . $searchKey . '%');
-
                     $q->orWhere('is_approved', 'like', '%' . $searchKey . '%');
                 });
             }
@@ -75,7 +71,7 @@ class GetAllData
                     ->select($fields)
                     ->where($condition)
                     ->orderBy($orderByColumn, $orderByType)
-                    ->paginate($pageLimit);
+                    ->get();
             } else {
                 $data = $data
                     ->with($with)
@@ -83,15 +79,12 @@ class GetAllData
                     ->where($condition)
                     ->where('status', $status)
                     ->orderBy($orderByColumn, $orderByType)
-                    ->paginate($pageLimit);
+                    ->get();
             }
 
-            return entityResponse([
-                ...$data->toArray(),
-                "active_data_count" => self::$model::active()->count(),
-                "inactive_data_count" => self::$model::inactive()->count(),
-                "trased_data_count" => self::$model::trased()->count(),
-            ]);
+            $final_data = array_merge($data->toArray(), $central_yearly_plan->toArray());
+
+            return entityResponse($final_data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }

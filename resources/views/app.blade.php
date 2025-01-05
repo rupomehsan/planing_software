@@ -1,30 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Planing Software</title>
-    {{--
-    <link rel="stylesheet" href="{{ asset('css/uniflex_style.css')}}"> --}}
-    @vite('resources/sass/app.scss')
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/custom/custom.css')}}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('plugins/pace.js')}}"></script>
-    <script src="{{ asset('js/sweet_alert.js')}}" defer></script>
-    @vite('resources/js/backend/Views/SuperAdmin/app.js')
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- Link --}}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.css') }}">
+    {{-- inertia Head --}}
+    @inertiaHead
 </head>
 
 <body>
-    <div id="app">
-        <app></app>
-    </div>
+
+    @inertia
+
+    {{-- plugins --}}
+    <script src="{{ asset('frontend/assets/js/jquery.min.js') }}"></script>
+    {{-- script --}}
+    <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- resource & vite --}}
+    @vite(['resources/js/frontend/app.js'])
 </body>
 
 </html>

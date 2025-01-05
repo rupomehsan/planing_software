@@ -55,7 +55,7 @@
                                 <td>Admin</td>
                                 <!-- <td>@12345678</td> -->
                                 <td>
-                                    <button @click="setPassword('admin@gmail.com')"
+                                    <button @click="setPassword('department_admin@gmail.com')"
                                         class="btn btn-outline-info">Login</button>
                                 </td>
                             </tr>
@@ -92,10 +92,10 @@ export default {
                     if (data.access_token) {
                         window.s_alert("Login Successfully");
                         localStorage.setItem('admin_token', data.access_token);
-                        localStorage.setItem('admin_role', data.user?.role_id);
-                        if (data.user?.role_id == 1) {
+                        localStorage.setItem('admin_role', data.user?.user_role_id);
+                        if (data.user?.user_role_id == 1) {
                             window.location.href = 'super-admin#/dashboard';
-                        } else if (data.user?.role_id == 2) {
+                        } else if (data.user?.user_role_id == 2) {
                             window.location.href = 'admin#/dashboard';
                         }
                     }

@@ -64,15 +64,11 @@ export default {
 
     methods: {
         logout: async function () {
-            let con = await window.s_confirm('logout');
+            let con = await window.s_confirm('Logout');
             if (con) {
-                let res = await axios.post('/api-logout')
-                if (res.data.status == "success") {
-                    localStorage.removeItem('token');
-                    location.href = "/login"
-                } else {
-                    console.log('Logout failed:', res.data.result);
-                }
+                localStorage.removeItem('admin_token');
+                localStorage.removeItem('admin_role');
+                return (location.href = "/login");
             }
         },
 

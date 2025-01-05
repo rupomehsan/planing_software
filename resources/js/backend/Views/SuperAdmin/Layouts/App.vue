@@ -15,18 +15,17 @@ export default {
         rightToggle: false,
     }),
     created: async function () {
-        // await this.check_is_auth();
-        // await this.get_all_website_settings();
+        await this.check_is_auth();
 
         // if (this.is_auth) {
         //     let prev_url = window.sessionStorage.getItem("prevurl");
-        //     if (this.auth_info?.role_id == 1) {
+        //     if (this.auth_info?.user_role_id == 1) {
         //         window.location.href = "/super-admin#/dashboard";
         //         if (this.$route.path === "/super-admin#") {
         //             this.$router.push("/dashboard");
         //         }
         //         window.location.hash = prev_url || "/admin#/dashboard";
-        //     } else if (this.auth_info?.role_id == 2) {
+        //     } else if (this.auth_info?.user_role_id == 2) {
         //         window.location.href = "/admin#/dashboard";
         //         if (this.$route.path === "/admin#") {
         //             this.$router.push("/dashboard");

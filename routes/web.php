@@ -1,26 +1,34 @@
 <?php
 
-use App\Http\Middleware\CheckApiToken;
-use Illuminate\Support\Facades\Route;
+/*
+|--------------------------------------------------------------------------
+| frontend Routes
+|--------------------------------------------------------------------------
+|
+*/
 
+require_once __DIR__ . '/../app/Modules/Routes/FrontendRoutes.php';
 
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+|
+*/
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+require_once __DIR__ . '/../app/Modules/Routes/BackendRoutes.php';
 
-Route::get('/super-admin', function () {
-    return view('app');
-});
-Route::get('/department', function () {
-    return view('department.app');
-});
+/*
+|--------------------------------------------------------------------------
+| Test Routes
+|--------------------------------------------------------------------------
+|
+*/
 
-Route::get('/login', function () {
-    return view('Auth.login');
-})->name('login');
-
-// Route::any('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('auth_logout');
-
-
-
+require_once __DIR__ . '/test.php';
+/*
+|--------------------------------------------------------------------------
+| Test Routes
+|--------------------------------------------------------------------------
+|
+*/
