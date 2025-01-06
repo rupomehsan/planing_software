@@ -44,3 +44,4 @@ use Illuminate\Support\Facades\Route;
     include_once base_path("app/Modules/Management/PlanBudgetManagement/PlanBudgetSubCategory/Routes/Route.php");
     include_once base_path("app/Modules/Management/PlanBudgetManagement/PlanBudget/Routes/Route.php");
     include_once base_path("app/Modules/Management/PlanBudgetManagement/PlanBudgetCategory/Routes/Route.php");
+include_once base_path("app/Modules/Management/PlanDependency/PlanDepSession/Routes/Route.php");

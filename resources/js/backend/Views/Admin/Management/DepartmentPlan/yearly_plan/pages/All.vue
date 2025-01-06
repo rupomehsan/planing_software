@@ -33,14 +33,14 @@
                                             <i class="fa fa-pencil"></i>
                                             <i class="fa fa-trash mx-2"></i>
                                         </td>
-                                        <td class="text-wrap max-w-120">1</td>
+                                        <td class="text-wrap max-w-120">{{ item.id }}</td>
                                         <td class="text-wrap max-w-120">
                                             <button class="btn btn-sm btn-primary">Set budget</button>
                                         </td>
                                         <td class="text-wrap max-w-120">{{ item.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_dofa?.title }}</td>
                                         <td class="text-wrap max-w-120">{{ item.plan_dep_orjitobbo_target?.title }}</td>
-                                    <td class="text-wrap max-w-120">{{ item.previous_unfinished_parcent }}</td>
+                                        <td class="text-wrap max-w-120">{{ item.previous_unfinished_parcent }}</td>
                                         <td class="text-wrap max-w-120">{{ item.rating }}</td>
 
                                     </tr>
@@ -50,7 +50,7 @@
                                         <td class="text-wrap max-w-120">
                                             <button class="btn btn-sm btn-primary m-1">Comment</button>
                                         </td>
-                                        <td class="text-wrap max-w-120">1</td>
+                                        <td class="text-wrap max-w-120">{{ item.id }}</td>
                                         <td class="text-wrap max-w-120">
                                             central
                                         </td>

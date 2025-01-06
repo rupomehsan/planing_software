@@ -104,6 +104,7 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group mt-2">
                                         <label for="title ">Select department</label>
@@ -122,6 +123,7 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group mt-2">
                                         <label for="title"> Section sub section </label>
@@ -223,7 +225,7 @@
                                  <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">Plan Details</label>
-                                        <textarea name="" class="form-control" id="" v-model="form_item.plan_details"></textarea>
+                                        <textarea name="" class="form-control" id="" v-model="form_item.description"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -265,6 +267,7 @@ export default {
         user_department_sub_sections: [],
         plan_categories: [],
         sonkhatattik_totthos: [],
+
         bastobayoner_mash: [
             "January",
             "February",
@@ -310,7 +313,7 @@ export default {
             is_archived: 'yes',
             is_umbrella: 'no',
             umbrella_departments: [],
-            plan_details: ''
+            description: ''
         },
         edit_item: null
     }),
@@ -388,7 +391,7 @@ export default {
                     is_archived: 'yes',
                     is_umbrella: 'no',
                     umbrella_departments: [],
-                    plan_details: ''
+                    description: ''
                 }
             }
         

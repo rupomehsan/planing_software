@@ -92,6 +92,7 @@ export default {
     components: { DropdownNav, DropdownSingleItem },
 
     methods: {
+
         ...mapActions(site_settings_store, {
             get_setting_value: "get_setting_value",
         }),
@@ -102,9 +103,11 @@ export default {
                 this.log_out();
             }
         },
+        
         toggle_menu: function () {
             document.getElementById("wrapper").classList.toggle("toggled");
         },
+
     },
     computed: {
         ...mapState(auth_store, {

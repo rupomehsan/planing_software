@@ -31,7 +31,7 @@ class ModelingDirectory extends Command
         $fields = [];
 
 
-
+        dd($moduleName);
 
 
         // Check if the field argument is provided
@@ -52,6 +52,8 @@ class ModelingDirectory extends Command
         $baseDirectory = app_path("Modules/Management/");
         $format_dir = explode('/', $moduleName);
         $module_dir = null;
+
+
 
         if (count($format_dir) > 1) {
             $moduleName = end($format_dir);
@@ -79,6 +81,8 @@ class ModelingDirectory extends Command
         }
 
         $migrationtable = 'create_' . $table . '_table.php';
+
+
 
         $actionFiles = [
 
@@ -154,6 +158,7 @@ class ModelingDirectory extends Command
 
 
         foreach ($actionFiles as $file) {
+
             if ($file == 'GetAllData.php') {
                 File::put($actionsDirectory . '/' . $file, GetAllData($module_name, $fields));
             }
@@ -230,12 +235,12 @@ class ModelingDirectory extends Command
             $formated_module = explode('/', $moduleName);
             if (count($formated_module) > 1) {
                 $moduleName = implode('/', $formated_module);
-                $moduleName = Str::replace("/", "\\", $moduleName);
                 $table_name = Str::plural((Str::snake($formated_module[count($formated_module) - 1])));
             } else {
                 $table_name = Str::plural((Str::snake($moduleName)));
-                $moduleName = Str::replace("/", "\\", $moduleName);
             }
+
+
 
             $migrationPath = "\App\\Modules\\Management\\{$ViewModuleName}\\Database\\create_{$table_name}_table.php";
             Artisan::call('migrate', ['--path' => $migrationPath]);

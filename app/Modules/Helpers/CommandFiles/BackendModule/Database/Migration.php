@@ -14,15 +14,12 @@ if (!function_exists('Migration')) {
 
 
             $moduleName = implode('/', $formated_module);
-            $moduleName = Str::replace("/", "\\", $moduleName);
             $table_name = Str::plural((Str::snake($formated_module[count($formated_module) - 1])));
         } else {
             $table_name = Str::plural((Str::snake($moduleName)));
-            $moduleName = Str::replace("/", "\\", $moduleName);
             // dd($moduleName);
         }
 
-        // dd($table_name);
 
 
 

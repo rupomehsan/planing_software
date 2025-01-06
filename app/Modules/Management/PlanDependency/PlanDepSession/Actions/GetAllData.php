@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Modules\Management\UserManagement\User\Actions;
-
-use Illuminate\Support\Facades\DB;
+namespace App\Modules\Management\PlanDependency\PlanDepSession\Actions;
 
 class GetAllData
 {
-    static $model = \App\Modules\Management\UserManagement\User\Models\Model::class;
+    static $model = \App\Modules\Management\PlanDependency\PlanDepSession\Models\Model::class;
 
     public static function execute()
     {
         try {
-
-
 
             $pageLimit = request()->input('limit') ?? 10;
             $orderByColumn = request()->input('sort_by_col') ?? 'id';
@@ -26,32 +22,16 @@ class GetAllData
 
             $data = self::$model::query();
 
-            if (request()->has('user_department_id') && request()->input('user_department_section_id') && request()->input('user_department_sub_section_id')) {
-                $data = $data->where('user_department_id', request()->input('user_department_id'))
-                    ->where('user_department_section_id', request()->input('user_department_section_id'))
-                    ->where('user_department_sub_section_id', request()->input('user_department_sub_section_id'));
-            }
-            if (request()->has('user_department_id')) {
-                $data = $data->where('user_department_id', request()->input('user_department_id'));
-            }
-
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-                    $q->where('name', 'like', '%' . $searchKey . '%');
+    $q->where('title', 'like', '%' . $searchKey . '%');              
 
-                    $q->orWhere('email', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('password', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('image', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('role_id', 'like', '%' . $searchKey . '%');
                 });
             }
 
             if ($start_date && $end_date) {
-                if ($end_date > $start_date) {
+                 if ($end_date > $start_date) {
                     $data->whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
                 } elseif ($end_date == $start_date) {
                     $data->whereDate('created_at', $start_date);
@@ -71,7 +51,6 @@ class GetAllData
                     ->limit($pageLimit)
                     ->orderBy($orderByColumn, $orderByType)
                     ->get();
-                return entityResponse($data);
             } else if ($status == 'trased') {
                 $data = $data
                     ->with($with)
@@ -95,6 +74,7 @@ class GetAllData
                 "inactive_data_count" => self::$model::inactive()->count(),
                 "trased_data_count" => self::$model::trased()->count(),
             ]);
+
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }
