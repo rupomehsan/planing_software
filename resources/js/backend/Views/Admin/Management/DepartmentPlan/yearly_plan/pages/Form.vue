@@ -2,37 +2,68 @@
     <div>
         <form @submit.prevent="submitHandler" class="p-2">
             <div class="card w-100">
-                <div class="card-header d-flex justify-content-between align-items-center">
+                <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                >
                     <!-- <h5 class="text-capitalize"> {{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
-                    <h5 class="text-capitalize w-50"> বিভাগিয় বার্ষিক পরিকল্পনা তৈরি করুন
+                    <h5 class="text-capitalize w-50">
+                        বিভাগিয় বার্ষিক পরিকল্পনা তৈরি করুন
                     </h5>
-                    <div class="d-flex align-items-center flex-wrap gap-2 justify-content-start">
-                        <button type="button" class="btn btn-outline-warning btn-sm mx-2" @click="is_show_modal = true">
+                    <div
+                        class="d-flex align-items-center flex-wrap gap-2 justify-content-start"
+                    >
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
+                        >
                             Import From Excel
                         </button>
-                        <button type="button" class="btn btn-outline-warning btn-sm mx-2" @click="is_show_modal = true">
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
+                        >
                             Import from central yearly plan
                         </button>
-                        <button type="button" class="btn btn-outline-warning btn-sm mx-2" @click="is_show_modal = true">
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
+                        >
                             Import previous incompleted
                         </button>
-                        <button type="button" class="btn btn-outline-warning btn-sm mx-2" @click="is_show_modal = true">
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
+                        >
                             Add Iitem
                         </button>
-                        <router-link v-if="item.slug" class="btn btn-outline-info mr-2 btn-sm"
-                            :to="{ name: `Details${setup.route_prefix}`, params: { id: item.slug } }">
+                        <router-link
+                            v-if="item.slug"
+                            class="btn btn-outline-info mr-2 btn-sm"
+                            :to="{
+                                name: `Details${setup.route_prefix}`,
+                                params: { id: item.slug },
+                            }"
+                        >
                             {{ setup.details_page_title }}
                         </router-link>
-                        <router-link class="btn btn-outline-warning btn-sm mx-2"
-                            :to="{ name: `All${setup.route_prefix}` }">
+                        <router-link
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            :to="{ name: `All${setup.route_prefix}` }"
+                        >
                             {{ setup.all_page_title }}
                         </router-link>
                     </div>
                 </div>
                 <div class="card-body card_body_fixed_height">
-                     <div class="row  justify-content-center">
+                    <div class="row justify-content-center">
                         <div class="col-md-12">
-                            <table class="table table-hover text-center table-bordered">
+                            <table
+                                class="table table-hover text-center table-bordered"
+                            >
                                 <thead>
                                     <tr>
                                         <th class="w-10">
@@ -43,38 +74,77 @@
                                         <th>Title</th>
                                         <th class="">Dofa</th>
                                         <th class="">Orjitobbo Target</th>
-                                        <th class=""> Executive Department</th>
+                                        <th class="">Executive Department</th>
                                         <th class="">Previous incomplete(%)</th>
                                         <th class="">Rating (1-100)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr 
-                                    v-for="(item,index) in form_data" :key="index"
-                                    class="table_rows table_row_4">
-                                        <td class="text-wrap max-w-120" >
-                                            <span @click="editItemHandler(index)">
-                                                <i class="fa fa-pencil cursor-pointer" ></i>
+                                    <tr
+                                        v-for="(item, index) in form_data"
+                                        :key="index"
+                                        class="table_rows table_row_4"
+                                    >
+                                        <td class="text-wrap max-w-120">
+                                            <span
+                                                @click="editItemHandler(index)"
+                                            >
+                                                <i
+                                                    class="fa fa-pencil cursor-pointer"
+                                                ></i>
                                             </span>
-                                            <span @click="deleteItemHandler(index)"> 
-                                                <i class="fa fa-trash mx-2 cursor-pointer"  ></i>
+                                            <span
+                                                @click="
+                                                    deleteItemHandler(index)
+                                                "
+                                            >
+                                                <i
+                                                    class="fa fa-trash mx-2 cursor-pointer"
+                                                ></i>
                                             </span>
                                         </td>
-                                        <td class="text-wrap max-w-120">{{ index+1 }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.title }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.central_yearly_plan?.title }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.plan_dep_dofa?.title }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.plan_dep_orjitobbo_target?.title }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.user_department?.title }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.previous_unfinished_parcent }}</td>
-                                        <td class="text-wrap max-w-120">{{ item.rating }}</td>
-
+                                        <td class="text-wrap max-w-120">
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{
+                                                item.central_yearly_plan?.title
+                                            }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.plan_dep_dofa?.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{
+                                                item.plan_dep_orjitobbo_target
+                                                    ?.title
+                                            }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.user_department?.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{
+                                                item.previous_unfinished_parcent
+                                            }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.rating }}
+                                        </td>
                                     </tr>
-                                   
                                 </tbody>
                             </table>
-                            <div  class="text-center">
-                                <button type="button" class="btn btn-primary" @click="submitHandler">Submit</button>
+                            <div class="text-center">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    @click="submitHandler"
+                                >
+                                    Submit
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -82,85 +152,223 @@
             </div>
         </form>
 
-        <div class="modal fade " :class="`${is_show_modal ? 'show d-block' : 'd-none'}`" id="primarymodal"
-            aria-modal="true">
-            <div class="modal-dialog modal-lg ">
+        <div
+            class="modal fade"
+            :class="`${is_show_modal ? 'show d-block' : 'd-none'}`"
+            id="primarymodal"
+            aria-modal="true"
+        >
+            <div class="modal-dialog modal-lg">
                 <form @submit.prevent="SingleItemSubmitHandler">
                     <div class="modal-content border-primary">
                         <div class="modal-header bg-primary">
-                            <h5 class="modal-title text-white"> {{ setup.prefix }} তৈরি করুন </h5>
-                            <button @click="is_show_modal = false" type="button" class="btn btn-light"
-                                data-dismiss="modal"><i class="fa fa-times"></i>
+                            <h5 class="modal-title text-white">
+                                {{ setup.prefix }} তৈরি করুন
+                            </h5>
+                            <button
+                                @click="is_show_modal = false"
+                                type="button"
+                                class="btn btn-light"
+                                data-dismiss="modal"
+                            >
+                                <i class="fa fa-times"></i>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div
+                                    class="col-md-12"
+                                   
+                                >
                                     <div class="form-group mt-2">
-                                        <label for="title "> Cnetral yearly Plan</label>
-                                        <select  @change="updateSelectText('central_yearly_plan', $event)" class="form-select" id="" required>
-                                            <option value="">Select central plan</option>
-                                            <option :value="item.id" v-for="item in central_yearly_plans" :selected="item.id == form_item.central_yearly_plan.id" :key="item">{{ item.title }}</option>
+                                        <label for="title ">
+                                            Central yearly Plan</label
+                                        >
+                                        <select
+                                            @change="
+                                                updateSelectText(
+                                                    'central_yearly_plan',
+                                                    $event
+                                                )
+                                            "
+                                            class="form-select"
+                                            id=""
+                                            required
+                                        >
+                                            <option value="">
+                                                Select central plan
+                                            </option>
+                                            <option
+                                                :value="item.id"
+                                                v-for="item in central_yearly_plans"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item
+                                                        .central_yearly_plan.id
+                                                "
+                                                :key="item"
+                                            >
+                                                {{ item.title }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Title</label>
-                                        <input type="text" class="form-control" v-model="form_item.title">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="form_item.title"
+                                        />
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Dofa</label>
-                                        <select  @change="updateSelectText('plan_dep_dofa', $event)" class="form-select" id="" required>
-                                            <option value="">Select Dofa</option>
-                                            <option :value="item.id" v-for="item in dofas" :selected="item.id == form_item.plan_dep_dofa.id" :key="item">{{ item.title }}</option>
+                                        <select
+                                            @change="
+                                                updateSelectText(
+                                                    'plan_dep_dofa',
+                                                    $event
+                                                )
+                                            "
+                                            class="form-select"
+                                            id=""
+                                            required
+                                        >
+                                            <option value="">
+                                                Select Dofa
+                                            </option>
+                                            <option
+                                                :value="item.id"
+                                                v-for="item in dofas"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item.plan_dep_dofa.id
+                                                "
+                                                :key="item"
+                                            >
+                                                {{ item.title }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title "> Orjitobbo Target</label>
-                                        <select  @change="updateSelectText('plan_dep_orjitobbo_target', $event)" class="form-select" id="" required>
-                                           <option value="">Select Orjitobbo Target</option>
-                                            <option v-for="item in orgitobbo_target" :selected="item.id == form_item.plan_dep_orjitobbo_target.id" :value="item.id" :key="item">{{ item.title }}</option>
+                                        <label for="title ">
+                                            Orjitobbo Target</label
+                                        >
+                                        <select
+                                            @change="
+                                                updateSelectText(
+                                                    'plan_dep_orjitobbo_target',
+                                                    $event
+                                                )
+                                            "
+                                            class="form-select"
+                                            id=""
+                                            required
+                                        >
+                                            <option value="">
+                                                Select Orjitobbo Target
+                                            </option>
+                                            <option
+                                                v-for="item in orgitobbo_target"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item
+                                                        .plan_dep_orjitobbo_target
+                                                        .id
+                                                "
+                                                :value="item.id"
+                                                :key="item"
+                                            >
+                                                {{ item.title }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title "> Executive Department</label>
-                                        <select  @change="updateSelectText('user_department', $event)" class="form-select" id="" required>
-                                            <option value="">Select Executive Department</option>
-                                            <option v-for="item in user_departments" :selected="item.id == form_item.user_department.id" :value="item.id" :key="item">{{ item.title }}</option>
+                                        <label for="title ">
+                                            Executive Department</label
+                                        >
+                                        <select
+                                            @change="
+                                                updateSelectText(
+                                                    'user_department',
+                                                    $event
+                                                )
+                                            "
+                                            class="form-select"
+                                            id=""
+                                            required
+                                        >
+                                            <option value="">
+                                                Select Executive Department
+                                            </option>
+                                            <option
+                                                v-for="item in user_departments"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item.user_department.id
+                                                "
+                                                :value="item.id"
+                                                :key="item"
+                                            >
+                                                {{ item.title }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title ">Previous incomplete (%)</label>
-                                        <input v-model="form_item.previous_unfinished_parcent" type="number" required class="form-control" placeholder="">
+                                        <label for="title "
+                                            >Previous incomplete (%)</label
+                                        >
+                                        <input
+                                            v-model="
+                                                form_item.previous_unfinished_parcent
+                                            "
+                                            type="number"
+                                            required
+                                            class="form-control"
+                                            placeholder=""
+                                        />
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title ">Rating (1-100) </label>
-                                        <input v-model="form_item.rating" type="number" class="form-control" required placeholder="">
+                                        <label for="title "
+                                            >Rating (1-100)
+                                        </label>
+                                        <input
+                                            v-model="form_item.rating"
+                                            type="number"
+                                            class="form-control"
+                                            required
+                                            placeholder=""
+                                        />
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">Description</label>
-                                        <textarea class="form-control" v-model="form_item.description" name="" id=""></textarea>
+                                        <textarea
+                                            class="form-control"
+                                            v-model="form_item.description"
+                                            name=""
+                                            id=""
+                                        ></textarea>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-download"></i>
-                                    Submit</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-download"></i> Submit
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -171,42 +379,42 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia'
-import { store as user_store } from '../store';
+import { mapActions, mapState } from "pinia";
+import { store as user_store } from "../store";
 import setup from "../setup";
 import form_fields from "../setup/form_fields";
-import DofaDropDownEl from '../../../PlanDependency/dofa/components/dropdown/DropDownEl.vue';
+import DofaDropDownEl from "../../../PlanDependency/dofa/components/dropdown/DropDownEl.vue";
 
 export default {
     components: { DofaDropDownEl },
     data: () => ({
         setup,
-        route_prefix: '',
-        prefix: '',
+        route_prefix: "",
+        prefix: "",
         form_fields,
         param_id: null,
         is_show_modal: false,
 
-        central_yearly_plans : [],
-        dofas : [],
+        central_yearly_plans: [],
+        dofas: [],
         orgitobbo_target: [],
         user_departments: [],
         form_data: [],
 
         form_item: {
-            title: '',
+            title: "",
             plan_dep_dofa: { id: null, title: null },
             central_yearly_plan: { id: null, title: null },
             plan_dep_orjitobbo_target: { id: null, title: null },
             user_department: { id: null, title: null },
-            previous_unfinished_parcent: '',
-            rating: '',
-            description: ''
+            previous_unfinished_parcent: "",
+            rating: "",
+            description: "",
         },
-        edit_item: null
+        edit_item: null,
     }),
     created: async function () {
-        let id = this.param_id = this.$route.params.id;
+        let id = (this.param_id = this.$route.params.id);
 
         this.reset_fields();
 
@@ -214,17 +422,16 @@ export default {
             this.set_fields(id);
         }
 
-        await this.get_all_central_yearly_plans()
-        await this.get_all_dofas()
-        await this.get_all_orgitobbo_target()
-        await this.get_all_user_departments()
-
+        await this.get_all_central_yearly_plans();
+        await this.get_all_dofas();
+        await this.get_all_orgitobbo_target();
+        await this.get_all_user_departments();
     },
     methods: {
         ...mapActions(user_store, {
-            create: 'create',
-            update: 'update',
-            details: 'details',
+            create: "create",
+            update: "update",
+            details: "details",
         }),
         reset_fields: function () {
             this.form_fields.forEach((item) => {
@@ -245,44 +452,37 @@ export default {
             }
         },
 
-        
-
         SingleItemSubmitHandler: async function ($event) {
             if (this.edit_item !== null) {
-                
-                this.form_data[this.edit_item] = this.form_item
-                this.is_show_modal = false
-
+                this.form_data[this.edit_item] = this.form_item;
+                this.is_show_modal = false;
             } else {
-
-
-                this.form_data.push(this.form_item)
+                this.form_data.push(this.form_item);
                 this.form_item = {
-                    title: '',
+                    title: "",
                     central_yearly_plan: { id: null, title: null },
                     plan_dep_dofa: { id: null, title: null },
                     plan_dep_orjitobbo_target: { id: null, title: null },
                     user_department: { id: null, title: null },
-                    previous_unfinished_parcent: '',
-                    rating: '',
-                    description: ''
-                }
+                    previous_unfinished_parcent: "",
+                    rating: "",
+                    description: "",
+                };
             }
-        
         },
 
         submitHandler: async function ($event) {
             $event.preventDefault();
             if (this.form_data.length == 0) {
-                s_warning('No item found');
+                s_warning("No item found");
                 return false;
             }
-            let contirmation = await s_confirm('Are you sure want to submit?');
-            
+            let contirmation = await s_confirm("Are you sure want to submit?");
+
             if (!contirmation) {
                 return false;
             }
-            
+
             if (this.param_id) {
                 await this.update(this.form_data);
             } else {
@@ -290,7 +490,7 @@ export default {
             }
         },
 
-         updateSelectText(field, event) {
+        updateSelectText(field, event) {
             const selectedIndex = event.target.selectedIndex;
             const selectedText = event.target.options[selectedIndex].text;
             const selectedValue = event.target.value;
@@ -298,46 +498,48 @@ export default {
             // Ensure the field is an object and update id and title
             this.form_item[field] = {
                 id: selectedValue,
-                title: selectedText
+                title: selectedText,
             };
         },
 
         editItemHandler(index) {
             this.is_show_modal = true;
-            this.edit_item = index
-            this.form_item = {}
-            this.form_item = this.form_data[index]
+            this.edit_item = index;
+            this.form_item = {};
+            this.form_item = this.form_data[index];
         },
 
         deleteItemHandler(index) {
-            this.form_data.splice(index, 1)
+            this.form_data.splice(index, 1);
         },
 
         get_all_dofas: async function () {
-            let response = await axios.get('plan-dep-dofas?get_all=1');
+            let response = await axios.get("plan-dep-dofas?get_all=1");
             if (response.data.status == "success") {
-                this.dofas = response.data.data
+                this.dofas = response.data.data;
             }
         },
         get_all_central_yearly_plans: async function () {
-            let response = await axios.get('central-yearly-plans?get_all=1');
+            let response = await axios.get("central-yearly-plans?get_all=1");
             if (response.data.status == "success") {
-                this.central_yearly_plans = response.data.data
+                this.central_yearly_plans = response.data.data;
             }
         },
 
         get_all_orgitobbo_target: async function () {
-            let response = await axios.get('plan-dep-orjitobbo-targets?get_all=1');
+            let response = await axios.get(
+                "plan-dep-orjitobbo-targets?get_all=1"
+            );
             if (response.data.status == "success") {
-                this.orgitobbo_target = response.data.data
+                this.orgitobbo_target = response.data.data;
             }
         },
         get_all_user_departments: async function () {
-            let response = await axios.get('user-departments?get_all=1');
+            let response = await axios.get("user-departments?get_all=1");
             if (response.data.status == "success") {
-                this.user_departments = response.data.data
+                this.user_departments = response.data.data;
             }
-        }
+        },
     },
 
     computed: {
@@ -345,8 +547,5 @@ export default {
             item: "item",
         }),
     },
-    
-}
+};
 </script>
-
- 

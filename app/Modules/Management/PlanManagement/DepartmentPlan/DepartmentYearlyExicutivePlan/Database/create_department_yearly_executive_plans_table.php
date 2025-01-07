@@ -32,6 +32,7 @@ return new class extends Migration
             $table->bigInteger('plan_dep_schedule_type_id')->nullable();
             $table->bigInteger('plan_dep_schedule_id')->nullable();
             $table->text('description')->nullable();
+            $table->string('bastobayoner_mash', 50)->nullable();
             $table->enum('deadline_type', ['deadline', 'schedule'])->nullable();
             $table->bigInteger('serial_no')->nullable();
             $table->integer('previous_unfinished_parcent')->nullable();
@@ -53,6 +54,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('department_yearly_exicutive_plans');
+        Schema::dropIfExists('department_yearly_executive_plans');
     }
 };

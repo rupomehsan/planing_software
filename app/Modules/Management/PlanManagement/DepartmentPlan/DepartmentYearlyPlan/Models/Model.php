@@ -52,4 +52,12 @@ class Model extends EloquentModel
     {
         return $this->belongsTo(\App\Modules\Management\PlanDependency\PlanDepOrjitobboTarget\Models\Model::class, 'plan_dep_orjitobbo_target_id');
     }
+    public function central_yearly_plan()
+    {
+        return $this->belongsTo(\App\Modules\Management\PlanManagement\CentralPlan\CentralYearlyPlan\Models\Model::class, 'central_yearly_plan_id');
+    }
+    public function user_department()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\UserDepartment\Models\Model::class, 'user_depertment_id');
+    }
 }

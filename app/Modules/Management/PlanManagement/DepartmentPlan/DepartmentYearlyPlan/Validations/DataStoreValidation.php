@@ -46,7 +46,7 @@ class DataStoreValidation extends FormRequest
             'plan_dep_dofas_id' => 'required | sometimes',
             'plan_dep_orjitobbo_target_id' => 'required | sometimes',
             'title' => 'required | sometimes',
-            'serial_no' => 'required | sometimes',
+            'serial_no' => 'sometimes',
             'description' => 'required | sometimes',
             'previous_unfinished_parcent' => 'required | sometimes',
             'rating' => 'required | sometimes',
