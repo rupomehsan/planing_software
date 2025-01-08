@@ -276,15 +276,20 @@
                                             name=""
                                             class="form-select"
                                             id=""
-                                            v-model="form_item.schedule_type"
+                                            @change="
+                                                updateSelectText(
+                                                    'schedule_type',
+                                                    $event
+                                                )
+                                            "
                                         >
                                             <option value="">
                                                 Select somoysimar dhoron
                                             </option>
                                             <option
                                                 v-for="item in somoysimar_dhoron"
-                                                :value="item.id"
                                                 :key="item.id"
+                                                :value="item.id"
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -299,15 +304,20 @@
                                             name=""
                                             class="form-select"
                                             id=""
-                                            v-model="form_item.schedule"
+                                            @change="
+                                                updateSelectText(
+                                                    'schedule',
+                                                    $event
+                                                )
+                                            "
                                         >
                                             <option value="">
                                                 Select somoykal
                                             </option>
                                             <option
                                                 v-for="item in somoykal"
-                                                :value="item.id"
                                                 :key="item.id"
+                                                :value="item.id"
                                             >
                                                 {{ item.title }}
                                             </option>

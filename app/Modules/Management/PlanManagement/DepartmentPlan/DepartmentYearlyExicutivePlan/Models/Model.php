@@ -51,4 +51,38 @@ class Model extends EloquentModel
     {
         return $this->belongsTo(\App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Models\Model::class, 'department_yearly_plan_id');
     }
+
+    public function  schedule_type()
+    {
+        return $this->belongsTo(\App\Modules\Management\PlanDependency\PlanDepScheduleType\Models\Model::class, 'plan_dep_schedule_type_id');
+    }
+
+    public function schedule()
+    {
+        return $this->belongsTo(\App\Modules\Management\PlanDependency\PlanDepSchedule\Models\Model::class, 'plan_dep_schedule_id');
+    }
+
+    public function department_section()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\UserDepartmentSection\Models\Model::class, 'department_section_id');
+    }
+
+    public function department_sub_section()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\UserDepartmentSubSection\Models\Model::class, 'department_sub_section_id');
+    }
+
+    public function  department_sub_section_user()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\User\Models\Model::class, 'department_user_id');
+    }
+
+    public function helper_department()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\UserDepartment\Models\Model::class, 'helper_department_id');
+    }
+    public function helper_department_user()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\User\Models\Model::class, 'helper_department_user_id');
+    }
 }

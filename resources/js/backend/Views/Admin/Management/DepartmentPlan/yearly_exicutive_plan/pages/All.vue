@@ -153,6 +153,10 @@
                                                 ) in sessions"
                                                 :value="item.id"
                                                 :key="index"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item.session?.id
+                                                "
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -193,6 +197,12 @@
                                                 ) in department_yearly_plans"
                                                 :value="item.id"
                                                 :key="index"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item
+                                                        .department_yearly_plan
+                                                        ?.id
+                                                "
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -238,7 +248,6 @@
                                             name=""
                                             class="form-select"
                                             id=""
-                                            v-model="form_item.schedule_type"
                                         >
                                             <option value="">
                                                 Select somoysimar dhoron
@@ -247,6 +256,10 @@
                                                 v-for="item in somoysimar_dhoron"
                                                 :value="item.id"
                                                 :key="item.id"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item.schedule_type?.id
+                                                "
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -261,7 +274,6 @@
                                             name=""
                                             class="form-select"
                                             id=""
-                                            v-model="form_item.schedule"
                                         >
                                             <option value="">
                                                 Select somoykal
@@ -270,6 +282,10 @@
                                                 v-for="item in somoykal"
                                                 :value="item.id"
                                                 :key="item.id"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item.schedule?.id
+                                                "
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -304,7 +320,7 @@
                                             class="form-select"
                                             @change="
                                                 get_user_department_section_sub_section_by_section_id(
-                                                    $event
+                                                    $event.target.value
                                                 ),
                                                     updateSelectText(
                                                         'user_department_section',
@@ -319,6 +335,11 @@
                                                 v-for="item in user_department_sections"
                                                 :value="item.id"
                                                 :key="item.id"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item.department_section
+                                                        ?.id
+                                                "
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -335,7 +356,7 @@
                                             class="form-select"
                                             @change="
                                                 get_user_department_section_sub_section_users(
-                                                    $event
+                                                    $event.target.id
                                                 ),
                                                     updateSelectText(
                                                         'user_department_sub_section',
@@ -350,6 +371,12 @@
                                                 v-for="item in user_department_sub_sections"
                                                 :value="item.id"
                                                 :key="item.id"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item
+                                                        .department_sub_section
+                                                        ?.id
+                                                "
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -378,6 +405,12 @@
                                                 v-for="item in department_sub_section_users"
                                                 :value="item.id"
                                                 :key="item.id"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item
+                                                        .department_sub_section_user
+                                                        ?.id
+                                                "
                                             >
                                                 {{ item.name }}
                                             </option>
@@ -401,10 +434,10 @@
                                             class="form-select"
                                             @click="
                                                 get_user_department_users(
-                                                    $event
+                                                    $event.target.value
                                                 ),
                                                     updateSelectText(
-                                                        'helper_user_department',
+                                                        'helper_department',
                                                         $event
                                                     )
                                             "
@@ -416,6 +449,11 @@
                                                 v-for="item in user_departments"
                                                 :value="item.id"
                                                 :key="item.id"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item.helper_department
+                                                        ?.id
+                                                "
                                             >
                                                 {{ item.title }}
                                             </option>
@@ -446,6 +484,12 @@
                                                 v-for="item in department_users"
                                                 :value="item.id"
                                                 :key="item.id"
+                                                :selected="
+                                                    item.id ==
+                                                    form_item
+                                                        .helper_user_department_user
+                                                        ?.id
+                                                "
                                             >
                                                 {{ item.name }}
                                             </option>
@@ -460,7 +504,7 @@
                                             name=""
                                             class="form-control"
                                             id=""
-                                            v-model="form_item.plan_details"
+                                            v-model="form_item.description"
                                         ></textarea>
                                     </div>
                                 </div>
@@ -550,11 +594,11 @@ export default {
             schedule: { id: null, title: null },
             rating: "",
 
-            user_department_section: { id: null, title: null },
-            user_department_sub_section: { id: null, title: null },
-            user_department_sub_section_user: { id: null, title: null },
+            department_section: { id: null, title: null },
+            department_sub_section: { id: null, title: null },
+            department_sub_section_user: { id: null, title: null },
 
-            helper_user_department: { id: null, title: null },
+            helper_department: { id: null, title: null },
             helper_user_department_user: { id: null, title: null },
 
             plan_details: "",
@@ -581,14 +625,26 @@ export default {
             "details", // needs in pagination props
             "update",
         ]),
+
         get_all_data,
 
         editItem: async function (id) {
             await this.details(id);
-            console.log(this.item);
 
             if (this.item) {
                 this.form_item = this.item;
+                this.get_user_department_section_sub_section_by_section_id(
+                    this.form_item.department_section.id
+                );
+
+                this.get_user_department_section_sub_section_users(
+                    this.form_item.department_sub_section.id
+                );
+
+                this.get_user_department_users(
+                    this.form_item.helper_department.id
+                );
+
                 this.is_show_modal = true;
             }
         },
@@ -656,6 +712,7 @@ export default {
                 this.orgitobbo_target = response.data.data;
             }
         },
+
         get_all_user_departments: async function () {
             let response = await axios.get("user-departments?get_all=1");
             if (response.data.status == "success") {
@@ -680,9 +737,8 @@ export default {
         },
 
         get_user_department_section_sub_section_by_section_id: async function (
-            event
+            id
         ) {
-            let id = event.target.value;
             this.user_department_section_id = id;
             let response = await axios.get(
                 `user-department-sub-sections?get_all=1&user_department_section_id=${id}`
@@ -692,8 +748,7 @@ export default {
             }
         },
 
-        get_user_department_section_sub_section_users: async function (event) {
-            let id = event.target.value;
+        get_user_department_section_sub_section_users: async function (id) {
             let response = await axios.get(
                 `users?get_all=1&user_department_id=${this.auth_info.id}&user_department_section_id=${this.user_department_section_id}&user_department_sub_section_id=${id}`
             );
@@ -702,8 +757,7 @@ export default {
             }
         },
 
-        get_user_department_users: async function (event) {
-            let id = event.target.value;
+        get_user_department_users: async function (id) {
             let response = await axios.get(
                 `users?get_all=1&user_department_id=${id}`
             );
@@ -715,9 +769,10 @@ export default {
     computed: {
         ...mapWritableState(data_store, {
             all: "all",
+            item: "item",
         }),
 
-        ...mapState(auth_store, {
+        ...mapWritableState(auth_store, {
             auth_info: "auth_info",
         }),
     },
