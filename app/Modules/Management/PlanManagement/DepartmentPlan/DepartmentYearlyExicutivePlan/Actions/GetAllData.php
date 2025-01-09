@@ -25,23 +25,8 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-                    $q->where('department_yearly_plan_id', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('central_yearly_plan_id', 'like', '%' . $searchKey . '%');
-
+                    $q->where('title', 'like', '%' . $searchKey . '%');
                     $q->orWhere('description', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('plan_dep_monthly_schedule_type_id', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('plan_dep_schedule_id', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('serial_no', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('rating', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('is_published', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('is_approved', 'like', '%' . $searchKey . '%');
                 });
             }
 

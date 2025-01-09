@@ -9,19 +9,90 @@
                         <all-page-header />
                     </div>
                     <div class="card-body">
-                        <template v-for="item in all?.data" :key="i">
-                            <CardItem :data="item"></CardItem>
-                        </template>
+                        <div
+                            class="table-responsive table_responsive card_body_fixed_height"
+                        >
+                            <table
+                                class="table table-hover text-center table-bordered"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="w-10">
+                                            <span class="icon"></span>
+                                        </th>
+                                        <th class="w-10">id</th>
+                                        <th class="">Title</th>
+                                        <th class="">Session</th>
+                                        <th class="">Plan</th>
+                                        <th class="">Month</th>
+                                        <th class="">Rating (1-100)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(item, index) in all.data"
+                                        :key="index"
+                                        class="table_rows table_row_4"
+                                    >
+                                        <td class="max-w-120 mx-2">
+                                            <span
+                                                class="mx-2 cursor-pointer"
+                                                @click="editItem(item.slug)"
+                                            >
+                                                <i class="fa fa-pencil"></i>
+                                            </span>
+                                            <span
+                                                class="cursor-pointer"
+                                                @click="deleteItem(item)"
+                                            >
+                                                <i class="fa fa-trash mx-2"></i>
+                                            </span>
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.session?.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{
+                                                item.department_yearly_plan
+                                                    ?.title
+                                            }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.bastobayoner_mash }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.rating }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
+                    <div v-if="typeof all == `object`">
+                        <!-- <pagination
+                            :data="all"
+                            :get_data="get_all_data"
+                            :set_paginate="set_paginate"
+                            :set_page="set_page"
+                        /> -->
+                    </div>
                     <div class="card-footer py-2">
                         <all-page-footer-actions></all-page-footer-actions>
                     </div>
                 </div>
             </div>
         </div>
+        <export-all-loader />
         <quick-view />
         <filter-data />
+        <import-modal></import-modal>
+
         <div
             class="modal fade"
             :class="`${is_show_modal ? 'show d-block' : 'd-none'}`"
@@ -456,17 +527,26 @@
 /** plugins */
 import { mapActions, mapWritableState } from "pinia";
 import { store as data_store } from "../store/index";
-import { auth_store } from "../../../../../../GlobalStore/auth_store";
 import setup from "../setup";
+
 /** helper and actions */
 import get_all_data from "../store/async_actions/all";
+
 /** components */
+// import TableRowAction from './components/all_data_page/TableRowAction.vue';
+// import SelectSingle from './components/all_data_page/select_data/SelectSingle.vue';
+// import SelectAll from './components/all_data_page/select_data/SelectAll.vue';
 import AllPageHeader from "../components/all_data_page/AllPageHeader.vue";
 import AllPageFooterActions from "../components/all_data_page/AllPageFooterActions.vue";
-import CardItem from "../components/todo_list/CardItem.vue";
+import ExportAllLoader from "../components/all_data_page/ExportAllLoader.vue";
 import QuickView from "../components/canvas/QuickView.vue";
+import ImportModal from "../components/canvas/ImportModal.vue";
+import QuickViewColumn from "../components/all_data_page/QuickViewColumn.vue";
 import FilterData from "../components/canvas/FilterData.vue";
-/** end */
+import DropDownEl from "../components/dropdown/DropDownEl.vue";
+import TableHead from "../components/all_data_page/TableHead.vue";
+import TableBody from "../components/all_data_page/TableBody.vue";
+import { auth_store } from "../../../../../../GlobalStore/auth_store";
 export default {
     data: () => ({
         setup,
@@ -703,11 +783,21 @@ export default {
         }),
     },
     components: {
+        // TableRowAction,
+        // SelectSingle,
+        // SelectAll,
+        TableHead,
+        TableBody,
         AllPageHeader,
         AllPageFooterActions,
-        CardItem,
+        ExportAllLoader,
         QuickView,
+        QuickViewColumn,
         FilterData,
+        DropDownEl,
+        ImportModal,
     },
 };
 </script>
+
+<style></style>
