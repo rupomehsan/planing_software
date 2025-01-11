@@ -1,5 +1,5 @@
 <template>
-    <div class="card-item" @click="toggleDetails(item)">
+    <div class="card-item" @click="toggleDetails(data)">
         <div class="card-item-header card-item-active">
             <div
                 class="d-flex align-items-center gap-3 justify-content-between"
@@ -13,7 +13,7 @@
                     </span>
                 </span>
 
-                <label for="check" class="check-label"></label>
+                <label @click="task_completed" class="check-label"></label>
                 <p class="fw-bold">{{ data.title }}</p>
                 <p class="mx-2">
                     <i class="far fa-calendar mx-2"></i>
@@ -30,15 +30,15 @@
         </div>
         <div class="card-item-footer" v-if="is_show_details">
             <p>
-                <i class="far fa-circle-check text-success"></i>
+                <i class="far fa-calendar text-success"></i>
                 <span>Session : {{ data.session?.title }}</span>
             </p>
             <p>
-                <i class="far fa-circle-check text-success"></i>
+                <i class="far fa-star text-success"></i>
                 <span>Rating : {{ data.rating }}</span>
             </p>
             <p>
-                <i class="far fa-circle-check text-success"></i>
+                <i class="far fa-clock text-success"></i>
                 <span>Executive Month : {{ data.bastobayoner_mash }}</span>
             </p>
         </div>
@@ -61,8 +61,15 @@ export default {
             this.is_show_details = !this.is_show_details;
         },
         toggleDetails(item) {
+            console.log(item);
             this.set_item(item);
             this.set_show_details_canvas(!this.show_details_canvas);
+        },
+        async task_completed(event) {
+            event.stopPropagation();
+            alert("Before log");
+            console.log("This is a log statement.");
+            alert("After log");
         },
     },
     computed: {

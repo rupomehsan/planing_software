@@ -9,7 +9,7 @@
                         <all-page-header />
                     </div>
                     <div class="card-body">
-                        <template v-for="item in all?.data" :key="i">
+                        <template v-for="item in all?.data" :key="item">
                             <CardItem :data="item"></CardItem>
                         </template>
                     </div>

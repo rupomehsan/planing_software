@@ -17,7 +17,17 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = ['session:id,title', 'department_yearly_plan:id,title'];
+            $with = [
+                'session:id,title',
+                'helper_department_user:id,name',
+                'helper_department:id,title',
+                'department_sub_section_user:id,name',
+                'department_sub_section:id,title',
+                'department_section:id,title',
+                'schedule:id,title',
+                'schedule_type:id,title',
+                'department_yearly_plan:id,title',
+            ];
             $condition = [];
 
             $data = self::$model::query();

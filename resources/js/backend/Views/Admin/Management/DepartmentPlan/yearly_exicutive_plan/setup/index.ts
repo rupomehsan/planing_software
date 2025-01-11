@@ -33,6 +33,8 @@ const setup: setup_type = {
         "slug",
         "created_at",
         "status",
+        "is_completed",
+        "is_favorite",
     ],
 
     sort_by_cols: ["id", "title", "slug", "created_at", "status"],

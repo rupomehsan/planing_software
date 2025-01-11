@@ -40,6 +40,8 @@ return new class extends Migration
             $table->integer('rating')->nullable();
             $table->tinyInteger('is_published')->default(0);
             $table->tinyInteger('is_approved')->default(0);
+            $table->tinyInteger('is_completed')->default(0);
+            $table->tinyInteger('is_favorite')->default(0);
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
