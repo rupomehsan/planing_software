@@ -3,8 +3,8 @@
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyPlan\Controller\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')group(function () {
-// Route::prefix('v1')->middleware('auth:api')->group(function () {
+Route::prefix('v1')->group(function () {
+    // Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::prefix('department-yearly-plans')->group(function () {
         Route::get('', [Controller::class, 'index']);
         Route::get('{slug}', [Controller::class, 'show']);
