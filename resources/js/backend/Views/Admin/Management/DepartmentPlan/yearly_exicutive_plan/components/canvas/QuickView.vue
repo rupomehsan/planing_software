@@ -115,10 +115,23 @@
                             </th>
                         </tr>
                         <tr>
+                            <th>Comment</th>
+                            <th>:</th>
+                            <th>
+                                {{ item.comment }}
+                            </th>
+                        </tr>
+                        <tr>
                             <th colspan="3">
-                                <label for="">Comments</label>
-                                <textarea class="form-control"> </textarea>
+                                <label for="">Give Comments</label>
+                                <textarea
+                                    v-model="comment"
+                                    class="form-control"
+                                >
+                                </textarea>
                                 <button
+                                    type="button"
+                                    @click.prevent="SubmitHandler"
                                     class="btn btn-sm btn-outline-primary my-3 mx-auto d-block"
                                 >
                                     Add comment
@@ -137,8 +150,32 @@ import { mapActions, mapWritableState } from "pinia";
 import { store } from "../../store";
 
 export default {
+    data: () => ({
+        comment: "",
+    }),
     methods: {
-        ...mapActions(store, ["set_show_details_canvas"]),
+        ...mapActions(store, [
+            "set_show_details_canvas",
+            "get_all",
+            "set_only_latest_data",
+        ]),
+        SubmitHandler: async function () {
+            let response = await axios.post(
+                "department-yealy-executive-plan-add-comment",
+                {
+                    comment: this.comment,
+                    item: this.item,
+                }
+            );
+
+            if (response.data.status == "success") {
+                window.s_alert(response.data.message);
+                this.comment = "";
+                this.set_show_details_canvas(false);
+                this.set_only_latest_data(true);
+                await this.get_all();
+            }
+        },
     },
     computed: {
         ...mapWritableState(store, ["show_details_canvas", "item"]),

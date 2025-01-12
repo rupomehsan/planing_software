@@ -13,7 +13,11 @@
                     </span>
                 </span>
 
-                <label @click="task_completed" class="check-label"></label>
+                <label
+                    @click="task_completed"
+                    class="check-label"
+                    :class="data.is_completed == 1 ? 'complete' : ''"
+                ></label>
                 <p class="fw-bold">{{ data.title }}</p>
                 <p class="mx-2">
                     <i class="far fa-calendar mx-2"></i>
@@ -24,7 +28,11 @@
                     {{ new Date(data.created_at).toLocaleTimeString() }}
                 </p>
             </div>
-            <div class="star">
+            <div
+                class="star"
+                @click="add_to_favourite"
+                :class="data.is_favorite == 1 ? 'active' : ''"
+            >
                 <span></span>
             </div>
         </div>
@@ -55,7 +63,12 @@ export default {
     }),
 
     methods: {
-        ...mapActions(store, ["set_show_details_canvas", "set_item"]),
+        ...mapActions(store, [
+            "set_show_details_canvas",
+            "set_item",
+            "get_all",
+            "set_only_latest_data",
+        ]),
         show_details(event) {
             event.stopPropagation();
             this.is_show_details = !this.is_show_details;
@@ -67,9 +80,39 @@ export default {
         },
         async task_completed(event) {
             event.stopPropagation();
-            alert("Before log");
-            console.log("This is a log statement.");
-            alert("After log");
+            let contirmation = await s_confirm("Are you sure want to action?");
+
+            if (!contirmation) {
+                return false;
+            }
+
+            let response = await axios.post(
+                `department-yearly-executive-plan/completion/${this.data.id}`
+            );
+
+            if (response.data.status == "success") {
+                window.s_alert(response.data.message);
+                this.set_only_latest_data(true);
+                await this.get_all();
+            }
+        },
+        async add_to_favourite(event) {
+            event.stopPropagation();
+            let contirmation = await s_confirm("Are you sure want to action?");
+
+            if (!contirmation) {
+                return false;
+            }
+
+            let response = await axios.post(
+                `department-yearly-executive-plan/add-to-favourite/${this.data.id}`
+            );
+
+            if (response.data.status == "success") {
+                window.s_alert(response.data.message);
+                this.set_only_latest_data(true);
+                await this.get_all();
+            }
         },
     },
     computed: {
@@ -134,6 +177,9 @@ export default {
 }
 
 .check-label:hover::after {
+    display: flex;
+}
+.check-label.complete::after {
     display: flex;
 }
 

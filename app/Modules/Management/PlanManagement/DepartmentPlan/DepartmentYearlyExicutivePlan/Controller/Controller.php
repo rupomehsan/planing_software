@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Controller;
+
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Actions\GetAllData;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Actions\DestroyData;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Actions\GetSingleData;
@@ -13,13 +14,17 @@ use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicuti
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Validations\BulkActionsValidation;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Validations\DataStoreValidation;
 use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Actions\BulkActions;
+use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Actions\TaskCompletion;
+use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Actions\AddComment;
+use App\Modules\Management\PlanManagement\DepartmentPlan\DepartmentYearlyExicutivePlan\Actions\AddToFavourite;
 use App\Http\Controllers\Controller as ControllersController;
 
 
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
         return $data;
@@ -37,12 +42,12 @@ class Controller extends ControllersController
         return $data;
     }
 
-   public function update(DataStoreValidation $request, $slug)
+    public function update(DataStoreValidation $request, $slug)
     {
         $data = UpdateData::execute($request, $slug);
         return $data;
     }
-public function updateStatus()
+    public function updateStatus()
     {
         $data = UpdateStatus::execute();
         return $data;
@@ -73,5 +78,19 @@ public function updateStatus()
         $data = BulkActions::execute($request);
         return $data;
     }
-
+    public function TaskCompletion($id)
+    {
+        $data = TaskCompletion::execute($id);
+        return $data;
+    }
+    public function AddComment()
+    {
+        $data = AddComment::execute();
+        return $data;
+    }
+    public function AddToFavourite()
+    {
+        $data = AddToFavourite::execute();
+        return $data;
+    }
 }

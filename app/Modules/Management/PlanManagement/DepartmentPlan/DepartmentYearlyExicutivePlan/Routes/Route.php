@@ -16,4 +16,8 @@ Route::prefix('v1')->middleware('auth:api')->group(function () {
         Route::post('import', [Controller::class, 'import']);
         Route::post('bulk-action', [Controller::class, 'bulkAction']);
     });
+
+    Route::post('department-yearly-executive-plan/completion/{id}', [Controller::class, 'TaskCompletion']);
+    Route::post('department-yearly-executive-plan/add-to-favourite/{id}', [Controller::class, 'AddToFavourite']);
+    Route::post('department-yealy-executive-plan-add-comment', [Controller::class, 'AddComment']);
 });
