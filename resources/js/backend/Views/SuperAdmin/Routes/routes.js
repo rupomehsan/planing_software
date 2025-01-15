@@ -22,61 +22,58 @@ import Dashboard from "../Management/Dashboard/Dashboard.vue";
 | Plan Dependency Routes
 |--------------------------------------------------------------------------
 */
-import dofa_routes from '../Management/PlanDependency/dofa/setup/routes.js';
-import orjitobbo_target_routes from '../Management/PlanDependency/orjitobbo_target/setup/routes';
-import category_routes from '../Management/PlanDependency/category/setup/routes';
-import mash_bebosthapona_routes from '../Management/PlanDependency/mash_bebosthapona/setup/routes';
-import porikolponar_dhoron_routes from '../Management/PlanDependency/porikolponar_dhoron/setup/routes';
-import somoykal_routes from '../Management/PlanDependency/somoykal/setup/routes';
-import somoysimar_dhoron_routes from '../Management/PlanDependency/somoysimar_dhoron/setup/routes';
-import sonkha_tattik_tottho_routes from '../Management/PlanDependency/sonkha_tattik_tottho/setup/routes';
-import plan_type_routes from '../Management/PlanDependency/plan_type/setup/routes';
+import dofa_routes from "../Management/PlanDependency/dofa/setup/routes.js";
+import orjitobbo_target_routes from "../Management/PlanDependency/orjitobbo_target/setup/routes";
+import category_routes from "../Management/PlanDependency/category/setup/routes";
+import mash_bebosthapona_routes from "../Management/PlanDependency/mash_bebosthapona/setup/routes";
+import porikolponar_dhoron_routes from "../Management/PlanDependency/porikolponar_dhoron/setup/routes";
+import somoykal_routes from "../Management/PlanDependency/somoykal/setup/routes";
+import somoysimar_dhoron_routes from "../Management/PlanDependency/somoysimar_dhoron/setup/routes";
+import sonkha_tattik_tottho_routes from "../Management/PlanDependency/sonkha_tattik_tottho/setup/routes";
+import plan_type_routes from "../Management/PlanDependency/plan_type/setup/routes";
+import session_routes from "../Management/PlanDependency/session/setup/routes";
 /*
 |--------------------------------------------------------------------------
 | Central(kendro) Plan Management Routes
 |--------------------------------------------------------------------------
 */
-import central_yearly_plan from '../Management/CentralPlan/yearly_plan/setup/routes';
-import central_yearly_exicutive_plan from '../Management/CentralPlan/yearly_exicutive_plan/setup/routes';
+import central_yearly_plan from "../Management/CentralPlan/yearly_plan/setup/routes";
+import central_yearly_exicutive_plan from "../Management/CentralPlan/yearly_exicutive_plan/setup/routes";
 /*
 |--------------------------------------------------------------------------
 | Department Plan Management Routes
 |--------------------------------------------------------------------------
 */
-import department_yearly_plan from '../Management/DepartmentPlan/yearly_plan/setup/routes';
-import department_yearly_exicutive_plan from '../Management/DepartmentPlan/yearly_exicutive_plan/setup/routes';
+import department_yearly_plan from "../Management/DepartmentPlan/yearly_plan/setup/routes";
+import department_yearly_exicutive_plan from "../Management/DepartmentPlan/yearly_exicutive_plan/setup/routes";
 
 /*
 |--------------------------------------------------------------------------
 | Department Plan Management Routes
 |--------------------------------------------------------------------------
 */
-import department_budget_income from '../Management/DepartmentBudget/BudgetIncome/setup/routes';
-import department_budget_expense from '../Management/DepartmentBudget/BudgetExpense/setup/routes';
-
+import department_budget_income from "../Management/DepartmentBudget/BudgetIncome/setup/routes";
+import department_budget_expense from "../Management/DepartmentBudget/BudgetExpense/setup/routes";
 
 /*
 |--------------------------------------------------------------------------
 | Department  Management Routes
 |--------------------------------------------------------------------------
 */
-import division_routes from '../Management/DepartmentManagement/division/setup/routes';
-import division_memeber_routes from '../Management/DepartmentManagement/division_member/setup/routes';
-import division_role_routes from '../Management/DepartmentManagement/division_role/setup/routes';
-import section_routes from '../Management/DepartmentManagement/section/setup/routes';
-import sub_section_routes from '../Management/DepartmentManagement/sub_section/setup/routes';
-
-
-
+import division_routes from "../Management/DepartmentManagement/division/setup/routes";
+import division_memeber_routes from "../Management/DepartmentManagement/division_member/setup/routes";
+import division_role_routes from "../Management/DepartmentManagement/division_role/setup/routes";
+import section_routes from "../Management/DepartmentManagement/section/setup/routes";
+import sub_section_routes from "../Management/DepartmentManagement/sub_section/setup/routes";
 
 const routes = {
-    path: '',
+    path: "",
     component: Layout,
     children: [
         {
-            path: 'dashboard',
+            path: "dashboard",
             component: Dashboard,
-            name: 'SuperAdminDashboard',
+            name: "SuperAdminDashboard",
         },
 
         /*
@@ -85,8 +82,7 @@ const routes = {
         |--------------------------------------------------------------------------
         */
         {
-
-            path: 'plan-management',
+            path: "plan-management",
             children: [
                 dofa_routes,
                 orjitobbo_target_routes,
@@ -97,6 +93,7 @@ const routes = {
                 somoykal_routes,
                 somoysimar_dhoron_routes,
                 plan_type_routes,
+                session_routes,
             ],
         },
         /*
@@ -119,7 +116,7 @@ const routes = {
         |--------------------------------------------------------------------------
         */
         {
-            path: 'department-management',
+            path: "department-management",
             children: [
                 division_routes,
                 division_memeber_routes,
@@ -134,11 +131,8 @@ const routes = {
         |--------------------------------------------------------------------------
         */
         {
-            path: 'department-budget',
-            children: [
-                department_budget_income,
-                department_budget_expense,
-            ],
+            path: "department-budget",
+            children: [department_budget_income, department_budget_expense],
         },
 
         /*
@@ -151,4 +145,3 @@ const routes = {
 };
 
 export default routes;
-

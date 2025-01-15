@@ -1,116 +1,85 @@
-<template>
-    <div class="custom_drop_down"><input type="hidden" id="product_brand_id" name="product_brand_id">
-        <div class="selected_list"></div>
-        <div class="drop_down_items">
-            <div class="drop_down_data_search"><input class="form-control" placeholder="search.." id="table_search_box"
-                    type="search"><button type="button" class="btn btn-danger"><i class="fa fa-close"></i></button>
+<template lang="">
+    <div
+        class="custom_drop_down cursor-pointer border"
+        @click="show_list = true"
+    >
+        <input
+            type="hidden"
+            :id="name"
+            :name="name"
+            :value="multiple ? `[${selected_ids}]` : `${selected_ids}`"
+        />
+        <div class="selected_list">
+            <div
+                v-for="item in selected"
+                :key="item.id"
+                :id="item.id"
+                class="selected_item"
+            >
+                <div class="label">
+                    {{ item.title }}
+                </div>
+                <div @click.prevent="remove_item(item)" class="remove">
+                    <i class="fa fa-close"></i>
+                </div>
             </div>
-            <ul class="option_list custom_scroll">
-                <li class="option_item"><label for="drop_item_65">
-                        <div class="check_box"><input type="checkbox" id="drop_item_65" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Ralph lauren</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_64">
-                        <div class="check_box"><input type="checkbox" id="drop_item_64" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">U.s polo</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_63">
-                        <div class="check_box"><input type="checkbox" id="drop_item_63" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Banana</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_62">
-                        <div class="check_box"><input type="checkbox" id="drop_item_62" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">American eagle</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_61">
-                        <div class="check_box"><input type="checkbox" id="drop_item_61" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Porsche</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_60">
-                        <div class="check_box"><input type="checkbox" id="drop_item_60" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Hyundai</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_59">
-                        <div class="check_box"><input type="checkbox" id="drop_item_59" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Volswagen</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_58">
-                        <div class="check_box"><input type="checkbox" id="drop_item_58" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">BMW</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_57">
-                        <div class="check_box"><input type="checkbox" id="drop_item_57" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Dolce &amp; gabbana</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_56">
-                        <div class="check_box"><input type="checkbox" id="drop_item_56" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Primark / penney's</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_55">
-                        <div class="check_box"><input type="checkbox" id="drop_item_55" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Next</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_54">
-                        <div class="check_box"><input type="checkbox" id="drop_item_54" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Bosideng portfolio</div>
-                    </label></li>
-                <li class="option_item"><label for="drop_item_53">
-                        <div class="check_box"><input type="checkbox" id="drop_item_53" class="form-check-input ml-0">
-                        </div>
-                        <div class="label">Bottega veneta</div>
-                    </label></li>
-            </ul>
-            <div class="drop_down_footer data_list">
-                <nav aria-label="" class="d-flex gap-2 align-items-center" style="gap: 10px;">
-                    <ul class="pagination my-2" style="font-size: 11px;">
-                        <li class="page-item"><a class="page-link"><span>« Previous</span></a></li>
-                        <li class="page-item active"><a class="page-link"
-                                href="https://app.etek.com.bd/api/v1/product-brands?page=1"><span>1</span></a></li>
-                        <li class="page-item"><a class="page-link"
-                                href="https://app.etek.com.bd/api/v1/product-brands?page=2"><span>2</span></a></li>
-                        <li class="page-item"><a class="page-link"
-                                href="https://app.etek.com.bd/api/v1/product-brands?page=3"><span>3</span></a></li>
-                        <li class="page-item"><a class="page-link"
-                                href="https://app.etek.com.bd/api/v1/product-brands?page=4"><span>4</span></a></li>
-                        <li class="page-item"><a class="page-link"
-                                href="https://app.etek.com.bd/api/v1/product-brands?page=5"><span>5</span></a></li>
-                        <li class="page-item"><a class="page-link"
-                                href="https://app.etek.com.bd/api/v1/product-brands?page=2"><span>Next »</span></a></li>
-                    </ul>
-                    <div class="d-flex" style="gap: 5px;">
-                        <span></span><span>1</span><span>-</span><span>13</span><span>of</span><span>62</span>
-                    </div>
-                    <div class="d-flex" style="gap: 5px;"><span></span><span> Limit </span><select
-                            class="bg-transparent text-white rounded-1">
-                            <option value="10">10</option>
-                            <option value="5">5</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select></div>
-                </nav>
+            <div v-if="!selected?.length" class="selected_item">
+                <div class="label">
+                    Select {{ multiple ? "Items" : "Item" }}
+                </div>
             </div>
         </div>
+        <template v-if="show_list">
+            <div class="drop_down_items">
+                <div class="drop_down_data_search">
+                    <input
+                        @keyup="search_item($event)"
+                        class="form-control"
+                        placeholder="search.."
+                        id="table_search_box"
+                        type="search"
+                    />
+
+                    <button
+                        type="button"
+                        @click.prevent.stop="show_list = false"
+                        class="btn btn-danger"
+                    >
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+
+                <ul class="option_list custom_scroll p-0">
+                    <li
+                        class="option_item border my-1 mx-2 text-capitalize"
+                        v-for="item in data_list?.slice(0, 10)"
+                        :key="item.id"
+                    >
+                        <label
+                            :for="`drop_item_${item.id}`"
+                            class="cursor-pointer"
+                        >
+                            <div class="check_box">
+                                <input
+                                    @change="
+                                        set_selected(item, $event),
+                                            onchange_actions($event)
+                                    "
+                                    :checked="is_selected(item)"
+                                    type="checkbox"
+                                    :id="`drop_item_${item.id}`"
+                                    class="form-check-input ml-0"
+                                />
+                            </div>
+                            <div class="label">{{ item.title }}</div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </template>
     </div>
 </template>
 <script>
-import { mapActions, mapState, mapWritableState } from 'pinia';
-
-
-
 export default {
     props: {
         multiple: {
@@ -119,27 +88,107 @@ export default {
         },
         name: {
             type: String,
-            default: 'users_' + (parseInt(Math.random() * 1000)),
+            default: "users_" + parseInt(Math.random() * 1000),
         },
         value: {
             type: Array,
             default: [],
-        }
+        },
+        all_data: {
+            type: Array,
+            default: [],
+        },
+        onchange: {
+            type: Function,
+            default: () => {},
+        },
+    },
+    data() {
+        return {
+            selected: [],
+            show_list: false,
+            data_list: [],
+        };
     },
     created: function () {
-
+        this.data_list = [...this.all_data];
+        this.$watch("value", function (v) {
+            v.forEach((i) => {
+                this.set_selected(i);
+            });
+        });
     },
-    data: () => ({
-        selected: [],
-        show_list: false,
-    }),
-    methods: {
 
+    methods: {
+        search_item: async function (event) {
+            const value = event.target.value.trim().toLowerCase();
+
+            // Filter data based on the search value
+            if (value) {
+                this.data_list = this.all_data.filter((item) => {
+                    const searchField = (
+                        item.title ||
+                        item.name ||
+                        ""
+                    ).toLowerCase();
+                    return searchField.includes(value);
+                });
+            } else {
+                // Reset to original data if the search input is cleared
+                this.data_list = this.all_data;
+            }
+        },
+        set_selected: function (item, event) {
+            if (!this.multiple) {
+                if (event.target.checked) {
+                    this.selected = [item];
+                    return;
+                } else {
+                    this.selected = [];
+                    return;
+                }
+            } else {
+                if (event.target.checked) {
+                    this.selected.push(item);
+                } else {
+                    this.selected = this.selected.filter(
+                        (i) => i.id != item.id
+                    );
+                }
+            }
+        },
+        is_selected: function (item) {
+            return this.selected.find((i) => i.id == item.id);
+        },
+        remove_item: function (item) {
+            this.selected = this.selected.filter((i) => i.id != item.id);
+        },
+
+        onchange_actions: function (event) {
+            let currentElement = event.target;
+            let nextElement = currentElement.nextElementSibling;
+            if (nextElement) {
+                currentElement.classList.remove("border-warning");
+                nextElement.remove();
+            }
+
+            if (this.onchange) {
+                this.onchange(event);
+            }
+        },
     },
     computed: {
-
-    }
-}
+        selected_ids: function () {
+            return this.selected.map((i) => i.id).join(",");
+        },
+    },
+    watch: {
+        // Watch for changes in `all_data` and update `data_list`
+        all_data(newData) {
+            this.data_list = [...newData];
+        },
+    },
+};
 </script>
 <style scoped>
 .custom_drop_down {
@@ -182,19 +231,20 @@ export default {
 }
 
 .custom_drop_down .selected_list .selected_item .remove *:hover {
-    color: #FF5722;
+    color: #ff5722;
 }
 
 .custom_drop_down .drop_down_items {
-    border: 1px solid rgba(121, 85, 72, 0.6588235294);
+    border: 1px solid rgb(121 85 72 / 8%);
     border-radius: 5px;
     padding: 10px;
     position: absolute;
     backdrop-filter: blur(8px);
-    background: rgba(54, 64, 74, 0.92);
+    background: rgba(54, 64, 74, 0.452);
     top: calc(100% + 5px);
     width: 100%;
     z-index: 9999;
+    box-shadow: 4px 3px 10px 0px #80808061;
 }
 
 .custom_drop_down .drop_down_items .drop_down_data_search {
@@ -213,7 +263,7 @@ export default {
 }
 
 .custom_drop_down .drop_down_items .option_list {
-    margin-top: 25px;
+    margin-top: 5px;
     min-height: 170px;
     max-height: 226px;
     overflow-y: auto;

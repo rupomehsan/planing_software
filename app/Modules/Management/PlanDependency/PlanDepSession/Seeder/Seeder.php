@@ -24,9 +24,10 @@ class Seeder extends SeederClass
             'nov-27-nov-28',
         ];
 
-        foreach ($data as $item) {
+        foreach ($data as $key => $item) {
             self::$model::create([
                 'title' => $item,
+                'serial' => $key + 1,
             ]);
         }
     }

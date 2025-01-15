@@ -23,7 +23,7 @@ class GetAllData
 
 
 
-            $central_yearly_plan = self::$CentralYearlyPlanmodel::with($with)->where('user_depertment_id', auth()->user()->user_department_id)->get();
+            $central_yearly_plan = self::$CentralYearlyPlanmodel::with($with)->where('user_depertment_id', auth()->user()?->user_department_id)->get();
 
             $data = self::$model::query();
 

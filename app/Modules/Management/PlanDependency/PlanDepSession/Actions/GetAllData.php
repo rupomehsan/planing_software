@@ -11,8 +11,8 @@ class GetAllData
         try {
 
             $pageLimit = request()->input('limit') ?? 10;
-            $orderByColumn = request()->input('sort_by_col') ?? 'id';
-            $orderByType = request()->input('sort_type') ?? 'desc';
+            $orderByColumn = request()->input('sort_by_col') ?? 'serial';
+            $orderByType = request()->input('sort_type') ?? 'asc';
             $status = request()->input('status') ?? 'active';
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');

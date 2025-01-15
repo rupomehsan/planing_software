@@ -13,6 +13,7 @@ import App from "./Layouts/App.vue";
 // common components
 // common components
 import CommonInput from "../../GlobalComponents/FormComponents/CommonInput.vue";
+import DropDown from "../../GlobalComponents/FormComponents/DropDownEl.vue";
 import Pagination from "../../GlobalComponents/Pagination.vue";
 // project rotes
 // project rotes
@@ -25,9 +26,7 @@ const router = createRouter({
         {
             path: "/",
             component: App,
-            children: [
-                Routes
-            ],
+            children: [Routes],
         },
     ],
 });
@@ -46,7 +45,7 @@ const app = createApp({});
 app.component("app", App);
 app.component("common-input", CommonInput);
 app.component("pagination", Pagination);
-
+app.component("drop-down", DropDown);
 
 app.use(pinia);
 app.use(router);

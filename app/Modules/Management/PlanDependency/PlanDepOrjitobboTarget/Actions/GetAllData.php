@@ -22,6 +22,11 @@ class GetAllData
 
             $data = self::$model::query();
 
+
+            if (request()->has('plan_dep_dofa_id')) {
+                $condition['plan_dep_dofa_id'] = request()->input('plan_dep_dofa_id');
+            }
+
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {

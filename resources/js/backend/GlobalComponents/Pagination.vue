@@ -1,17 +1,24 @@
 <template>
-
-    <nav aria-label="" class="d-flex gap-2 align-items-center border-top px-3" style="gap: 10px;">
-        <ul class="pagination my-2" style="font-size: 11px;">
+    <nav
+        aria-label=""
+        class="d-flex gap-2 align-items-center border-top px-3"
+        style="gap: 10px"
+    >
+        <ul class="pagination my-2" style="font-size: 11px">
             <template v-for="(link, index) in data.links" :key="index">
                 <li class="page-item" :class="{ active: link.active }">
-                    <a class="page-link" :class="(
-                        data.current_page == data.last_page &&
-                        data.links.length - 1 == index
-                    )
-                        ?
-                        'disabled'
-                        : ''
-                        " @click.prevent="set_page_data(link)" :href="link.url" v-html="`<span>${link.label}</span>`">
+                    <a
+                        class="page-link"
+                        :class="
+                            data.current_page == data.last_page &&
+                            data.links.length - 1 == index
+                                ? 'disabled'
+                                : ''
+                        "
+                        @click.prevent="set_page_data(link)"
+                        :href="link.url"
+                        v-html="`<span>${link.label}</span>`"
+                    >
                     </a>
                 </li>
             </template>
@@ -27,7 +34,11 @@
         <div class="d-flex" style="gap: 5px">
             <span></span>
             <span> Limit </span>
-            <select @change="set_per_page_limit" v-model="page_limit" class="bg-transparent rounded-1">
+            <select
+                @change="set_per_page_limit"
+                v-model="page_limit"
+                class="bg-transparent rounded-1"
+            >
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
@@ -48,26 +59,25 @@ export default {
         set_paginate: Function,
     },
     data: () => ({
-        page_limit: 10
+        page_limit: 10,
     }),
 
     methods: {
         set_page_data: function (link) {
             try {
                 let url = new URL(link.url);
-                let page = url.searchParams.get('page')
-                link.url ? this.set_page(parseInt(page)) : '';
+                let page = url.searchParams.get("page");
+                link.url ? this.set_page(parseInt(page)) : "";
                 this.get_data();
             } catch (error) {
                 console.log(" error", error);
-
             }
         },
         set_per_page_limit: function () {
             this.set_paginate(event.target.value);
             this.get_data();
-        }
-    }
+        },
+    },
 };
 </script>
 

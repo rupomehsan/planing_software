@@ -11,10 +11,24 @@ class StoreData
         try {
             $requestData = $request->validated();
             if ($data = self::$model::query()->create($requestData)) {
+                self::set_serial($data);
                 return messageResponse('Item added successfully', $data, 201);
             }
         } catch (\Exception $e) {
-            return messageResponse($e->getMessage(),[], 500, 'server_error');
+            return messageResponse($e->getMessage(), [], 500, 'server_error');
         }
+    }
+
+    public static function set_serial($data)
+    {
+        $requestedSerial = $data->serial;
+
+        self::$model::query()
+            ->where('serial', '>=', $requestedSerial)
+            ->where('id', '!=', $data->id)
+            ->increment('serial');
+
+        $data->serial = $requestedSerial;
+        $data->save();
     }
 }

@@ -1,8 +1,18 @@
 <template lang="">
     <div class="custom_drop_down">
-        <input type="hidden" :id="name" :name="name" :value="`[${selected_ids}]`">
+        <input
+            type="hidden"
+            :id="name"
+            :name="name"
+            :value="`[${selected_ids}]`"
+        />
         <div class="selected_list" @click="show_list = true">
-            <div v-for="item in selected" :key="item.id" :id="item.id" class="selected_item">
+            <div
+                v-for="item in selected"
+                :key="item.id"
+                :id="item.id"
+                class="selected_item"
+            >
                 <div class="label">
                     {{ item.title }}
                 </div>
@@ -13,14 +23,19 @@
         </div>
         <div class="drop_down_items" v-if="show_list">
             <div class="drop_down_data_search">
-                <input @keyup="search_item($event)"
+                <input
+                    @keyup="search_item($event)"
                     class="form-control"
                     placeholder="search.."
-                    id="table_search_box" type="search">
+                    id="table_search_box"
+                    type="search"
+                />
 
-                <button type="button"
+                <button
+                    type="button"
                     @click.prevent="show_list = false"
-                    class="btn btn-danger">
+                    class="btn btn-danger"
+                >
                     <i class="fa fa-close"></i>
                 </button>
             </div>
@@ -28,10 +43,13 @@
                 <li class="option_item" v-for="item in all.data" :key="item.id">
                     <label :for="`drop_item_${item.id}`">
                         <div class="check_box">
-                            <input @change="set_selected(item, $event)"
+                            <input
+                                @change="set_selected(item, $event)"
                                 :checked="is_selected(item)"
-                                type="checkbox" :id="`drop_item_${item.id}`"
-                                class="form-check-input ml-0">
+                                type="checkbox"
+                                :id="`drop_item_${item.id}`"
+                                class="form-check-input ml-0"
+                            />
                         </div>
                         <div class="label">{{ item.title }}</div>
                     </label>
@@ -42,15 +60,16 @@
                     :data="all"
                     :get_data="get_all"
                     :set_paginate="set_paginate"
-                    :set_page="set_page" />
+                    :set_page="set_page"
+                />
             </div>
         </div>
     </div>
 </template>
 <script>
-import { mapActions, mapState, mapWritableState } from 'pinia';
-import { store } from '../../store';
-import debounce from '../../helpers/debounce';
+import { mapActions, mapState, mapWritableState } from "pinia";
+import { store } from "../../store";
+import debounce from "../../helpers/debounce";
 
 export default {
     props: {
@@ -60,33 +79,29 @@ export default {
         },
         name: {
             type: String,
-            default: 'users_' + (parseInt(Math.random() * 1000)),
+            default: "users_" + parseInt(Math.random() * 1000),
         },
         value: {
             type: Array,
             default: [],
-        }
+        },
     },
     created: function () {
         if (!this.all?.data?.lenght) {
             this.get_all();
         }
-        this.$watch('value',function(v){
-            v.forEach(i=>{
+        this.$watch("value", function (v) {
+            v.forEach((i) => {
                 this.set_selected(i);
-            })
-        })
+            });
+        });
     },
     data: () => ({
         selected: [],
         show_list: false,
     }),
     methods: {
-        ...mapActions(store, [
-            'get_all',
-            'set_paginate',
-            'set_page',
-        ]),
+        ...mapActions(store, ["get_all", "set_paginate", "set_page"]),
         search_item: debounce(async function (event) {
             let value = event.target.value;
             this.search_key = value;
@@ -95,7 +110,7 @@ export default {
             this.only_latest_data = false;
         }, 500),
         set_selected: function (item, event) {
-            if(!this.multiple){
+            if (!this.multiple) {
                 this.selected = [item];
                 return;
             }
@@ -103,29 +118,23 @@ export default {
             if (event.target.checked) {
                 this.selected.push(item);
             } else {
-                this.selected = this.selected.filter(i => i.id != item.id);
+                this.selected = this.selected.filter((i) => i.id != item.id);
             }
         },
         is_selected: function (item) {
             return this.selected.find((i) => i.id == item.id);
         },
         remove_item: function (item) {
-            this.selected = this.selected.filter(i => i.id != item.id);
-        }
+            this.selected = this.selected.filter((i) => i.id != item.id);
+        },
     },
     computed: {
-        ...mapState(store, [
-            'all',
-        ]),
-        ...mapWritableState(store, [
-            'search_key',
-        ]),
+        ...mapState(store, ["all"]),
+        ...mapWritableState(store, ["search_key"]),
         selected_ids: function () {
-            return this.selected.map(i => i.id).join(',');
-        }
-    }
-}
+            return this.selected.map((i) => i.id).join(",");
+        },
+    },
+};
 </script>
-<style lang="">
-
-</style>
+<style lang=""></style>
