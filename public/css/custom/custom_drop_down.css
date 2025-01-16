@@ -3,7 +3,7 @@
 }
 
 .custom_drop_down .selected_list {
-    border: 1px solid var(--gray);
+    border: 1px solid #80808059;
     border-radius: 5px;
     padding: 10px;
     display: flex;
@@ -38,7 +38,7 @@
 }
 
 .custom_drop_down .selected_list .selected_item .remove *:hover {
-    color: #FF5722;
+    color: #ff5722;
 }
 
 .custom_drop_down .drop_down_items {

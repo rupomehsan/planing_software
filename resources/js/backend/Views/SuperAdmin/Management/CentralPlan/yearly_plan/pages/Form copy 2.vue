@@ -169,23 +169,23 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Session</label>
-                                        <custom-drop-down-el
+                                        <drop-down
                                             :all_data="sessions"
                                             name="session_id"
                                         >
-                                        </custom-drop-down-el>
+                                        </drop-down>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Dofa</label>
-                                        <custom-drop-down-el
+                                        <drop-down
                                             :all_data="dofas"
                                             name="plan_dep_dofa_id"
                                             :onchange="get_all_orgitobbo_target"
                                         >
-                                        </custom-drop-down-el>
+                                        </drop-down>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -193,11 +193,11 @@
                                         <label for="title ">
                                             Orjitobbo Target</label
                                         >
-                                        <custom-drop-down-el
+                                        <drop-down
                                             :all_data="orgitobbo_targets"
                                             name="plan_dep_orgitobbo_target_id"
                                         >
-                                        </custom-drop-down-el>
+                                        </drop-down>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -205,13 +205,13 @@
                                         <label for="title ">
                                             Executive Department</label
                                         >
-                                        <custom-drop-down-el
+                                        <drop-down
                                             :all_data="user_departments"
                                             name="user_department_id"
                                             :multiple="true"
                                             :onchange="set_ratting"
                                         >
-                                        </custom-drop-down-el>
+                                        </drop-down>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -314,20 +314,13 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { store } from "../store";
+import { store as user_store } from "../store";
 import setup from "../setup";
 import form_fields from "../setup/form_fields";
-import SessionDropDownEl from "../../../PlanDependency/session/components/dropdown/DropDownEl.vue";
 import DofaDropDownEl from "../../../PlanDependency/dofa/components/dropdown/DropDownEl.vue";
-import OrgitobboDropDownEl from "../../../PlanDependency/orjitobbo_target/components/dropdown/DropDownEl.vue";
-import CustomDropDownEl from "../components/dropdown/CustomDropDownEl.vue";
+
 export default {
-    components: {
-        DofaDropDownEl,
-        SessionDropDownEl,
-        OrgitobboDropDownEl,
-        CustomDropDownEl,
-    },
+    components: { DofaDropDownEl },
     data: () => ({
         setup,
         route_prefix: "",
@@ -340,6 +333,17 @@ export default {
         dofas: [],
         orgitobbo_targets: [],
         user_departments: [],
+        form_data: [],
+
+        form_item: {
+            title: "",
+            plan_dep_session: { id: null, title: null },
+            plan_dep_dofa: { id: null, title: null },
+            plan_dep_orjitobbo_target: { id: null, title: null },
+            previous_unfinished_parcent: "100",
+            execution: [],
+            description: "",
+        },
 
         edit_item: null,
     }),
@@ -357,11 +361,10 @@ export default {
         await this.get_all_user_departments();
     },
     methods: {
-        ...mapActions(store, {
+        ...mapActions(user_store, {
             create: "create",
             update: "update",
             details: "details",
-            set_form_data: "set_form_data",
         }),
         reset_fields: function () {
             this.form_fields.forEach((item) => {
@@ -415,8 +418,16 @@ export default {
                         };
                     }
                 });
-
-                this.set_form_data();
+                this.form_data.push(this.form_item);
+                this.form_item = {
+                    title: "",
+                    plan_dep_session: { id: null, title: null },
+                    plan_dep_dofa: { id: null, title: null },
+                    plan_dep_orjitobbo_target: { id: null, title: null },
+                    previous_unfinished_parcent: "100",
+                    execution: [],
+                    description: "",
+                };
             }
         },
 
@@ -509,10 +520,8 @@ export default {
     },
 
     computed: {
-        ...mapState(store, {
+        ...mapState(user_store, {
             item: "item",
-            form_data: "form_data",
-            form_item: "form_item",
         }),
     },
 };

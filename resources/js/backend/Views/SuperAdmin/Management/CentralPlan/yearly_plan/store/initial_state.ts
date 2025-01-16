@@ -1,21 +1,21 @@
-import {anyObject} from '../../../../../../common_types/object'
-import setup from '../setup';
+import { anyObject } from "../../../../../../common_types/object";
+import setup from "../setup";
 export const initialState = {
     /** loading status */
     is_loading: false,
-    loading_text: 'loading..',
+    loading_text: "loading..",
 
     /* data store */
     all: {} as anyObject,
     item: {} as anyObject,
-    url: '',
+    url: "",
     /*_______________*/
     /* data filters */
 
     select_fields: setup.select_fields,
     sort_by_cols: setup.sort_by_cols,
-    sort_by_col: 'id',
-    sort_type: 'DESC',
+    sort_by_col: "id",
+    sort_type: "DESC",
 
     filter_criteria: {} as anyObject,
     all_data_count: 0, // total data in database
@@ -26,11 +26,10 @@ export const initialState = {
     paginate: 13,
     search_key: ``,
 
-    orderByCol: 'id',
+    orderByCol: "id",
     orderByAsc: true,
 
-
-    status: 'active', // active | inactive
+    status: "active", // active | inactive
 
     /*_______________*/
 
@@ -53,4 +52,18 @@ export const initialState = {
     only_latest_data: false,
 
     import_csv_modal_show: false,
+
+    // custom form
+    // custom form
+
+    form_data: [],
+    form_item: {
+        title: "",
+        plan_dep_session: { id: null, title: null },
+        plan_dep_dofa: { id: null, title: null },
+        plan_dep_orjitobbo_target: { id: null, title: null },
+        previous_unfinished_parcent: "100",
+        execution: [],
+        description: "",
+    },
 };

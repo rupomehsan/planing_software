@@ -12,7 +12,6 @@ import destroy from "./async_actions/destroy";
 import update_status from "./async_actions/update_status";
 import bulk_action from "./async_actions/bulk_action";
 
-
 /** actions */
 import set_filter_criteria from "./actions/set_filter_criteria";
 import set_item from "./actions/set_item";
@@ -50,6 +49,11 @@ export const store = defineStore(setup.store_prefix, {
         set_status,
         set_only_latest_data,
         set_import_csv_modal,
-        clear_selected
+        clear_selected,
+        /* additional actions */
+        set_form_data: function () {
+            this.form_data.push(this.form_item);
+            console.log(this.form_data);
+        },
     },
 });
