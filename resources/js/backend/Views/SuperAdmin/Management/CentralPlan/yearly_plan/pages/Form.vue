@@ -27,7 +27,7 @@
                         <button
                             type="button"
                             class="btn btn-outline-warning btn-sm mx-2"
-                            @click="is_show_modal = true"
+                            @click="set_model_form_data()"
                         >
                             Add Iitem
                         </button>
@@ -145,7 +145,9 @@
                                 {{ setup.prefix }} তৈরি করুন
                             </h5>
                             <button
-                                @click="is_show_modal = false"
+                                @click="
+                                    (is_show_modal = false), reset_form_item()
+                                "
                                 type="button"
                                 class="btn btn-light"
                                 data-dismiss="modal"
@@ -172,6 +174,7 @@
                                         <custom-drop-down-el
                                             :all_data="sessions"
                                             name="session_id"
+                                            :data="form_item.plan_dep_session"
                                         >
                                         </custom-drop-down-el>
                                     </div>
@@ -184,10 +187,12 @@
                                             :all_data="dofas"
                                             name="plan_dep_dofa_id"
                                             :onchange="get_all_orgitobbo_target"
+                                            :data="form_item.plan_dep_dofa"
                                         >
                                         </custom-drop-down-el>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">
@@ -196,10 +201,14 @@
                                         <custom-drop-down-el
                                             :all_data="orgitobbo_targets"
                                             name="plan_dep_orgitobbo_target_id"
+                                            :data="
+                                                form_item.plan_dep_orjitobbo_target
+                                            "
                                         >
                                         </custom-drop-down-el>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">
@@ -210,10 +219,12 @@
                                             name="user_department_id"
                                             :multiple="true"
                                             :onchange="set_ratting"
+                                            :data="form_item.execution"
                                         >
                                         </custom-drop-down-el>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
@@ -285,7 +296,6 @@
                                         />
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">Description</label>
@@ -362,6 +372,7 @@ export default {
             update: "update",
             details: "details",
             set_form_data: "set_form_data",
+            reset_form_item: "reset_form_item",
         }),
         reset_fields: function () {
             this.form_fields.forEach((item) => {
@@ -411,7 +422,7 @@ export default {
                             id: value,
                             title: this.orgitobbo_targets.find((item) => {
                                 return item.id == value;
-                            }).title,
+                            })?.title,
                         };
                     }
                 });
@@ -505,6 +516,11 @@ export default {
                     (item) => department_user_ids.includes(item.department_id)
                 );
             }
+        },
+
+        set_model_form_data: function () {
+            this.is_show_modal = true;
+            this.reset_form_item();
         },
     },
 

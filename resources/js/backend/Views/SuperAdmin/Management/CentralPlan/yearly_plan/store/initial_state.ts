@@ -59,9 +59,9 @@ export const initialState = {
     form_data: [],
     form_item: {
         title: "",
-        plan_dep_session: { id: null, title: null },
-        plan_dep_dofa: { id: null, title: null },
-        plan_dep_orjitobbo_target: { id: null, title: null },
+        plan_dep_session: null,
+        plan_dep_dofa: null,
+        plan_dep_orjitobbo_target: null,
         previous_unfinished_parcent: "100",
         execution: [],
         description: "",

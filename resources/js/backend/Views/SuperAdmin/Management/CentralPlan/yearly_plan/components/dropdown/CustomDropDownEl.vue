@@ -55,7 +55,7 @@
                 <ul class="option_list custom_scroll p-0">
                     <li
                         class="option_item border my-1 mx-2 text-capitalize"
-                        v-for="item in data_list?.slice(0, 10)"
+                        v-for="item in data_list?.slice(0, 100)"
                         :key="item.id"
                     >
                         <label
@@ -110,6 +110,10 @@ export default {
             type: Function,
             default: () => {},
         },
+        data: {
+            type: [Object, Array],
+            default: null,
+        },
     },
     data() {
         return {
@@ -121,6 +125,15 @@ export default {
     },
     created: function () {
         this.data_list = [...this.all_data];
+
+        if (this.data) {
+            if (this.multiple) {
+                this.selected = [...this.data];
+            } else {
+                this.selected = [this.data];
+            }
+        }
+
         this.$watch("value", function (v) {
             v.forEach((i) => {
                 this.set_selected(i);

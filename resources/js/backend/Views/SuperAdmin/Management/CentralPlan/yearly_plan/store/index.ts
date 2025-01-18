@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { initialState } from "./initial_state";
-
 /** async actions */
 import all from "./async_actions/all";
 import create from "./async_actions/create";
@@ -11,7 +10,6 @@ import restore from "./async_actions/restore";
 import destroy from "./async_actions/destroy";
 import update_status from "./async_actions/update_status";
 import bulk_action from "./async_actions/bulk_action";
-
 /** actions */
 import set_filter_criteria from "./actions/set_filter_criteria";
 import set_item from "./actions/set_item";
@@ -54,6 +52,18 @@ export const store = defineStore(setup.store_prefix, {
         set_form_data: function () {
             this.form_data.push(this.form_item);
             console.log(this.form_data);
+        },
+
+        reset_form_item: function () {
+            this.form_item = {
+                title: "",
+                plan_dep_session: null,
+                plan_dep_dofa: null,
+                plan_dep_orjitobbo_target: null,
+                previous_unfinished_parcent: "100",
+                execution: [],
+                description: "",
+            };
         },
     },
 });
