@@ -110,9 +110,10 @@ export default {
             type: Function,
             default: () => {},
         },
-        data: {
-            type: [Object, Array],
-            default: null,
+
+        reset_data: {
+            type: Function,
+            default: () => {},
         },
     },
     data() {
@@ -139,6 +140,10 @@ export default {
                 this.set_selected(i);
             });
         });
+
+        if (this.reset) {
+            this.selected = [];
+        }
 
         if (this.edit_item) {
             console.log(this.edit_item);

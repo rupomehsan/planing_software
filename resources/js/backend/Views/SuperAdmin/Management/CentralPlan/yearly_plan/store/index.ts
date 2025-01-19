@@ -49,21 +49,5 @@ export const store = defineStore(setup.store_prefix, {
         set_import_csv_modal,
         clear_selected,
         /* additional actions */
-        set_form_data: function () {
-            this.form_data.push(this.form_item);
-            console.log(this.form_data);
-        },
-
-        reset_form_item: function () {
-            this.form_item = {
-                title: "",
-                plan_dep_session: null,
-                plan_dep_dofa: null,
-                plan_dep_orjitobbo_target: null,
-                previous_unfinished_parcent: "100",
-                execution: [],
-                description: "",
-            };
-        },
     },
 });

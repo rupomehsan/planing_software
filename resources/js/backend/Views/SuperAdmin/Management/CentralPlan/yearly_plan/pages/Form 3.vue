@@ -27,7 +27,7 @@
                         <button
                             type="button"
                             class="btn btn-outline-warning btn-sm mx-2"
-                            @click="is_show_modal = true"
+                            @click="set_model_form_data"
                         >
                             Add Iitem
                         </button>
@@ -169,51 +169,55 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Session</label>
-                                        <drop-down
-                                            :all_data="sessions"
-                                            name="session_id"
-                                        >
-                                        </drop-down>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> Dofa</label>
-                                        <drop-down
+                                        <custom-drop-down-el
                                             :all_data="dofas"
                                             name="plan_dep_dofa_id"
                                             :onchange="get_all_orgitobbo_target"
+                                            :data="[form_item.plan_dep_dofa]"
                                         >
-                                        </drop-down>
+                                        </custom-drop-down-el>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">
                                             Orjitobbo Target</label
                                         >
-                                        <drop-down
+                                        <custom-drop-down-el
                                             :all_data="orgitobbo_targets"
                                             name="plan_dep_orgitobbo_target_id"
+                                            :data="[
+                                                form_item.plan_dep_orjitobbo_target,
+                                            ]"
                                         >
-                                        </drop-down>
+                                        </custom-drop-down-el>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">
                                             Executive Department</label
                                         >
-                                        <drop-down
+                                        <custom-drop-down-el
                                             :all_data="user_departments"
                                             name="user_department_id"
                                             :multiple="true"
                                             :onchange="set_ratting"
+                                            :data="form_item.execution"
                                         >
-                                        </drop-down>
+                                        </custom-drop-down-el>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
@@ -285,7 +289,6 @@
                                         />
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title ">Description</label>
@@ -314,13 +317,20 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { store as user_store } from "../store";
+import { store } from "../store";
 import setup from "../setup";
 import form_fields from "../setup/form_fields";
+import SessionDropDownEl from "../../../PlanDependency/session/components/dropdown/DropDownEl.vue";
 import DofaDropDownEl from "../../../PlanDependency/dofa/components/dropdown/DropDownEl.vue";
-
+import OrgitobboDropDownEl from "../../../PlanDependency/orjitobbo_target/components/dropdown/DropDownEl.vue";
+import CustomDropDownEl from "../components/dropdown/CustomDropDownEl.vue";
 export default {
-    components: { DofaDropDownEl },
+    components: {
+        DofaDropDownEl,
+        SessionDropDownEl,
+        OrgitobboDropDownEl,
+        CustomDropDownEl,
+    },
     data: () => ({
         setup,
         route_prefix: "",
@@ -333,13 +343,13 @@ export default {
         dofas: [],
         orgitobbo_targets: [],
         user_departments: [],
-        form_data: [],
 
+        form_data: [],
         form_item: {
             title: "",
-            plan_dep_session: { id: null, title: null },
-            plan_dep_dofa: { id: null, title: null },
-            plan_dep_orjitobbo_target: { id: null, title: null },
+            plan_dep_session: null,
+            plan_dep_dofa: null,
+            plan_dep_orjitobbo_target: null,
             previous_unfinished_parcent: "100",
             execution: [],
             description: "",
@@ -361,7 +371,7 @@ export default {
         await this.get_all_user_departments();
     },
     methods: {
-        ...mapActions(user_store, {
+        ...mapActions(store, {
             create: "create",
             update: "update",
             details: "details",
@@ -389,6 +399,7 @@ export default {
             if (this.edit_item !== null) {
                 this.form_data[this.edit_item] = this.form_item;
                 this.is_show_modal = false;
+                this.edit_item = null;
             } else {
                 let form = $event.target;
                 let formData = new FormData(form);
@@ -421,9 +432,9 @@ export default {
                 this.form_data.push(this.form_item);
                 this.form_item = {
                     title: "",
-                    plan_dep_session: { id: null, title: null },
-                    plan_dep_dofa: { id: null, title: null },
-                    plan_dep_orjitobbo_target: { id: null, title: null },
+                    plan_dep_session: null,
+                    plan_dep_dofa: null,
+                    plan_dep_orjitobbo_target: null,
                     previous_unfinished_parcent: "100",
                     execution: [],
                     description: "",
@@ -517,12 +528,22 @@ export default {
                 );
             }
         },
+
+        set_model_form_data: function () {
+            this.is_show_modal = true;
+        },
     },
 
     computed: {
-        ...mapState(user_store, {
+        ...mapState(store, {
             item: "item",
         }),
+    },
+
+    watch: {
+        form_item(newData) {
+            this.form_data[this.edit_item] = newData;
+        },
     },
 };
 </script>

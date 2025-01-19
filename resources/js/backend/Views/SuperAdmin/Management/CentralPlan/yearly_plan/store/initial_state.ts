@@ -55,15 +55,4 @@ export const initialState = {
 
     // custom form
     // custom form
-
-    form_data: [],
-    form_item: {
-        title: "",
-        plan_dep_session: null,
-        plan_dep_dofa: null,
-        plan_dep_orjitobbo_target: null,
-        previous_unfinished_parcent: "100",
-        execution: [],
-        description: "",
-    },
 };
