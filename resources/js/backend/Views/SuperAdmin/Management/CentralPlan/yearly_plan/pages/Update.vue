@@ -1,156 +1,42 @@
 <template>
     <div>
-        <form @submit.prevent="submitHandler" class="p-2">
-            <div class="card w-100">
-                <div
-                    class="card-header d-flex justify-content-between align-items-center"
-                >
-                    <!-- <h5 class="text-capitalize">{{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
-                    <h5 class="text-capitalize">
-                        কেন্দ্রিও বার্ষিক পরিকল্পনা তৈরি করুন
-                    </h5>
-                    <div>
-                        <button
-                            type="button"
-                            class="btn btn-outline-warning btn-sm mx-2"
-                            @click="is_show_modal = true"
-                        >
-                            Import From Excel
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-outline-warning btn-sm mx-2"
-                            @click="is_show_modal = true"
-                        >
-                            Import previous incompleted
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-outline-warning btn-sm mx-2"
-                            @click="addNewItem()"
-                        >
-                            Add Iitem
-                        </button>
-                        <router-link
-                            v-if="item.slug"
-                            class="btn btn-outline-info mx-2 btn-sm"
-                            :to="{
-                                name: `Details${setup.route_prefix}`,
-                                params: { id: item.slug },
-                            }"
-                        >
-                            {{ setup.details_page_title }}
-                        </router-link>
-                        <router-link
-                            class="btn btn-outline-warning btn-sm mx-2"
-                            :to="{ name: `All${setup.route_prefix}` }"
-                        >
-                            {{ setup.all_page_title }}
-                        </router-link>
-                    </div>
-                </div>
-                <div class="card-body card_body_fixed_height">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12">
-                            <table
-                                class="table table-hover text-center table-bordered"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="w-10">
-                                            <span class="icon"></span>
-                                        </th>
-                                        <th class="w-10">id</th>
-                                        <th>Title</th>
-                                        <th class="">Dofa</th>
-                                        <th class="">Orjitobbo Target</th>
-                                        <th class="">Previous incomplete(%)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        v-for="(item, index) in form_data"
-                                        :key="index"
-                                        class="table_rows table_row_4"
-                                    >
-                                        <td class="text-wrap max-w-120">
-                                            <span
-                                                @click="editItemHandler(index)"
-                                            >
-                                                <i
-                                                    class="fa fa-pencil cursor-pointer"
-                                                ></i>
-                                            </span>
-                                            <span
-                                                @click="
-                                                    deleteItemHandler(index)
-                                                "
-                                            >
-                                                <i
-                                                    class="fa fa-trash mx-2 cursor-pointer"
-                                                ></i>
-                                            </span>
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{ index + 1 }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{ item.title }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{ item.plan_dep_dofa?.title }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{
-                                                item.plan_dep_orjitobbo_target
-                                                    ?.title
-                                            }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{
-                                                item.previous_unfinished_parcent
-                                            }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="text-center">
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    @click="submitHandler"
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        <div class="card w-100">
+            <div
+                class="card-header d-flex justify-content-between align-items-center"
+            >
+                <!-- <h5 class="text-capitalize">{{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
+                <h5 class="text-capitalize">
+                    কেন্দ্রিও বার্ষিক পরিকল্পনা আপডেট
+                </h5>
+                <div>
+                    <router-link
+                        class="text-decoration-none btn btn-outline-warning mx-2 btn-sm"
+                        :to="{ name: `Create${setup.route_prefix}` }"
+                    >
+                        Add Iitem
+                    </router-link>
+
+                    <router-link
+                        v-if="item.slug"
+                        class="btn btn-outline-info mx-2 btn-sm"
+                        :to="{
+                            name: `Details${setup.route_prefix}`,
+                            params: { id: item.slug },
+                        }"
+                    >
+                        {{ setup.details_page_title }}
+                    </router-link>
+                    <router-link
+                        class="btn btn-outline-warning btn-sm mx-2"
+                        :to="{ name: `All${setup.route_prefix}` }"
+                    >
+                        {{ setup.all_page_title }}
+                    </router-link>
                 </div>
             </div>
-        </form>
-
-        <div
-            class="modal fade"
-            :class="`${is_show_modal ? 'show d-block' : 'd-none'}`"
-            id="primarymodal"
-            aria-modal="true"
-        >
-            <div class="modal-dialog modal-lg">
-                <form @submit.prevent="SingleItemSubmitHandler">
-                    <div class="modal-content border-primary">
-                        <div class="modal-header bg-primary">
-                            <h5 class="modal-title text-white">
-                                {{ setup.prefix }} তৈরি করুন
-                            </h5>
-                            <button
-                                @click="is_show_modal = false"
-                                type="button"
-                                class="btn btn-light"
-                                data-dismiss="modal"
-                            >
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
+            <div class="card-body card_body_fixed_height">
+                <form @submit.prevent="submitHandler">
+                    <div class="modal-content">
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12">
@@ -776,7 +662,7 @@
                                 </div>
                             </div>
 
-                            <div class="modal-footer">
+                            <div class="modal-footer justify-content-center">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-download"></i> Submit
                                 </button>
@@ -810,7 +696,7 @@ export default {
         dofas: [],
         orgitobbo_targets: [],
         user_departments: [],
-        form_data: [],
+
         form_item: {
             title: "",
             plan_dep_session: { id: null, title: null },
@@ -831,13 +717,9 @@ export default {
         search_data: "",
     }),
     created: async function () {
-        let id = (this.param_id = this.$route.params.id);
+        this.param_id = this.$route.params.slug;
 
-        this.reset_fields();
-
-        if (id) {
-            this.set_fields(id);
-        }
+        this.set_fields(this.param_id);
 
         await this.get_all_sessions();
         await this.get_all_dofas();
@@ -849,20 +731,34 @@ export default {
             update: "update",
             details: "details",
         }),
-        reset_fields: function () {
-            this.form_fields.forEach((item) => {
-                item.value = "";
-            });
-        },
+
         set_fields: async function (id) {
             this.param_id = id;
             await this.details(id);
             if (this.item) {
-                this.form_fields.forEach((field, index) => {
-                    Object.entries(this.item).forEach((value) => {
-                        if (field.name == value[0]) {
-                            this.form_fields[index].value = value[1];
-                        }
+                this.form_item.title = this.item.title;
+                this.form_item.plan_dep_session = {
+                    id: this.item.plan_dep_session.id,
+                    title: this.item.plan_dep_session.title,
+                };
+                this.form_item.plan_dep_dofa = {
+                    id: this.item.plan_dep_dofa.id,
+                    title: this.item.plan_dep_dofa.title,
+                };
+                this.form_item.plan_dep_orjitobbo_target = {
+                    id: this.item.plan_dep_orjitobbo_target.id,
+                    title: this.item.plan_dep_orjitobbo_target.title,
+                };
+                this.form_item.previous_unfinished_parcent =
+                    this.item.previous_unfinished_parcent;
+                this.form_item.description = this.item.description;
+
+                this.item.executive_departments.forEach((data) => {
+                    this.form_item.executive_departments.push({
+                        title: data.user_department.title,
+                        id: data.user_department.id,
+                        rating: data.rating,
+                        execution_id: data.id,
                     });
                 });
             }
@@ -904,26 +800,16 @@ export default {
 
         submitHandler: async function ($event) {
             $event.preventDefault();
-            if (this.form_data.length == 0) {
-                s_warning("No item found");
-                return false;
-            }
+
             let contirmation = await s_confirm("Are you sure want to submit?");
 
             if (!contirmation) {
                 return false;
             }
 
-            if (this.param_id) {
-                let response = await this.update(this.form_data);
-                if (response.data.status === "success") {
-                    s_alert(response.data?.message);
-                }
-            } else {
-                let response = await this.create(this.form_data);
-                if (response.data.status === "success") {
-                    s_alert(response.data?.message);
-                }
+            let response = await this.update(this.form_item);
+            if (response.data.status === "success") {
+                s_alert(response.data?.message);
             }
         },
 

@@ -42,6 +42,11 @@ class Model extends EloquentModel
         return $q->onlyTrashed();
     }
 
+    public function plan_dep_session()
+    {
+        return $this->belongsTo(\App\Modules\Management\PlanDependency\PlanDepSession\Models\Model::class, 'plan_dep_session_id');
+    }
+
     public function plan_dep_dofa()
     {
         return $this->belongsTo(\App\Modules\Management\PlanDependency\PlanDepDofas\Models\Model::class, 'plan_dep_dofas_id');
@@ -55,5 +60,9 @@ class Model extends EloquentModel
     public function user_department()
     {
         return $this->belongsTo(\App\Modules\Management\UserManagement\UserDepartment\Models\Model::class, 'user_depertment_id');
+    }
+    public function executive_departments()
+    {
+        return $this->hasMany(\App\Modules\Management\PlanManagement\RelationalData\Models\PlanExecutorModel::class, 'table_id');
     }
 }

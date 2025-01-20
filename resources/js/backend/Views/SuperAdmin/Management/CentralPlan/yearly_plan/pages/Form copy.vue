@@ -581,6 +581,9 @@ export default {
             this.edit_item = index;
             this.form_item = {};
             this.form_item = this.form_data[index];
+
+            
+
         },
 
         deleteItemHandler(index) {

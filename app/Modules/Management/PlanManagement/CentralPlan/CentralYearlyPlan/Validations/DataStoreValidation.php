@@ -46,9 +46,9 @@ class DataStoreValidation extends FormRequest
             'plan_dep_orjitobbo_target_id' => 'required | sometimes',
             'serial_no' => 'required | sometimes',
             'previous_unfinished_parcent' => 'required | sometimes',
-            'rating' => 'required | sometimes',
-            'is_published' => 'required | sometimes',
-            'is_approved' => 'required | sometimes',
+            'rating' => ' sometimes',
+            'is_published' => ' sometimes',
+            'is_approved' => ' sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

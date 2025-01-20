@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('central_yearly_plans', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('plan_dep_session')->nullable();
             $table->bigInteger('plan_dep_dofas_id')->nullable();
             $table->bigInteger('plan_dep_orjitobbo_target_id')->nullable();
             $table->bigInteger('user_depertment_id')->nullable();
