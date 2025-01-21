@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="title "> Session</label>
+                                    <label for="title "> সেশন</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_session_list = true"
@@ -179,7 +179,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="title "> Dofa</label>
+                                    <label for="title "> দফা</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_dofa_list = true"
@@ -313,7 +313,7 @@
 
                                 <div class="col-md-12">
                                     <label for="title ">
-                                        Orjitobbo target</label
+                                        অর্জিতব্য টার্গেট</label
                                     >
                                     <div
                                         class="custom_drop_down cursor-pointer"
@@ -448,7 +448,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="title ">
-                                        Execution Department</label
+                                        বাস্তবায়নকারী বিভাগ</label
                                     >
                                     <div
                                         class="custom_drop_down cursor-pointer"
@@ -586,7 +586,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
-                                            >Rating (1-100)
+                                            >রেটিং (1-100)
                                         </label>
                                         <table
                                             class="table table-hover text-center table-bordered"
@@ -594,9 +594,9 @@
                                             <thead>
                                                 <tr>
                                                     <th class="w-50">
-                                                        Department
+                                                        বাস্তবায়নকারী বিভাগ
                                                     </th>
-                                                    <th class="w-50">Rating</th>
+                                                    <th class="w-50">রেটিং</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -636,7 +636,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
-                                            >Previous incomplete (%)</label
+                                            >পরিকল্পনা অবাস্তবায়িত অংশ
+                                            (%)</label
                                         >
                                         <input
                                             v-model="
@@ -651,12 +652,25 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title ">Description</label>
+                                        <label for="title "> টাইটেল</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="form_item.title"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group mt-2">
+                                        <label for="title "
+                                            >কর্মপরিকল্পনা</label
+                                        >
                                         <textarea
                                             class="form-control"
                                             v-model="form_item.description"
                                             name=""
                                             id=""
+                                            rows="10"
                                         ></textarea>
                                     </div>
                                 </div>

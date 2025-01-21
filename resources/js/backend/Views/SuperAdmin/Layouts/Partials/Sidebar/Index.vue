@@ -69,10 +69,10 @@
                                 name: `Allcentral_yearly_plans`,
                                 label: `বার্ষিক পরিকল্পনা`,
                             },
-                            {
-                                name: `Allcentral_yearly_exicutive_plans`,
-                                label: ` কার্যকরী পরিকল্পনা`,
-                            },
+                            // {
+                            //     name: `Allcentral_yearly_exicutive_plans`,
+                            //     label: ` কার্যকরী পরিকল্পনা`,
+                            // },
                             // { name: `Allorjitobbo_target`, label: `বিভাগীয় সেকশন` },
                         ]"
                     >

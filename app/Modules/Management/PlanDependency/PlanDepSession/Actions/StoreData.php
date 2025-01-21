@@ -21,8 +21,8 @@ class StoreData
 
     public static function set_serial($data)
     {
-        $requestedSerial = $data->serial;
 
+        $requestedSerial = $data->serial;
         self::$model::query()
             ->where('serial', '>=', $requestedSerial)
             ->where('id', '!=', $data->id)

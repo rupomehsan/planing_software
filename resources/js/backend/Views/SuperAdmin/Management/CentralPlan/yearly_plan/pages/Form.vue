@@ -3,37 +3,38 @@
         <form @submit.prevent="submitHandler" class="p-2">
             <div class="card w-100">
                 <div
-                    class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center gap-2"
                 >
                     <!-- <h5 class="text-capitalize">{{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
-                    <h5 class="text-capitalize">
+                    <h5 class="text-capitalize w-50">
                         কেন্দ্রিও বার্ষিক পরিকল্পনা তৈরি করুন
                     </h5>
-                    <div>
+                    <div class="w-50">
                         <button
                             type="button"
-                            class="btn btn-outline-warning btn-sm mx-2"
+                            class="btn btn-outline-success btn-sm m-1"
+                            @click="addNewItem"
+                        >
+                            Add Iitem
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary btn-sm m-1"
                             @click="is_show_modal = true"
                         >
                             Import From Excel
                         </button>
                         <button
                             type="button"
-                            class="btn btn-outline-warning btn-sm mx-2"
+                            class="btn btn-outline-dark btn-sm m-1"
                             @click="is_show_modal = true"
                         >
                             Import previous incompleted
                         </button>
-                        <button
-                            type="button"
-                            class="btn btn-outline-warning btn-sm mx-2"
-                            @click="addNewItem()"
-                        >
-                            Add Iitem
-                        </button>
+
                         <router-link
                             v-if="item.slug"
-                            class="btn btn-outline-info mx-2 btn-sm"
+                            class="btn btn-outline-info m-1 btn-sm"
                             :to="{
                                 name: `Details${setup.route_prefix}`,
                                 params: { id: item.slug },
@@ -42,7 +43,7 @@
                             {{ setup.details_page_title }}
                         </router-link>
                         <router-link
-                            class="btn btn-outline-warning btn-sm mx-2"
+                            class="btn btn-outline-warning btn-sm m-1"
                             :to="{ name: `All${setup.route_prefix}` }"
                         >
                             {{ setup.all_page_title }}
@@ -134,16 +135,18 @@
             :class="`${is_show_modal ? 'show d-block' : 'd-none'}`"
             id="primarymodal"
             aria-modal="true"
+            ref="modal"
+            @click="closeModal"
         >
             <div class="modal-dialog modal-lg">
                 <form @submit.prevent="SingleItemSubmitHandler">
-                    <div class="modal-content border-primary">
+                    <div class="modal-content border-primary" @click.stop>
                         <div class="modal-header bg-primary">
                             <h5 class="modal-title text-white">
                                 {{ setup.prefix }} তৈরি করুন
                             </h5>
                             <button
-                                @click="is_show_modal = false"
+                                @click="closeModal"
                                 type="button"
                                 class="btn btn-light"
                                 data-dismiss="modal"
@@ -155,17 +158,16 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title "> Title</label>
+                                        <label for="title "> ক্রম</label>
                                         <input
                                             type="text"
                                             class="form-control"
-                                            v-model="form_item.title"
+                                            v-model="form_item.serial_no"
                                         />
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
-                                    <label for="title "> Session</label>
+                                    <label for="title "> সেশন</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_session_list = true"
@@ -293,7 +295,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="title "> Dofa</label>
+                                    <label for="title "> দফা</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_dofa_list = true"
@@ -427,8 +429,8 @@
 
                                 <div class="col-md-12">
                                     <label for="title ">
-                                        Orjitobbo target</label
-                                    >
+                                        অর্জিতব্য টার্গেট
+                                    </label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="
@@ -515,6 +517,9 @@
                                                 </div>
 
                                                 <ul
+                                                    v-if="
+                                                        orgitobbo_targets.length
+                                                    "
                                                     class="option_list custom_scroll p-0"
                                                 >
                                                     <li
@@ -556,13 +561,19 @@
                                                         </label>
                                                     </li>
                                                 </ul>
+                                                <p
+                                                    v-else
+                                                    class="text-center p-2 alert alert-danger my-3"
+                                                >
+                                                    No Data Found
+                                                </p>
                                             </div>
                                         </template>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="title ">
-                                        Execution Department</label
+                                        বাস্তবায়নকারী বিভাগ</label
                                     >
                                     <div
                                         class="custom_drop_down cursor-pointer"
@@ -700,7 +711,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
-                                            >Rating (1-100)
+                                            >রেটিং (1-100)
                                         </label>
                                         <table
                                             class="table table-hover text-center table-bordered"
@@ -708,9 +719,9 @@
                                             <thead>
                                                 <tr>
                                                     <th class="w-50">
-                                                        Department
+                                                        বাস্তবায়নকারী বিভাগ
                                                     </th>
-                                                    <th class="w-50">Rating</th>
+                                                    <th class="w-50">রেটিং</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -750,7 +761,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
-                                            >Previous incomplete (%)</label
+                                            >পরিকল্পনা অবাস্তবায়িত অংশ
+                                            (%)</label
                                         >
                                         <input
                                             v-model="
@@ -765,7 +777,19 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title ">Description</label>
+                                        <label for="title "> টাইটেল</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="form_item.title"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group mt-2">
+                                        <label for="title "
+                                            >কর্মপরিকল্পনা</label
+                                        >
                                         <textarea
                                             class="form-control"
                                             v-model="form_item.description"
@@ -812,6 +836,7 @@ export default {
         user_departments: [],
         form_data: [],
         form_item: {
+            serial_no: "",
             title: "",
             plan_dep_session: { id: null, title: null },
             plan_dep_dofa: { id: null, title: null },
@@ -872,6 +897,7 @@ export default {
             this.is_show_modal = true;
             this.edit_item = null;
             this.form_item = {
+                serial_no: "",
                 title: "",
                 plan_dep_session: { id: null, title: null },
                 plan_dep_dofa: { id: null, title: null },
@@ -890,6 +916,7 @@ export default {
             } else {
                 this.form_data.push(this.form_item);
                 this.form_item = {
+                    serial_no: "",
                     title: "",
                     plan_dep_dofa: { id: null, title: null },
                     plan_dep_orjitobbo_target: { id: null, title: null },
@@ -1082,7 +1109,7 @@ export default {
         search_item: async function (event, name) {
             const value = event.target.value.trim().toLowerCase();
             this.search_data = value;
-            if (name == "session") {
+            if (name == "sessions") {
                 this.get_all_sessions();
             }
 
@@ -1094,6 +1121,17 @@ export default {
             }
             if (name == "user_department") {
                 this.get_all_user_departments();
+            }
+        },
+
+        closeModal(event) {
+            const modal = this.$refs.modal;
+            if (
+                !event ||
+                modal === event.target ||
+                event.target.closest(".btn-light")
+            ) {
+                this.is_show_modal = false;
             }
         },
     },

@@ -10,13 +10,20 @@ class UpdateData
     public static function execute($request, $slug)
     {
         try {
+
             // dd($request->all());
             if (!$data = self::$model::query()->where('slug', $slug)->first()) {
                 return messageResponse('Data not found...', $data, 404, 'error');
             }
 
+            $isExist = self::$model::where('id', '!=', $data->id)->where('serial_no', $request['serial_no'])->first();
+            if ($isExist) {
+                return messageResponse('Item already exist serial no : ' . $request['serial_no'], [], 201);
+            }
+
             // Prepare request data
             $requestData = [
+                'serial_no' => $request['serial_no'],
                 'title' => $request['title'],
                 'plan_dep_session_id' => $request['plan_dep_session']['id'] ?? null,
                 'plan_dep_dofas_id' => $request['plan_dep_dofa']['id'] ?? null,

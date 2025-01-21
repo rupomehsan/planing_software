@@ -10,11 +10,20 @@ class StoreData
     public static function execute($request)
     {
         try {
+
             $requestData = $request->all();
+
+            foreach ($requestData as $key => $value) {
+                $isExist = self::$model::where('serial_no', $value['serial_no'])->first();
+                if ($isExist) {
+                    return messageResponse('Item already exist serial no : ' . $value['serial_no'], [], 201);
+                }
+            }
 
             foreach ($requestData as $key => $value) {
 
                 $data = [
+                    'serial_no' => $value['serial_no'],
                     'title' => $value['title'],
                     'plan_dep_session_id' => $value['plan_dep_session']['id'],
                     'plan_dep_dofas_id' => $value['plan_dep_dofa']['id'],
@@ -24,9 +33,11 @@ class StoreData
                 ];
 
 
-
+                // dd($value['executive_departments']);
                 if ($centralYearlyPlan = self::$model::create($data)) {
-                    foreach ($value['executive_departments'] as $item)
+
+                    foreach ($value['executive_departments'] as $item) {
+
                         $plan_executors = [
                             'table_name' => 'central_yearly_plans',
                             'table_id' => $centralYearlyPlan->id,
@@ -35,9 +46,10 @@ class StoreData
                             'rating' => $item['rating'],
                         ];
 
-                    // dd($plan_executors);
+                        // dd($plan_executors);
 
-                    self::$PlanExecutorModel::create($plan_executors);
+                        self::$PlanExecutorModel::create($plan_executors);
+                    }
                 }
             }
 
