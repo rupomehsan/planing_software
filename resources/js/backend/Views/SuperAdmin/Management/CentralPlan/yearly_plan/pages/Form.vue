@@ -156,23 +156,31 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <div class="form-group mt-2">
                                         <label for="title "> ক্রম</label>
                                         <input
                                             type="text"
                                             class="form-control"
+                                            id="serial_no"
                                             v-model="form_item.serial_no"
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <label for="title "> সেশন</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_session_list = true"
                                     >
-                                        <div class="selected_list">
+                                        <div
+                                            class="selected_list"
+                                            :class="
+                                                session_error
+                                                    ? 'border-warning'
+                                                    : ''
+                                            "
+                                        >
                                             <template
                                                 v-if="
                                                     form_item.plan_dep_session
@@ -292,15 +300,26 @@
                                             </div>
                                         </template>
                                     </div>
+                                    <div v-if="session_error">
+                                        <p class="text-warning">
+                                            {{ session_error }}
+                                        </p>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <label for="title "> দফা</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_dofa_list = true"
                                     >
-                                        <div class="selected_list">
+                                        <div
+                                            class="selected_list"
+                                            :class="
+                                                dofa_error
+                                                    ? 'border-warning'
+                                                    : ''
+                                            "
+                                        >
                                             <template
                                                 v-if="
                                                     form_item.plan_dep_dofa
@@ -425,9 +444,13 @@
                                             </div>
                                         </template>
                                     </div>
+                                    <div v-if="dofa_error">
+                                        <p class="text-warning">
+                                            {{ dofa_error }}
+                                        </p>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <label for="title ">
                                         অর্জিতব্য টার্গেট
                                     </label>
@@ -437,7 +460,14 @@
                                             show_orgitobbo_target_list = true
                                         "
                                     >
-                                        <div class="selected_list">
+                                        <div
+                                            class="selected_list"
+                                            :class="
+                                                orgitobbo_target_error
+                                                    ? 'border-warning'
+                                                    : ''
+                                            "
+                                        >
                                             <template
                                                 v-if="
                                                     form_item
@@ -570,8 +600,13 @@
                                             </div>
                                         </template>
                                     </div>
+                                    <div v-if="orgitobbo_target_error">
+                                        <p class="text-warning">
+                                            {{ orgitobbo_target_error }}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <label for="title ">
                                         বাস্তবায়নকারী বিভাগ</label
                                     >
@@ -581,7 +616,14 @@
                                             show_executive_department_list = true
                                         "
                                     >
-                                        <div class="selected_list">
+                                        <div
+                                            class="selected_list"
+                                            :class="
+                                                user_department_error
+                                                    ? 'border border-warning'
+                                                    : ''
+                                            "
+                                        >
                                             <template
                                                 v-if="
                                                     form_item
@@ -706,9 +748,13 @@
                                             </div>
                                         </template>
                                     </div>
+                                    <div v-if="user_department_error">
+                                        <p class="text-warning">
+                                            {{ user_department_error }}
+                                        </p>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <div class="form-group mt-2">
                                         <label for="title "
                                             >রেটিং (1-100)
@@ -758,7 +804,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <div class="form-group mt-2">
                                         <label for="title "
                                             >পরিকল্পনা অবাস্তবায়িত অংশ
@@ -769,23 +815,24 @@
                                                 form_item.previous_unfinished_parcent
                                             "
                                             type="number"
-                                            required
                                             class="form-control"
                                             placeholder=""
+                                            id="previous_unfinished_parcent"
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <div class="form-group mt-2">
                                         <label for="title "> টাইটেল</label>
                                         <input
                                             type="text"
                                             class="form-control"
                                             v-model="form_item.title"
+                                            id="title"
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-1">
                                     <div class="form-group mt-2">
                                         <label for="title "
                                             >কর্মপরিকল্পনা</label
@@ -793,8 +840,7 @@
                                         <textarea
                                             class="form-control"
                                             v-model="form_item.description"
-                                            name=""
-                                            id=""
+                                            id="description"
                                         ></textarea>
                                     </div>
                                 </div>
@@ -819,6 +865,7 @@ import { store as user_store } from "../store";
 import setup from "../setup";
 import form_fields from "../setup/form_fields";
 import DofaDropDownEl from "../../../PlanDependency/dofa/components/dropdown/DropDownEl.vue";
+import axios from "axios";
 
 export default {
     components: { DofaDropDownEl },
@@ -854,6 +901,11 @@ export default {
         show_orgitobbo_target_list: false,
         show_executive_department_list: false,
         search_data: "",
+        //error message
+        session_error: null,
+        dofa_error: null,
+        orgitobbo_target_error: null,
+        user_department_error: null,
     }),
     created: async function () {
         let id = (this.param_id = this.$route.params.id);
@@ -910,6 +962,11 @@ export default {
         },
 
         SingleItemSubmitHandler: async function ($event) {
+            let res = await this.validation();
+            if (!res) {
+                return false;
+            }
+
             if (this.edit_item !== null) {
                 this.form_data[this.edit_item] = this.form_item;
                 this.is_show_modal = false;
@@ -929,6 +986,36 @@ export default {
             }
         },
 
+        validation: async function () {
+            try {
+                let validation = await axios.post(
+                    "central-yearly-plan-validation",
+                    this.form_item
+                );
+            } catch (error) {
+                if (error.response && error.response.data.errors) {
+                    const errors = error.response.data.errors;
+
+                    // Map nested errors
+                    this.session_error = errors["plan_dep_session.id"]
+                        ? errors["plan_dep_session.id"][0]
+                        : null;
+                    this.dofa_error = errors["plan_dep_dofa.id"]
+                        ? errors["plan_dep_dofa.id"][0]
+                        : null;
+                    this.orgitobbo_target_error = errors[
+                        "plan_dep_orjitobbo_target.id"
+                    ]
+                        ? errors["plan_dep_orjitobbo_target.id"][0]
+                        : null;
+                    this.user_department_error = errors["executive_departments"]
+                        ? errors["executive_departments"][0]
+                        : null;
+                }
+
+                return false;
+            }
+        },
         submitHandler: async function ($event) {
             $event.preventDefault();
             if (this.form_data.length == 0) {

@@ -75,4 +75,13 @@ class Controller extends ControllersController
         $data = BulkActions::execute($request);
         return $data;
     }
+
+    public function validation(DataStoreValidation $request)
+    {
+        $executive_departments = request()->executive_departments;
+        if (count($executive_departments) == 0) {
+            $request->validate(['executive_departments' => 'required']);
+        }
+        return messageResponse('validation success');
+    }
 }

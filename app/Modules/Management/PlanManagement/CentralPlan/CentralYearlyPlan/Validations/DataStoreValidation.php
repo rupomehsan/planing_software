@@ -42,14 +42,24 @@ class DataStoreValidation extends FormRequest
     public function rules(): array
     {
         return [
-            'plan_dep_dofas_id' => 'required | sometimes',
-            'plan_dep_orjitobbo_target_id' => 'required | sometimes',
             'serial_no' => 'required | sometimes',
+            'plan_dep_session.id' => 'required | sometimes',
+            'plan_dep_dofa.id' => 'required | sometimes',
+            'plan_dep_orjitobbo_target.id' => 'required | sometimes',
+           'executive_departments' => 'required | sometimes| array| min:1',
             'previous_unfinished_parcent' => 'required | sometimes',
-            'rating' => ' sometimes',
-            'is_published' => ' sometimes',
-            'is_approved' => ' sometimes',
+            'title' => 'required | sometimes',
+            'description' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'plan_dep_session.id.required' => 'Session is required',
+            'plan_dep_dofa.id.required' => 'Dofa is required',
+            'plan_dep_orjitobbo_target.id.required' => 'Orjitobbo target is required',
         ];
     }
 }
