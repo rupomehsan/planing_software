@@ -160,7 +160,7 @@
                                     <div class="form-group mt-2">
                                         <label for="title "> ক্রম</label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             class="form-control"
                                             id="serial_no"
                                             v-model="form_item.serial_no"
@@ -800,6 +800,25 @@
                                                         />
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>মোট :</td>
+                                                    <td>
+                                                        {{
+                                                            form_item.executive_departments?.reduce(
+                                                                (total, item) =>
+                                                                    Number(
+                                                                        total ??
+                                                                            0
+                                                                    ) +
+                                                                    Number(
+                                                                        item.rating ??
+                                                                            0
+                                                                    ),
+                                                                0
+                                                            )
+                                                        }}
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -959,6 +978,20 @@ export default {
                 rating: "",
                 description: "",
             };
+            this.reset_error_message();
+        },
+        reset_error_message: function () {
+            this.session_error = null;
+            this.dofa_error = null;
+            this.orgitobbo_target_error = null;
+            this.user_department_error = null;
+
+            document.querySelectorAll(".error").forEach((item) => {
+                item.remove();
+            });
+            document.querySelectorAll(".form-control").forEach((item) => {
+                item.classList.remove("border-warning");
+            });
         },
 
         SingleItemSubmitHandler: async function ($event) {
@@ -992,6 +1025,7 @@ export default {
                     "central-yearly-plan-validation",
                     this.form_item
                 );
+                return true;
             } catch (error) {
                 if (error.response && error.response.data.errors) {
                     const errors = error.response.data.errors;

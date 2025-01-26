@@ -15,14 +15,13 @@ class StoreData
             foreach ($requestData as $key => $value) {
 
                 $data = [
+                    'serial_no' => $value['serial_no'],
                     'title' => $value['title'],
-                    'central_yearly_plan_id' => $value['central_yearly_plan']['id'],
+                    'plan_dep_session_id' => $value['plan_dep_session']['id'],
                     'plan_dep_dofas_id' => $value['plan_dep_dofa']['id'],
                     'plan_dep_orjitobbo_target_id' => $value['plan_dep_orjitobbo_target']['id'],
                     'description' => $value['description'] ?? null,
                     'previous_unfinished_parcent' => $value['previous_unfinished_parcent'] ?? null,
-                    'rating' => $value['rating'] ?? null,
-                    'user_depertment_id' => auth()->user()->id ?? null,
                 ];
 
                 $centralYearlyPlan = self::$model::create($data);

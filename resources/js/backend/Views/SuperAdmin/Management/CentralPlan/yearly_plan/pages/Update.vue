@@ -41,11 +41,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group mt-2">
-                                        <label for="title "> Title</label>
+                                        <label for="title "> ক্রম</label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             class="form-control"
-                                            v-model="form_item.title"
+                                            v-model="form_item.serial_no"
                                         />
                                     </div>
                                 </div>
@@ -629,6 +629,25 @@
                                                         />
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>মোট :</td>
+                                                    <td>
+                                                        {{
+                                                            form_item.executive_departments?.reduce(
+                                                                (total, item) =>
+                                                                    Number(
+                                                                        total ??
+                                                                            0
+                                                                    ) +
+                                                                    Number(
+                                                                        item.rating ??
+                                                                            0
+                                                                    ),
+                                                                0
+                                                            )
+                                                        }}
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -712,6 +731,7 @@ export default {
         user_departments: [],
 
         form_item: {
+            serial_no: "",
             title: "",
             plan_dep_session: { id: null, title: null },
             plan_dep_dofa: { id: null, title: null },
@@ -750,6 +770,7 @@ export default {
             this.param_id = id;
             await this.details(id);
             if (this.item) {
+                this.form_item.serial_no = this.item.serial_no;
                 this.form_item.title = this.item.title;
                 this.form_item.plan_dep_session = {
                     id: this.item.plan_dep_session.id,
@@ -782,6 +803,7 @@ export default {
             this.is_show_modal = true;
             this.edit_item = null;
             this.form_item = {
+                serial_no: "",
                 title: "",
                 plan_dep_session: { id: null, title: null },
                 plan_dep_dofa: { id: null, title: null },
@@ -800,11 +822,13 @@ export default {
             } else {
                 this.form_data.push(this.form_item);
                 this.form_item = {
+                    serial_no: "",
                     title: "",
+                    plan_dep_session: { id: null, title: null },
                     plan_dep_dofa: { id: null, title: null },
                     plan_dep_orjitobbo_target: { id: null, title: null },
-                    user_department: { id: null, title: null },
-                    previous_unfinished_parcent: "",
+                    executive_departments: [],
+                    previous_unfinished_parcent: "100",
                     rating: "",
                     description: "",
                 };
