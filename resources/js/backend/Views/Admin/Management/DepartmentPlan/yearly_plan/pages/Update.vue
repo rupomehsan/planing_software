@@ -1,339 +1,60 @@
 <template>
     <div>
-        <form @submit.prevent="submitHandler" class="p-2">
-            <div class="card w-100">
-                <div
-                    class="card-header d-flex justify-content-between align-items-center gap-2"
-                >
-                    <!-- <h5 class="text-capitalize">{{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
-                    <h5 class="text-capitalize w-50">
-                        বিভাগিয় বার্ষিক পরিকল্পনা তৈরি করুন
-                    </h5>
-                    <div class="w-50">
-                        <button
-                            type="button"
-                            class="btn btn-outline-success btn-sm m-1"
-                            @click="addNewItem"
-                        >
-                            Add Iitem
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-outline-secondary btn-sm m-1"
-                            @click="is_show_modal = true"
-                        >
-                            Import From Excel
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-outline-dark btn-sm m-1"
-                            @click="is_show_modal = true"
-                        >
-                            Import previous incompleted
-                        </button>
+        <div class="card w-100">
+            <div
+                class="card-header d-flex justify-content-between align-items-center"
+            >
+                <!-- <h5 class="text-capitalize">{{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
+                <h5 class="text-capitalize">বিভাগিয় বার্ষিক পরিকল্পনা আপডেট</h5>
+                <div>
+                    <router-link
+                        class="text-decoration-none btn btn-outline-warning mx-2 btn-sm"
+                        :to="{ name: `Create${setup.route_prefix}` }"
+                    >
+                        Add Iitem
+                    </router-link>
 
-                        <router-link
-                            v-if="item.slug"
-                            class="btn btn-outline-info m-1 btn-sm"
-                            :to="{
-                                name: `Details${setup.route_prefix}`,
-                                params: { id: item.slug },
-                            }"
-                        >
-                            {{ setup.details_page_title }}
-                        </router-link>
-                        <router-link
-                            class="btn btn-outline-warning btn-sm m-1"
-                            :to="{ name: `All${setup.route_prefix}` }"
-                        >
-                            {{ setup.all_page_title }}
-                        </router-link>
-                    </div>
-                </div>
-                <div class="card-body card_body_fixed_height">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12">
-                            <table
-                                class="table table-hover text-center table-bordered"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="w-10">
-                                            <span class="icon"></span>
-                                        </th>
-                                        <th class="w-10">id</th>
-                                        <th>Title</th>
-                                        <th class="">Central Yearly Plan</th>
-                                        <th class="">Dofa</th>
-                                        <th class="">Orjitobbo Target</th>
-                                        <th class="">Previous incomplete(%)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        v-for="(item, index) in form_data"
-                                        :key="index"
-                                        class="table_rows table_row_4"
-                                    >
-                                        <td class="text-wrap max-w-120">
-                                            <span
-                                                @click="editItemHandler(index)"
-                                            >
-                                                <i
-                                                    class="fa fa-pencil cursor-pointer"
-                                                ></i>
-                                            </span>
-                                            <span
-                                                @click="
-                                                    deleteItemHandler(index)
-                                                "
-                                            >
-                                                <i
-                                                    class="fa fa-trash mx-2 cursor-pointer"
-                                                ></i>
-                                            </span>
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{ index + 1 }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{ item.title }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{ item.plan_dep_dofa?.title }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{
-                                                item.central_yearly_plan?.title
-                                            }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{
-                                                item.plan_dep_orjitobbo_target
-                                                    ?.title
-                                            }}
-                                        </td>
-                                        <td class="text-wrap max-w-120">
-                                            {{
-                                                item.previous_unfinished_parcent
-                                            }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="text-center">
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    @click="submitHandler"
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <router-link
+                        v-if="item.slug"
+                        class="btn btn-outline-info mx-2 btn-sm"
+                        :to="{
+                            name: `Details${setup.route_prefix}`,
+                            params: { id: item.slug },
+                        }"
+                    >
+                        {{ setup.details_page_title }}
+                    </router-link>
+                    <router-link
+                        class="btn btn-outline-warning btn-sm mx-2"
+                        :to="{ name: `All${setup.route_prefix}` }"
+                    >
+                        {{ setup.all_page_title }}
+                    </router-link>
                 </div>
             </div>
-        </form>
-
-        <div
-            class="modal fade"
-            :class="`${is_show_modal ? 'show d-block' : 'd-none'}`"
-            id="primarymodal"
-            aria-modal="true"
-            ref="modal"
-            @click="closeModal"
-        >
-            <div class="modal-dialog modal-lg">
-                <form @submit.prevent="SingleItemSubmitHandler">
-                    <div class="modal-content border-primary" @click.stop>
-                        <div class="modal-header bg-primary">
-                            <h5 class="modal-title text-white">
-                                {{ setup.prefix }} তৈরি করুন
-                            </h5>
-                            <button
-                                @click="closeModal"
-                                type="button"
-                                class="btn btn-light"
-                                data-dismiss="modal"
-                            >
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
+            <div class="card-body card_body_fixed_height">
+                <form @submit.prevent="submitHandler">
+                    <div class="modal-content">
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-12 my-1">
+                                <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> ক্রম</label>
                                         <input
                                             type="number"
                                             class="form-control"
-                                            id="serial_no"
                                             v-model="form_item.serial_no"
                                         />
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-12 my-1">
-                                    <label for="title ">
-                                        কেন্দ্রিও বার্ষিক পরিকল্পনা
-                                    </label>
-                                    <div
-                                        class="custom_drop_down cursor-pointer"
-                                        @click="
-                                            show_central_yearly_plan_list = true
-                                        "
-                                    >
-                                        <div
-                                            class="selected_list"
-                                            :class="
-                                                central_yearly_plan_error
-                                                    ? 'border-warning'
-                                                    : ''
-                                            "
-                                        >
-                                            <template
-                                                v-if="
-                                                    form_item
-                                                        .central_yearly_plan
-                                                        ?.title
-                                                "
-                                            >
-                                                <div class="selected_item">
-                                                    <label class="label" for="">
-                                                        {{
-                                                            form_item
-                                                                .central_yearly_plan
-                                                                ?.title
-                                                        }}
-                                                    </label>
 
-                                                    <div
-                                                        @click.prevent="
-                                                            remove_item(
-                                                                form_item.central_yearly_plan,
-                                                                'central_yearly_plan'
-                                                            )
-                                                        "
-                                                        class="remove"
-                                                    >
-                                                        <i
-                                                            class="fa fa-close"
-                                                        ></i>
-                                                    </div>
-                                                </div>
-                                            </template>
-
-                                            <div
-                                                v-if="
-                                                    !form_item
-                                                        .central_yearly_plan
-                                                        ?.title
-                                                "
-                                                class="selected_item"
-                                            >
-                                                <div class="label">
-                                                    Select central plan
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <template
-                                            v-if="show_central_yearly_plan_list"
-                                        >
-                                            <div class="drop_down_items">
-                                                <div
-                                                    class="drop_down_data_search"
-                                                >
-                                                    <input
-                                                        @keyup="
-                                                            search_item(
-                                                                $event,
-                                                                'central_yearly_plan'
-                                                            )
-                                                        "
-                                                        class="form-control"
-                                                        placeholder="search.."
-                                                        id="table_search_box"
-                                                        type="search"
-                                                    />
-
-                                                    <button
-                                                        type="button"
-                                                        @click.prevent.stop="
-                                                            show_central_yearly_plan_list = false
-                                                        "
-                                                        class="btn btn-danger"
-                                                    >
-                                                        <i
-                                                            class="fa fa-close"
-                                                        ></i>
-                                                    </button>
-                                                </div>
-
-                                                <ul
-                                                    class="option_list custom_scroll p-0"
-                                                >
-                                                    <li
-                                                        class="option_item border my-1 mx-2 text-capitalize"
-                                                        v-for="item in central_yearly_plans"
-                                                        :key="item.id"
-                                                    >
-                                                        <label
-                                                            :for="`drop_item_${item.id}`"
-                                                            class="cursor-pointer"
-                                                        >
-                                                            <div
-                                                                class="check_box"
-                                                            >
-                                                                <input
-                                                                    @change="
-                                                                        set_central_yearly_plan(
-                                                                            item,
-                                                                            $event
-                                                                        )
-                                                                    "
-                                                                    type="checkbox"
-                                                                    :id="`drop_item_${item.id}`"
-                                                                    class="form-check-input ml-0"
-                                                                    :value="
-                                                                        item.id
-                                                                    "
-                                                                    :checked="
-                                                                        form_item
-                                                                            .central_yearly_plan
-                                                                            .id ===
-                                                                        item.id
-                                                                    "
-                                                                />
-                                                            </div>
-                                                            <div class="label">
-                                                                {{ item.title }}
-                                                            </div>
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </template>
-                                    </div>
-                                    <div v-if="central_yearly_plan_error">
-                                        <p class="text-warning">
-                                            {{ central_yearly_plan_error }}
-                                        </p>
-                                    </div>
-                                </div> -->
-                                <div class="col-md-12 my-1">
-                                    <label for="title "> সেশন </label>
+                                <div class="col-md-12">
+                                    <label for="title "> সেশন</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_session_list = true"
                                     >
-                                        <div
-                                            class="selected_list"
-                                            :class="
-                                                session_error
-                                                    ? 'border-warning'
-                                                    : ''
-                                            "
-                                        >
+                                        <div class="selected_list">
                                             <template
                                                 v-if="
                                                     form_item.plan_dep_session
@@ -453,26 +174,15 @@
                                             </div>
                                         </template>
                                     </div>
-                                    <div v-if="session_error">
-                                        <p class="text-warning">
-                                            {{ session_error }}
-                                        </p>
-                                    </div>
                                 </div>
-                                <div class="col-md-12 my-1">
+
+                                <div class="col-md-12">
                                     <label for="title "> দফা</label>
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="show_dofa_list = true"
                                     >
-                                        <div
-                                            class="selected_list"
-                                            :class="
-                                                dofa_error
-                                                    ? 'border-warning'
-                                                    : ''
-                                            "
-                                        >
+                                        <div class="selected_list">
                                             <template
                                                 v-if="
                                                     form_item.plan_dep_dofa
@@ -597,30 +307,19 @@
                                             </div>
                                         </template>
                                     </div>
-                                    <div v-if="dofa_error">
-                                        <p class="text-warning">
-                                            {{ dofa_error }}
-                                        </p>
-                                    </div>
                                 </div>
-                                <div class="col-md-12 my-1">
+
+                                <div class="col-md-12">
                                     <label for="title ">
-                                        অর্জিতব্য টার্গেট
-                                    </label>
+                                        অর্জিতব্য টার্গেট</label
+                                    >
                                     <div
                                         class="custom_drop_down cursor-pointer"
                                         @click="
                                             show_orgitobbo_target_list = true
                                         "
                                     >
-                                        <div
-                                            class="selected_list"
-                                            :class="
-                                                orgitobbo_target_error
-                                                    ? 'border-warning'
-                                                    : ''
-                                            "
-                                        >
+                                        <div class="selected_list">
                                             <template
                                                 v-if="
                                                     form_item
@@ -700,9 +399,6 @@
                                                 </div>
 
                                                 <ul
-                                                    v-if="
-                                                        orgitobbo_targets.length
-                                                    "
                                                     class="option_list custom_scroll p-0"
                                                 >
                                                     <li
@@ -744,22 +440,11 @@
                                                         </label>
                                                     </li>
                                                 </ul>
-                                                <p
-                                                    v-else
-                                                    class="text-center p-2 alert alert-danger my-3"
-                                                >
-                                                    No Data Found
-                                                </p>
                                             </div>
                                         </template>
                                     </div>
-                                    <div v-if="orgitobbo_target_error">
-                                        <p class="text-warning">
-                                            {{ orgitobbo_target_error }}
-                                        </p>
-                                    </div>
                                 </div>
-                                <div class="col-md-12 my-1">
+                                <div class="col-md-12">
                                     <label for="title ">
                                         বাস্তবায়নকারী বিভাগ</label
                                     >
@@ -769,14 +454,7 @@
                                             show_executive_department_list = true
                                         "
                                     >
-                                        <div
-                                            class="selected_list"
-                                            :class="
-                                                user_department_error
-                                                    ? 'border border-warning'
-                                                    : ''
-                                            "
-                                        >
+                                        <div class="selected_list">
                                             <template
                                                 v-if="
                                                     form_item
@@ -901,13 +579,9 @@
                                             </div>
                                         </template>
                                     </div>
-                                    <div v-if="user_department_error">
-                                        <p class="text-warning">
-                                            {{ user_department_error }}
-                                        </p>
-                                    </div>
                                 </div>
-                                <div class="col-md-12 my-1">
+
+                                <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
                                             >রেটিং (1-100)
@@ -976,7 +650,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-md-12 my-1">
+                                <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
                                             >পরিকল্পনা অবাস্তবায়িত অংশ
@@ -987,24 +661,23 @@
                                                 form_item.previous_unfinished_parcent
                                             "
                                             type="number"
+                                            required
                                             class="form-control"
                                             placeholder=""
-                                            id="previous_unfinished_parcent"
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12 my-1">
+                                <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "> টাইটেল</label>
                                         <input
                                             type="text"
                                             class="form-control"
                                             v-model="form_item.title"
-                                            id="title"
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12 my-1">
+                                <div class="col-md-12">
                                     <div class="form-group mt-2">
                                         <label for="title "
                                             >কর্মপরিকল্পনা</label
@@ -1012,13 +685,15 @@
                                         <textarea
                                             class="form-control"
                                             v-model="form_item.description"
-                                            id="description"
+                                            name=""
+                                            id=""
+                                            rows="10"
                                         ></textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="modal-footer">
+                            <div class="modal-footer justify-content-center">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-download"></i> Submit
                                 </button>
@@ -1037,7 +712,6 @@ import { store as user_store } from "../store";
 import setup from "../setup";
 import form_fields from "../setup/form_fields";
 import DofaDropDownEl from "../../../PlanDependency/dofa/components/dropdown/DropDownEl.vue";
-import axios from "axios";
 
 export default {
     components: { DofaDropDownEl },
@@ -1053,13 +727,10 @@ export default {
         dofas: [],
         orgitobbo_targets: [],
         user_departments: [],
-        central_yearly_plans: [],
 
-        form_data: [],
         form_item: {
             serial_no: "",
             title: "",
-            central_yearly_plan: { id: null, title: null },
             plan_dep_session: { id: null, title: null },
             plan_dep_dofa: { id: null, title: null },
             plan_dep_orjitobbo_target: { id: null, title: null },
@@ -1071,30 +742,17 @@ export default {
         edit_item: null,
 
         //setup
-        show_central_yearly_plan_list: false,
         show_session_list: false,
         show_dofa_list: false,
         show_orgitobbo_target_list: false,
         show_executive_department_list: false,
         search_data: "",
-
-        //error message
-        central_yearly_plan_error: null,
-        session_error: null,
-        dofa_error: null,
-        orgitobbo_target_error: null,
-        user_department_error: null,
     }),
     created: async function () {
-        let id = (this.param_id = this.$route.params.id);
+        this.param_id = this.$route.params.slug;
 
-        this.reset_fields();
+        this.set_fields(this.param_id);
 
-        if (id) {
-            this.set_fields(id);
-        }
-
-        await this.get_all_central_yearly_plans();
         await this.get_all_sessions();
         await this.get_all_dofas();
         await this.get_all_user_departments();
@@ -1105,20 +763,38 @@ export default {
             update: "update",
             details: "details",
         }),
-        reset_fields: function () {
-            this.form_fields.forEach((item) => {
-                item.value = "";
-            });
-        },
+
         set_fields: async function (id) {
             this.param_id = id;
             await this.details(id);
             if (this.item) {
-                this.form_fields.forEach((field, index) => {
-                    Object.entries(this.item).forEach((value) => {
-                        if (field.name == value[0]) {
-                            this.form_fields[index].value = value[1];
-                        }
+                this.form_item.serial_no = this.item.serial_no;
+                this.form_item.title = this.item.title;
+                this.form_item.plan_dep_session = {
+                    id: this.item.plan_dep_session.id,
+                    title: this.item.plan_dep_session.title,
+                };
+                this.form_item.plan_dep_dofa = {
+                    id: this.item.plan_dep_dofa.id,
+                    title: this.item.plan_dep_dofa.title,
+                };
+                this.form_item.plan_dep_orjitobbo_target = {
+                    id: this.item.plan_dep_orjitobbo_target.id,
+                    title: this.item.plan_dep_orjitobbo_target.title,
+                };
+                this.get_all_orgitobbo_target(
+                    this.form_item.plan_dep_orjitobbo_target.id
+                );
+                this.form_item.previous_unfinished_parcent =
+                    this.item.previous_unfinished_parcent;
+                this.form_item.description = this.item.description;
+
+                this.item.executive_departments.forEach((data) => {
+                    this.form_item.executive_departments.push({
+                        title: data.user_department.title,
+                        id: data.user_department.id,
+                        rating: data.rating,
+                        execution_id: data.id,
                     });
                 });
             }
@@ -1130,7 +806,6 @@ export default {
             this.form_item = {
                 serial_no: "",
                 title: "",
-                central_yearly_plan: { id: null, title: null },
                 plan_dep_session: { id: null, title: null },
                 plan_dep_dofa: { id: null, title: null },
                 plan_dep_orjitobbo_target: { id: null, title: null },
@@ -1139,28 +814,9 @@ export default {
                 rating: "",
                 description: "",
             };
-            this.reset_error_message();
-        },
-        reset_error_message: function () {
-            this.session_error = null;
-            this.dofa_error = null;
-            this.orgitobbo_target_error = null;
-            this.user_department_error = null;
-
-            document.querySelectorAll(".error").forEach((item) => {
-                item.remove();
-            });
-            document.querySelectorAll(".form-control").forEach((item) => {
-                item.classList.remove("border-warning");
-            });
         },
 
         SingleItemSubmitHandler: async function ($event) {
-            let res = await this.validation();
-            if (!res) {
-                return false;
-            }
-
             if (this.edit_item !== null) {
                 this.form_data[this.edit_item] = this.form_item;
                 this.is_show_modal = false;
@@ -1169,12 +825,11 @@ export default {
                 this.form_item = {
                     serial_no: "",
                     title: "",
-                    central_yearly_plan: { id: null, title: null },
                     plan_dep_session: { id: null, title: null },
                     plan_dep_dofa: { id: null, title: null },
                     plan_dep_orjitobbo_target: { id: null, title: null },
-                    user_department: { id: null, title: null },
-                    previous_unfinished_parcent: "",
+                    executive_departments: [],
+                    previous_unfinished_parcent: "100",
                     rating: "",
                     description: "",
                 };
@@ -1182,64 +837,18 @@ export default {
             }
         },
 
-        validation: async function () {
-            try {
-                let validation = await axios.post(
-                    "department-yearly-plan-validation",
-                    this.form_item
-                );
-                return true;
-            } catch (error) {
-                if (error.response && error.response.data.errors) {
-                    const errors = error.response.data.errors;
-
-                    // Map nested errors
-                    this.central_yearly_plan_error = errors[
-                        "central_yearly_plan.id"
-                    ]
-                        ? errors["central_yearly_plan.id"][0]
-                        : null;
-                    this.session_error = errors["plan_dep_session.id"]
-                        ? errors["plan_dep_session.id"][0]
-                        : null;
-                    this.dofa_error = errors["plan_dep_dofa.id"]
-                        ? errors["plan_dep_dofa.id"][0]
-                        : null;
-                    this.orgitobbo_target_error = errors[
-                        "plan_dep_orjitobbo_target.id"
-                    ]
-                        ? errors["plan_dep_orjitobbo_target.id"][0]
-                        : null;
-                    this.user_department_error = errors["executive_departments"]
-                        ? errors["executive_departments"][0]
-                        : null;
-                }
-
-                return false;
-            }
-        },
         submitHandler: async function ($event) {
             $event.preventDefault();
-            if (this.form_data.length == 0) {
-                s_warning("No item found");
-                return false;
-            }
+
             let contirmation = await s_confirm("Are you sure want to submit?");
 
             if (!contirmation) {
                 return false;
             }
 
-            if (this.param_id) {
-                let response = await this.update(this.form_data);
-                if (response.data.status === "success") {
-                    s_alert(response.data?.message);
-                }
-            } else {
-                let response = await this.create(this.form_data);
-                if (response.data.status === "success") {
-                    s_alert(response.data?.message);
-                }
+            let response = await this.update(this.form_item);
+            if (response.data.status === "success") {
+                s_alert(response.data?.message);
             }
         },
 
@@ -1270,16 +879,6 @@ export default {
             this.form_data.splice(index, 1);
         },
 
-        get_all_central_yearly_plans: async function () {
-            let response = await axios.get(
-                `central-yearly-plans?get_all=1&search=${this.search_data}`
-            );
-            if (response.data.status == "success") {
-                this.central_yearly_plans = response.data.data;
-            }
-
-            this.search_data = "";
-        },
         get_all_sessions: async function () {
             let response = await axios.get(
                 `plan-dep-sessions?get_all=1&search=${this.search_data}`
@@ -1370,20 +969,6 @@ export default {
                     );
             }
         },
-        set_central_yearly_plan: function (item, event) {
-            // Ensure the field is an object and update id and title
-            if (event.target.checked) {
-                this.form_item.central_yearly_plan = {
-                    id: item.id,
-                    title: item.title,
-                };
-            } else {
-                this.form_item.central_yearly_plan = {
-                    id: null,
-                    title: null,
-                };
-            }
-        },
         is_selected: function (item) {
             return this.form_item.executive_departments.find(
                 (i) => i.id == item.id
@@ -1422,10 +1007,10 @@ export default {
         search_item: async function (event, name) {
             const value = event.target.value.trim().toLowerCase();
             this.search_data = value;
-
-            if (name == "sessions") {
+            if (name == "session") {
                 this.get_all_sessions();
             }
+
             if (name == "dofa") {
                 this.get_all_dofas();
             }
@@ -1434,20 +1019,6 @@ export default {
             }
             if (name == "user_department") {
                 this.get_all_user_departments();
-            }
-            if (name == "central_yearly_plan") {
-                this.get_all_central_yearly_plans();
-            }
-        },
-
-        closeModal(event) {
-            const modal = this.$refs.modal;
-            if (
-                !event ||
-                modal === event.target ||
-                event.target.closest(".btn-light")
-            ) {
-                this.is_show_modal = false;
             }
         },
     },

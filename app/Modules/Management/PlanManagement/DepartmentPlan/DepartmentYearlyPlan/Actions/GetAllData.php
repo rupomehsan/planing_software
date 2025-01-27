@@ -22,9 +22,6 @@ class GetAllData
             $condition = [];
 
 
-
-            $central_yearly_plan = self::$CentralYearlyPlanmodel::with($with)->where('user_depertment_id', auth()->user()?->user_department_id)->get();
-
             $data = self::$model::query();
 
             if (request()->has('search') && request()->input('search')) {
@@ -82,9 +79,9 @@ class GetAllData
                     ->get();
             }
 
-            $final_data = array_merge($data->toArray(), $central_yearly_plan->toArray());
 
-            return entityResponse($final_data);
+
+            return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }

@@ -42,17 +42,26 @@ class DataStoreValidation extends FormRequest
     public function rules(): array
     {
         return [
-            'central_yearly_plan_id' => 'required | sometimes',
-            'plan_dep_dofas_id' => 'required | sometimes',
-            'plan_dep_orjitobbo_target_id' => 'required | sometimes',
-            'title' => 'required | sometimes',
-            'serial_no' => 'sometimes',
-            'description' => 'required | sometimes',
+            'serial_no' => 'required | sometimes',
+            // 'central_yearly_plan.id' => 'required | sometimes',
+            'plan_dep_session.id' => 'required | sometimes',
+            'plan_dep_dofa.id' => 'required | sometimes',
+            'plan_dep_orjitobbo_target.id' => 'required | sometimes',
+            'executive_departments' => 'required | sometimes| array| min:1',
             'previous_unfinished_parcent' => 'required | sometimes',
-            'rating' => 'required | sometimes',
-            'is_published' => 'required | sometimes',
-            'is_approved' => 'required | sometimes',
+            'title' => 'required | sometimes',
+            'description' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            // 'central_yearly_plan.id.required' => 'Central yearly plan is required',
+            'plan_dep_session.id.required' => 'Session is required',
+            'plan_dep_dofa.id.required' => 'Dofa is required',
+            'plan_dep_orjitobbo_target.id.required' => 'Orjitobbo target is required',
         ];
     }
 }

@@ -35,16 +35,26 @@
                                         :key="index"
                                     >
                                         <tr
-                                            v-if="item.central_yearly_plan_id"
+                                            v-if="!item.central_yearly_plan_id"
                                             class="table_rows table_row_4"
                                         >
                                             <td class="max-w-120 mx-2">
-                                                <span
-                                                    class="mx-2 cursor-pointer"
-                                                    @click="editItem(item.slug)"
+                                                <router-link
+                                                    :to="{
+                                                        name: 'DepartmentPlanUpdate',
+                                                        params: {
+                                                            slug: item.slug,
+                                                        },
+                                                    }"
                                                 >
-                                                    <i class="fa fa-pencil"></i>
-                                                </span>
+                                                    <span
+                                                        class="mx-2 cursor-pointer text-dark"
+                                                    >
+                                                        <i
+                                                            class="fa fa-pencil"
+                                                        ></i>
+                                                    </span>
+                                                </router-link>
                                                 <span
                                                     class="cursor-pointer"
                                                     @click="deleteItem(item)"
@@ -117,9 +127,6 @@
                                                 {{
                                                     item.previous_unfinished_parcent
                                                 }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.rating }}
                                             </td>
                                         </tr>
                                     </template>
@@ -507,4 +514,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.bg-secondary {
+    background-color: #2223242d !important;
+}
+</style>

@@ -16,10 +16,6 @@ class UpdateData
                 return messageResponse('Data not found...', $data, 404, 'error');
             }
 
-            $isExist = self::$model::where('id', '!=', $data->id)->where('serial_no', $request['serial_no'])->first();
-            if ($isExist) {
-                return messageResponse('Item already exist serial no : ' . $request['serial_no'], [], 201);
-            }
 
             // Prepare request data
             $requestData = [

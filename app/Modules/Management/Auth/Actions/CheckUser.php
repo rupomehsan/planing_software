@@ -11,7 +11,7 @@ class CheckUser
     {
         try {
             if (auth()->check()) {
-                $user = self::$model::where('id', auth()->user()->id)->first();
+                $user = self::$model::with('user_department:id,title')->where('id', auth()->user()->id)->first();
                 auth()->guard('web')->login($user, 1);
                 $user->role = $user->role()->select('id', 'title', 'serial_no')->first();
                 return entityResponse($user);

@@ -784,6 +784,9 @@ export default {
                     id: this.item.plan_dep_orjitobbo_target.id,
                     title: this.item.plan_dep_orjitobbo_target.title,
                 };
+                this.get_all_orgitobbo_target(
+                    this.form_item.plan_dep_orjitobbo_target.id
+                );
                 this.form_item.previous_unfinished_parcent =
                     this.item.previous_unfinished_parcent;
                 this.form_item.description = this.item.description;

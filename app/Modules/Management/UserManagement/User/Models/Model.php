@@ -54,4 +54,9 @@ class Model extends Authenticatable
     {
         return $this->belongsTo(self::$roleModel);
     }
+
+    public function user_department()
+    {
+        return $this->belongsTo(\App\Modules\Management\UserManagement\UserDepartment\Models\Model::class);
+    }
 }

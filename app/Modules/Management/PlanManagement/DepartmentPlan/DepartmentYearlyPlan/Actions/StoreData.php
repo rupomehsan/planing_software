@@ -22,23 +22,25 @@ class StoreData
                     'plan_dep_orjitobbo_target_id' => $value['plan_dep_orjitobbo_target']['id'],
                     'description' => $value['description'] ?? null,
                     'previous_unfinished_parcent' => $value['previous_unfinished_parcent'] ?? null,
+                    'creator' => auth()->user()->id ?? null
                 ];
 
-                $centralYearlyPlan = self::$model::create($data);
 
-                $plan_executors = [
-                    'table_name' => 'department_yearly_plans',
-                    'table_id' => $centralYearlyPlan->id,
-                    'user_id' => auth()->user()->id ?? null,
-                    'user_depertment_id' => $value['user_department']['id'],
-                    'description' => $centralYearlyPlan->description,
-                    'rating' => $centralYearlyPlan->rating,
-                ];
-
-                // dd($plan_executors);
-
-                self::$PlanExecutorModel::create($plan_executors);
+                if ($departmentYearlyPlan = self::$model::create($data)) {
+                    foreach ($value['executive_departments'] as $item) {
+                        $plan_executors = [
+                            'table_name' => 'department_yearly_plans',
+                            'table_id' => $departmentYearlyPlan->id,
+                            'user_id' => auth()->user()->id ?? null,
+                            'user_depertment_id' => $item['id'],
+                            'rating' => $item['rating'],
+                        ];
+                        self::$PlanExecutorModel::create($plan_executors);
+                    }
+                }
             }
+
+            return messageResponse('Item added successfully', [], 201);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }

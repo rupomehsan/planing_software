@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     // Route::prefix('v1')->middleware('auth:api')->group(function () {
-    Route::prefix('department-yearly-plans')->group(function () {
+    Route::prefix('department-yearly-plans')->middleware('auth:api')->group(function () {
         Route::get('', [Controller::class, 'index']);
         Route::get('{slug}', [Controller::class, 'show']);
         Route::post('store', [Controller::class, 'store']);
@@ -17,4 +17,6 @@ Route::prefix('v1')->group(function () {
         Route::post('import', [Controller::class, 'import']);
         Route::post('bulk-action', [Controller::class, 'bulkAction']);
     });
+
+    Route::post('department-yearly-plan-validation', [Controller::class, 'validation']);
 });
