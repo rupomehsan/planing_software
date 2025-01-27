@@ -55,11 +55,11 @@ class StoreData
                     }
                 }
 
+                $data['central_yearly_plan_id'] = $centralYearlyPlan->id;
+                $data['creator'] = auth()->user()->id ?? null;
+
                 self::DepartmentExecute($data);
             }
-
-
-
 
             return messageResponse('Item added successfully', [], 201);
         } catch (\Exception $e) {

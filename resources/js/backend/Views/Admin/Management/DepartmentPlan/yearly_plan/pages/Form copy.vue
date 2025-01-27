@@ -1,18 +1,66 @@
 <template>
     <div>
-        <div class="row m-0 mt-3">
-            <div class="col-sm-12">
-                <div class="card w-100">
+        <form @submit.prevent="submitHandler" class="p-2">
+            <div class="card w-100">
+                <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                >
+                    <!-- <h5 class="text-capitalize"> {{ setup.prefix }} {{ param_id ? 'আপডেট করুন' : 'নতুন তৈরি করুন' }} -->
+                    <h5 class="text-capitalize w-50">
+                        বিভাগিয় বার্ষিক পরিকল্পনা তৈরি করুন
+                    </h5>
                     <div
-                        class="card-header py-2 d-flex align-items-center justify-content-between gap-2"
+                        class="d-flex align-items-center flex-wrap gap-2 justify-content-start"
                     >
-                        <all-page-header />
-                    </div>
-
-                    <div class="card-body">
-                        <div
-                            class="table-responsive table_responsive card_body_fixed_height"
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
                         >
+                            Import From Excel
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
+                        >
+                            Import from central yearly plan
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
+                        >
+                            Import previous incompleted
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            @click="is_show_modal = true"
+                        >
+                            Add Iitem
+                        </button>
+                        <router-link
+                            v-if="item.slug"
+                            class="btn btn-outline-info mr-2 btn-sm"
+                            :to="{
+                                name: `Details${setup.route_prefix}`,
+                                params: { id: item.slug },
+                            }"
+                        >
+                            {{ setup.details_page_title }}
+                        </router-link>
+                        <router-link
+                            class="btn btn-outline-warning btn-sm mx-2"
+                            :to="{ name: `All${setup.route_prefix}` }"
+                        >
+                            {{ setup.all_page_title }}
+                        </router-link>
+                    </div>
+                </div>
+                <div class="card-body card_body_fixed_height">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
                             <table
                                 class="table table-hover text-center table-bordered"
                             >
@@ -22,118 +70,87 @@
                                             <span class="icon"></span>
                                         </th>
                                         <th class="w-10">id</th>
-                                        <th class="w-10"></th>
-                                        <th class="">Title</th>
+                                        <th>Central yearly plan</th>
+                                        <th>Title</th>
                                         <th class="">Dofa</th>
                                         <th class="">Orjitobbo Target</th>
+                                        <th class="">Executive Department</th>
                                         <th class="">Previous incomplete(%)</th>
+                                        <th class="">Rating (1-100)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <template
-                                        v-for="(item, index) in all"
+                                    <tr
+                                        v-for="(item, index) in form_data"
                                         :key="index"
+                                        class="table_rows table_row_4"
                                     >
-                                        <tr
-                                            v-if="item.central_yearly_plan_id"
-                                            class="table_rows table_row_4"
-                                        >
-                                            <td class="max-w-120 mx-2">
-                                                <span
-                                                    class="mx-2 cursor-pointer"
-                                                    @click="editItem(item.slug)"
-                                                >
-                                                    <i class="fa fa-pencil"></i>
-                                                </span>
-                                                <span
-                                                    class="cursor-pointer"
-                                                    @click="deleteItem(item)"
-                                                >
-                                                    <i
-                                                        class="fa fa-trash mx-2"
-                                                    ></i>
-                                                </span>
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.id }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                <button
-                                                    class="btn btn-sm btn-primary"
-                                                >
-                                                    Set budget
-                                                </button>
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.title }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.plan_dep_dofa?.title }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{
-                                                    item
-                                                        .plan_dep_orjitobbo_target
-                                                        ?.title
-                                                }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{
-                                                    item.previous_unfinished_parcent
-                                                }}
-                                            </td>
-                                        </tr>
-                                        <tr
-                                            v-else
-                                            class="table_rows table_row_4 bg-secondary"
-                                        >
-                                            <td class="text-wrap max-w-120">
-                                                <button
-                                                    class="btn btn-sm btn-primary m-1"
-                                                >
-                                                    Comment
-                                                </button>
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.id }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                central
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.title }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.plan_dep_dofa?.title }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{
-                                                    item
-                                                        .plan_dep_orjitobbo_target
-                                                        ?.title
-                                                }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{
-                                                    item.previous_unfinished_parcent
-                                                }}
-                                            </td>
-                                            <td class="text-wrap max-w-120">
-                                                {{ item.rating }}
-                                            </td>
-                                        </tr>
-                                    </template>
+                                        <td class="text-wrap max-w-120">
+                                            <span
+                                                @click="editItemHandler(index)"
+                                            >
+                                                <i
+                                                    class="fa fa-pencil cursor-pointer"
+                                                ></i>
+                                            </span>
+                                            <span
+                                                @click="
+                                                    deleteItemHandler(index)
+                                                "
+                                            >
+                                                <i
+                                                    class="fa fa-trash mx-2 cursor-pointer"
+                                                ></i>
+                                            </span>
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ index + 1 }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{
+                                                item.central_yearly_plan?.title
+                                            }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.plan_dep_dofa?.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{
+                                                item.plan_dep_orjitobbo_target
+                                                    ?.title
+                                            }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.user_department?.title }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{
+                                                item.previous_unfinished_parcent
+                                            }}
+                                        </td>
+                                        <td class="text-wrap max-w-120">
+                                            {{ item.rating }}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
+                            <div class="text-center">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    @click="submitHandler"
+                                >
+                                    Submit
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <export-all-loader />
-        <quick-view />
-        <filter-data />
-        <import-modal></import-modal>
+        </form>
 
         <div
             class="modal fade"
@@ -142,7 +159,7 @@
             aria-modal="true"
         >
             <div class="modal-dialog modal-lg">
-                <form @submit.prevent="SubmitHandler" v-if="item">
+                <form @submit.prevent="SingleItemSubmitHandler">
                     <div class="modal-content border-primary">
                         <div class="modal-header bg-primary">
                             <h5 class="modal-title text-white">
@@ -161,11 +178,11 @@
                             <div class="row">
                                 <div
                                     class="col-md-12"
-                                    v-if="form_item.central_yearly_plan?.id"
+                                   
                                 >
                                     <div class="form-group mt-2">
                                         <label for="title ">
-                                            Cnetral yearly Plan</label
+                                            Central yearly Plan</label
                                         >
                                         <select
                                             @change="
@@ -359,38 +376,23 @@
             </div>
         </div>
     </div>
-    <div class="card-footer py-2">
-        <all-page-footer-actions></all-page-footer-actions>
-    </div>
 </template>
 
 <script>
-/** plugins */
-import { mapActions, mapWritableState } from "pinia";
-import { store as data_store } from "../store/index";
+import { mapActions, mapState } from "pinia";
+import { store as user_store } from "../store";
 import setup from "../setup";
-
-/** helper and actions */
-import get_all_data from "../store/async_actions/all";
-
-/** components */
-// import TableRowAction from './components/all_data_page/TableRowAction.vue';
-// import SelectSingle from './components/all_data_page/select_data/SelectSingle.vue';
-// import SelectAll from './components/all_data_page/select_data/SelectAll.vue';
-import AllPageHeader from "../components/all_data_page/AllPageHeader.vue";
-import AllPageFooterActions from "../components/all_data_page/AllPageFooterActions.vue";
-import ExportAllLoader from "../components/all_data_page/ExportAllLoader.vue";
-import QuickView from "../components/canvas/QuickView.vue";
-import ImportModal from "../components/canvas/ImportModal.vue";
-import QuickViewColumn from "../components/all_data_page/QuickViewColumn.vue";
-import FilterData from "../components/canvas/FilterData.vue";
-import DropDownEl from "../components/dropdown/DropDownEl.vue";
-import TableHead from "../components/all_data_page/TableHead.vue";
-import TableBody from "../components/all_data_page/TableBody.vue";
+import form_fields from "../setup/form_fields";
+import DofaDropDownEl from "../../../PlanDependency/dofa/components/dropdown/DropDownEl.vue";
 
 export default {
+    components: { DofaDropDownEl },
     data: () => ({
         setup,
+        route_prefix: "",
+        prefix: "",
+        form_fields,
+        param_id: null,
         is_show_modal: false,
 
         central_yearly_plans: [],
@@ -409,9 +411,16 @@ export default {
             rating: "",
             description: "",
         },
+        edit_item: null,
     }),
     created: async function () {
-        await this.get_all_data();
+        let id = (this.param_id = this.$route.params.id);
+
+        this.reset_fields();
+
+        if (id) {
+            this.set_fields(id);
+        }
 
         await this.get_all_central_yearly_plans();
         await this.get_all_dofas();
@@ -419,38 +428,91 @@ export default {
         await this.get_all_user_departments();
     },
     methods: {
-        ...mapActions(data_store, [
-            "set_page", // needs in pagination props
-            "set_paginate", // needs in pagination props
-            "details", // needs in pagination props
-            "update",
-        ]),
-        get_all_data,
-
-        editItem: async function (id) {
+        ...mapActions(user_store, {
+            create: "create",
+            update: "update",
+            details: "details",
+        }),
+        reset_fields: function () {
+            this.form_fields.forEach((item) => {
+                item.value = "";
+            });
+        },
+        set_fields: async function (id) {
+            this.param_id = id;
             await this.details(id);
-            console.log(this.item);
-
             if (this.item) {
-                this.form_item = this.item;
-                this.is_show_modal = true;
+                this.form_fields.forEach((field, index) => {
+                    Object.entries(this.item).forEach((value) => {
+                        if (field.name == value[0]) {
+                            this.form_fields[index].value = value[1];
+                        }
+                    });
+                });
             }
         },
-        deleteItem: async function (item) {
-            let con = await window.s_confirm("Permanently delete");
-            if (con) {
-                this.set_item(item);
-                this.set_only_latest_data(true);
 
-                let res = await this.destroy();
-                await this.get_all();
-                if (res.data.status == "success") {
-                    window.s_alert("Permanently deleted.");
-                }
-
-                this.set_only_latest_data(false);
+        SingleItemSubmitHandler: async function ($event) {
+            if (this.edit_item !== null) {
+                this.form_data[this.edit_item] = this.form_item;
+                this.is_show_modal = false;
+            } else {
+                this.form_data.push(this.form_item);
+                this.form_item = {
+                    title: "",
+                    central_yearly_plan: { id: null, title: null },
+                    plan_dep_dofa: { id: null, title: null },
+                    plan_dep_orjitobbo_target: { id: null, title: null },
+                    user_department: { id: null, title: null },
+                    previous_unfinished_parcent: "",
+                    rating: "",
+                    description: "",
+                };
             }
         },
+
+        submitHandler: async function ($event) {
+            $event.preventDefault();
+            if (this.form_data.length == 0) {
+                s_warning("No item found");
+                return false;
+            }
+            let contirmation = await s_confirm("Are you sure want to submit?");
+
+            if (!contirmation) {
+                return false;
+            }
+
+            if (this.param_id) {
+                await this.update(this.form_data);
+            } else {
+                await this.create(this.form_data);
+            }
+        },
+
+        updateSelectText(field, event) {
+            const selectedIndex = event.target.selectedIndex;
+            const selectedText = event.target.options[selectedIndex].text;
+            const selectedValue = event.target.value;
+
+            // Ensure the field is an object and update id and title
+            this.form_item[field] = {
+                id: selectedValue,
+                title: selectedText,
+            };
+        },
+
+        editItemHandler(index) {
+            this.is_show_modal = true;
+            this.edit_item = index;
+            this.form_item = {};
+            this.form_item = this.form_data[index];
+        },
+
+        deleteItemHandler(index) {
+            this.form_data.splice(index, 1);
+        },
+
         get_all_dofas: async function () {
             let response = await axios.get("plan-dep-dofas?get_all=1");
             if (response.data.status == "success") {
@@ -478,33 +540,12 @@ export default {
                 this.user_departments = response.data.data;
             }
         },
-
-        SubmitHandler: async function ($event) {
-            await this.update(this.form_item);
-        },
     },
+
     computed: {
-        ...mapWritableState(data_store, {
-            all: "all",
+        ...mapState(user_store, {
             item: "item",
         }),
     },
-    components: {
-        // TableRowAction,
-        // SelectSingle,
-        // SelectAll,
-        TableHead,
-        TableBody,
-        AllPageHeader,
-        AllPageFooterActions,
-        ExportAllLoader,
-        QuickView,
-        QuickViewColumn,
-        FilterData,
-        DropDownEl,
-        ImportModal,
-    },
 };
 </script>
-
-<style></style>
